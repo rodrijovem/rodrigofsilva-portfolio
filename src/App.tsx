@@ -166,7 +166,7 @@ export default function App() {
             className="flex items-center gap-3 justify-start cursor-pointer"
             onClick={scrollToTop}
           >
-            <img src="/Favicon.webp" alt="Rodrigo Silva" className="w-8 h-8 rounded-sm" />
+            <img src="./Favicon.webp" alt="Rodrigo Silva" className="w-8 h-8 rounded-sm" />
             <span className="text-xl font-bold tracking-tighter hidden sm:block">Rodrigo Silva</span>
           </div>
 
