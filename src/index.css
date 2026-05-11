@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-primary: #FF3700;
+}
+
+:root {
+  --bg-color: #1A1A1A;
+  --bg-alt: #111111;
+  --text-primary: #FAF9F6;
+  --text-secondary: #9ca3af;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: rgba(0, 0, 0, 0.5);
+  --nav-gradient-start: #1A1A1A;
+  --nav-gradient-mid: rgba(26, 26, 26, 0.8);
+  --brand-color: #52BA52;
+  --brand-shadow: rgba(82, 186, 82, 0.3);
+}
+
+:root.light {
+  --bg-color: #FAF9F6;
+  --bg-alt: #ffffff;
+  --text-primary: #1A1A1A;
+  --text-secondary: #4b5563;
+  --glass-bg: rgba(0, 0, 0, 0.03);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: rgba(0, 0, 0, 0.1);
+  --nav-gradient-start: #FAF9F6;
+  --nav-gradient-mid: rgba(250, 249, 246, 0.8);
+  --brand-color: #026502;
+  --brand-shadow: rgba(2, 101, 2, 0.3);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Taste Skill Liquid Glass */
+.liquid-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-border),
+              0 20px 40px -15px var(--glass-shadow);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
