@@ -1,4 +1,3 @@
-import { a, em } from 'framer-motion/client';
 import { ReactNode } from 'react';
 
 export type Lang = 'pt' | 'en';
