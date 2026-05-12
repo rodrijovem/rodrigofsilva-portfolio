@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView, animate } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, LinkedinLogo, Sun, Moon, CaretDown, CaretUp, WhatsappLogo, Envelope, X } from '@phosphor-icons/react';
 import { useRef, useState, useEffect, MouseEvent } from 'react';
 import { flushSync } from 'react-dom';
@@ -11,6 +11,28 @@ import temHeader from '../images/tembici/temHeader.webp';
 import finHeader from '../images/Finvity/finHeader.webp';
 import { translations, Lang } from './i18n.tsx';
 import { getFinvityContent, getMiioContent, getTembiciContent } from './caseContent';
+
+function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: number, prefix?: string, suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (isInView && ref.current) {
+      const controls = animate(0, value, {
+        duration: 2.5,
+        ease: "easeOut",
+        onUpdate(v) {
+          if (ref.current) {
+            ref.current.textContent = `${prefix}${Math.round(v)}${suffix}`;
+          }
+        }
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, value, prefix, suffix]);
+
+  return <span ref={ref}>{prefix}0{suffix}</span>;
+}
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -26,7 +48,7 @@ export default function App() {
     {
       title: t.caseTitles.finvity,
       description: t.caseDescriptions.finvity,
-      category: "Fintech / Sistema complexo",
+      category: "Fintech / SaaS B2B / Sistema complexo",
       thumbnail: finvityCase,
       heroImage: finHeader,
       content: getFinvityContent(lang),
@@ -34,7 +56,7 @@ export default function App() {
     {
       title: t.caseTitles.miio,
       description: t.caseDescriptions.miio,
-      category: "Mobilidade / Monetização",
+      category: "Mobilidade elétrica / Monetização / Growth",
       thumbnail: miioCase,
       heroImage: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1200",
       content: getMiioContent(lang),
@@ -42,7 +64,7 @@ export default function App() {
     {
       title: t.caseTitles.tembici,
       description: t.caseDescriptions.tembici,
-      category: "Mobilidade / Operação & Negócio",
+      category: "Mobilidade / Operação / Produto B2B2C",
       thumbnail: tembiciCase,
       heroImage: temHeader,
       content: getTembiciContent(lang),
@@ -159,7 +181,7 @@ export default function App() {
     <div ref={containerRef} className="min-h-[100dvh] selection:bg-[var(--brand-color)] selection:text-white font-sans">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24 py-6 bg-[var(--bg-color)]/80 backdrop-blur-md pointer-events-none">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-3 items-center pointer-events-auto">
+        <div className="max-w-[1400px] mx-auto flex justify-between md:grid md:grid-cols-3 items-center pointer-events-auto">
 
           {/* Left: Logo */}
           <div
@@ -191,23 +213,23 @@ export default function App() {
           </div>
 
           {/* Right: Actions */}
-          <div className="flex items-center gap-4 justify-end">
+          <div className="flex items-center gap-2 md:gap-4 justify-end">
             {/* Language Toggle */}
             <button
               onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')}
-              className="h-10 px-3 rounded-full liquid-glass flex items-center justify-center hover:scale-110 transition-transform text-sm font-bold tracking-tight"
+              className="h-10 px-3 rounded-full liquid-glass flex shrink-0 items-center justify-center hover:scale-110 transition-transform text-sm font-bold tracking-tight"
               aria-label="Toggle language"
             >
               {lang === 'pt' ? 'EN' : 'PT'}
             </button>
             <button
               onClick={toggleTheme}
-              className="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:scale-110 transition-transform"
+              className="w-10 h-10 rounded-full liquid-glass flex shrink-0 items-center justify-center hover:scale-110 transition-transform"
               aria-label="Toggle theme"
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} weight="fill" />}
             </button>
-            <a href="#contact" className="inline-flex items-center justify-center gap-2 bg-[var(--brand-color)] text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-[0.98] transition-transform active:scale-95 shadow-[0_0_20px_var(--brand-shadow)]">
+            <a href="#contact" className="inline-flex shrink-0 items-center justify-center gap-2 bg-[var(--brand-color)] text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-[0.98] transition-transform active:scale-95 shadow-[0_0_20px_var(--brand-shadow)]">
               {t.nav.cta} <ArrowRight weight="bold" />
             </a>
           </div>
@@ -247,6 +269,9 @@ export default function App() {
             <h1 className="text-7xl md:text-8xl lg:text-[140px] font-bold tracking-tighter leading-[0.9] mb-8">
               Rodrigo <br className="hidden md:block" /> Silva
             </h1>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug mb-6 text-[var(--text-primary)] max-w-2xl mx-auto md:mx-0">
+              {t.hero.title}
+            </h2>
             <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl leading-relaxed mb-10 mx-auto md:mx-0">
               {t.hero.description}
             </p>
@@ -295,11 +320,15 @@ export default function App() {
 
             <div className="grid grid-cols-2 gap-8 mt-16 pt-12 border-t border-[var(--glass-border)]">
               <div>
-                <span className="block text-5xl md:text-6xl font-bold text-[var(--text-primary)] mb-2 tracking-tighter">{t.about.metric1Value}</span>
+                <span className="block text-5xl md:text-6xl font-bold text-[var(--text-primary)] mb-2 tracking-tighter">
+                  <AnimatedCounter value={t.about.metric1Value} prefix="+" suffix={t.about.metric1Suffix} />
+                </span>
                 <span className="text-sm font-mono tracking-widest text-[var(--brand-color)] uppercase">{t.about.metric1Label}</span>
               </div>
               <div>
-                <span className="block text-5xl md:text-6xl font-bold text-[var(--text-primary)] mb-2 tracking-tighter">{t.about.metric2Value}</span>
+                <span className="block text-5xl md:text-6xl font-bold text-[var(--text-primary)] mb-2 tracking-tighter">
+                  <AnimatedCounter value={t.about.metric2Value} prefix="+" suffix={t.about.metric2Suffix} />
+                </span>
                 <span className="text-sm font-mono tracking-widest text-[var(--brand-color)] uppercase">{t.about.metric2Label}</span>
               </div>
             </div>
