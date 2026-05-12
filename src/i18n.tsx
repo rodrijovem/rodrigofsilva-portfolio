@@ -19,7 +19,6 @@ interface Translations {
     cta: string;
   };
   hero: {
-    title: string;
     subtitle: string;
     description: string;
     ctaPrimary: string;
@@ -74,7 +73,6 @@ export const translations: Record<Lang, Translations> = {
       cta: 'Vamos conversar',
     },
     hero: {
-      title: 'Transformo sistemas complexos em produtos claros, escaláveis e orientados a resultado',
       subtitle: 'Product Designer',
       description: 'Atuo em produtos SaaS, mobile e B2B/B2C, conectando UX, negócio e tecnologia para resolver problemas complexos com clareza, eficiência operacional e impacto mensurável.',
       ctaPrimary: 'Ver meus projetos',
@@ -207,7 +205,6 @@ export const translations: Record<Lang, Translations> = {
       cta: "Let's talk",
     },
     hero: {
-      title: 'I transform complex systems into clear, scalable, and result-oriented products',
       subtitle: 'Product Designer',
       description: 'I work on SaaS, mobile, and B2B/B2C products, connecting UX, business, and technology to solve complex problems with clarity, operational efficiency, and measurable impact.',
       ctaPrimary: 'See my projects',

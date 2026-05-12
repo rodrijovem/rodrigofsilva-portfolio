@@ -269,9 +269,6 @@ export default function App() {
             <h1 className="text-7xl md:text-8xl lg:text-[140px] font-bold tracking-tighter leading-[0.9] mb-8">
               Rodrigo <br className="hidden md:block" /> Silva
             </h1>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-snug mb-6 text-[var(--text-primary)] max-w-2xl mx-auto md:mx-0">
-              {t.hero.title}
-            </h2>
             <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl leading-relaxed mb-10 mx-auto md:mx-0">
               {t.hero.description}
             </p>
