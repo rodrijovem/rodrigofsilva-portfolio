@@ -34,6 +34,12 @@ function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: number, p
   return <span ref={ref}>{prefix}0{suffix}</span>;
 }
 
+export const trackEvent = (eventName: string, params?: Record<string, any>) => {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', eventName, params);
+  }
+};
+
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [lang, setLang] = useState<Lang>('pt');
@@ -84,6 +90,7 @@ export default function App() {
 
   const toggleTheme = (e: MouseEvent) => {
     const isDark = !isDarkMode;
+    trackEvent('theme_switch', { theme: isDark ? 'dark' : 'light' });
 
     if (!document.startViewTransition) {
       setIsDarkMode(isDark);
@@ -216,7 +223,11 @@ export default function App() {
           <div className="flex items-center gap-2 md:gap-4 justify-end">
             {/* Language Toggle */}
             <button
-              onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')}
+              onClick={() => {
+                const newLang = lang === 'pt' ? 'en' : 'pt';
+                setLang(newLang);
+                trackEvent('language_switch', { language: newLang });
+              }}
               className="h-10 px-3 rounded-full liquid-glass flex shrink-0 items-center justify-center hover:scale-110 transition-transform text-sm font-bold tracking-tight"
               aria-label="Toggle language"
             >
@@ -229,7 +240,7 @@ export default function App() {
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} weight="fill" />}
             </button>
-            <a href="#contact" className="inline-flex shrink-0 items-center justify-center gap-2 bg-[var(--brand-color)] text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-[0.98] transition-transform active:scale-95 shadow-[0_0_20px_var(--brand-shadow)]">
+            <a href="#contact" onClick={() => trackEvent('navbar_lets_talk_click')} className="inline-flex shrink-0 items-center justify-center gap-2 bg-[var(--brand-color)] text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-[0.98] transition-transform active:scale-95 shadow-[0_0_20px_var(--brand-shadow)]">
               {t.nav.cta} <ArrowRight weight="bold" />
             </a>
           </div>
@@ -273,10 +284,10 @@ export default function App() {
               {t.hero.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a href="#cases" className="inline-flex items-center justify-center gap-2 bg-[var(--brand-color)] text-white px-8 py-4 rounded-full font-semibold hover:scale-[0.98] transition-transform active:scale-95">
+              <a href="#cases" onClick={() => trackEvent('hero_see_projects_click')} className="inline-flex items-center justify-center gap-2 bg-[var(--brand-color)] text-white px-8 py-4 rounded-full font-semibold hover:scale-[0.98] transition-transform active:scale-95">
                 {t.hero.ctaPrimary} <ArrowRight weight="bold" />
               </a>
-              <a href="#about" className="inline-flex items-center justify-center gap-2 liquid-glass px-8 py-4 rounded-full font-semibold hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all active:scale-95">
+              <a href="#about" onClick={() => trackEvent('hero_who_am_i_click')} className="inline-flex items-center justify-center gap-2 liquid-glass px-8 py-4 rounded-full font-semibold hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all active:scale-95">
                 {t.hero.ctaSecondary}
               </a>
             </div>
@@ -444,7 +455,10 @@ export default function App() {
             {cases.map((project, i) => (
               <motion.div
                 key={i}
-                onClick={() => setSelectedCase(i)}
+                onClick={() => {
+                  setSelectedCase(i);
+                  trackEvent('case_card_click', { case_name: project.title });
+                }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -565,13 +579,13 @@ export default function App() {
             {t.contact.subtitle}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 mb-24">
-            <a href="https://www.linkedin.com/in/rodrigo-fsilva/" target="_blank" rel="noopener noreferrer" className="w-16 h-16 rounded-full flex items-center justify-center border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--brand-color)] hover:text-white hover:border-[var(--brand-color)] hover:-translate-y-2" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/rodrigo-fsilva/" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('contact_linkedin_click')} className="w-16 h-16 rounded-full flex items-center justify-center border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--brand-color)] hover:text-white hover:border-[var(--brand-color)] hover:-translate-y-2" title="LinkedIn">
               <LinkedinLogo size={32} />
             </a>
-            <a href="https://wa.me/5511982204357" target="_blank" rel="noopener noreferrer" className="w-16 h-16 rounded-full flex items-center justify-center border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--brand-color)] hover:text-white hover:border-[var(--brand-color)] hover:-translate-y-2" title="WhatsApp">
+            <a href="https://wa.me/5511982204357" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('contact_whatsapp_click')} className="w-16 h-16 rounded-full flex items-center justify-center border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--brand-color)] hover:text-white hover:border-[var(--brand-color)] hover:-translate-y-2" title="WhatsApp">
               <WhatsappLogo size={32} />
             </a>
-            <a href="mailto:rodrigo_silva05@live.com" className="w-16 h-16 rounded-full flex items-center justify-center border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--brand-color)] hover:text-white hover:border-[var(--brand-color)] hover:-translate-y-2" title="E-mail">
+            <a href="mailto:rodrigo_silva05@live.com" onClick={() => trackEvent('contact_email_click')} className="w-16 h-16 rounded-full flex items-center justify-center border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--brand-color)] hover:text-white hover:border-[var(--brand-color)] hover:-translate-y-2" title="E-mail">
               <Envelope size={32} />
             </a>
           </div>
