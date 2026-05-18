@@ -25,7 +25,6 @@ interface Translations {
     ctaSecondary: string;
   };
   about: {
-    headline: (highlight: ReactNode) => ReactNode;
     metric1Value: number;
     metric1Suffix: string;
     metric1Label: string;
@@ -34,10 +33,10 @@ interface Translations {
     metric2Label: string;
     bio1: string;
     bio2: string;
-    cta: string;
   };
   experience: {
     title: string;
+    subtitle: string;
     showMore: string;
     showLess: string;
   };
@@ -79,19 +78,18 @@ export const translations: Record<Lang, Translations> = {
       ctaSecondary: 'Quem sou eu',
     },
     about: {
-      headline: (highlight) => <>Também incorporo {highlight} para acelerar análise, ideação e prototipação, mantendo o foco em resolver o problema certo com critério e impacto mensurável.</>,
       metric1Value: 6,
       metric1Suffix: ' anos',
       metric1Label: 'como Product Designer',
       metric2Value: 16,
       metric2Suffix: '',
       metric2Label: 'Projetos entregues',
-      bio1: 'Iniciei minha jornada no Design Gráfico e evoluí para UX e Produto. Hoje, atuo resolvendo problemas reais através de interfaces claras, ajudando empresas a escalar operações e melhorar sua monetização.',
-      bio2: 'Acredito que o design não deve apenas ser esteticamente premium, mas precisa estar profundamente alinhado com as métricas do produto e as necessidades reais dos usuários.',
-      cta: 'Vamos conversar',
+      bio1: 'Sou Product Designer e comecei minha trajetória no Design Gráfico e no Web Design. Com o tempo, fui me aproximando de UX/UI até migrar para Produto, onde passei a atuar mais perto de estratégia, experiência e construção de soluções digitais.',
+      bio2: 'Sou paulista e atualmente moro em Porto Alegre. Essa mudança de áreas ajudou a formar meu olhar para design: mais visual no início, mais funcional e orientado ao uso conforme minha carreira evoluiu.',
     },
     experience: {
       title: 'Carreira',
+      subtitle: 'Minha carreira em Produto foi construída em diferentes tipos de negócio e complexidade: B2C, B2B, B2B2C, SaaS, mobile apps, dashboards e plataformas orientadas a dados. Atuei em jornadas de discovery a delivery, sempre buscando transformar contextos complexos em experiências mais claras, funcionais e conectadas a resultado. Nos últimos anos venho incorporando IA aos meus processos para acelerar análise, ideação e prototipação.',
       showMore: 'Ver mais experiências',
       showLess: 'Recolher',
     },
@@ -211,19 +209,18 @@ export const translations: Record<Lang, Translations> = {
       ctaSecondary: 'Who am I',
     },
     about: {
-      headline: (highlight) => <>I also incorporate {highlight} to accelerate analysis, ideation, and prototyping, keeping the focus on solving the right problem with criteria and measurable impact.</>,
       metric1Value: 6,
       metric1Suffix: ' years',
       metric1Label: 'as Product Designer',
       metric2Value: 16,
       metric2Suffix: '',
       metric2Label: 'Delivered projects',
-      bio1: 'I started my journey in Graphic Design and evolved into UX and Product. Today, I solve real problems through clear interfaces, helping companies scale operations and improve their monetization.',
-      bio2: 'I believe design should not only be aesthetically premium but must be deeply aligned with the product\'s metrics and users\' real needs.',
-      cta: "Let's talk",
+      bio1: 'I am a Product Designer and started my journey in Graphic Design and Web Design. Over time, I got closer to UX/UI until I migrated to Product, where I started to work closer to strategy, experience, and the construction of digital solutions.',
+      bio2: 'I am from São Paulo and currently live in Porto Alegre. This shift in areas helped shape my view on design: more visual at the beginning, more functional and use-oriented as my career evolved.',
     },
     experience: {
       title: 'Career',
+      subtitle: 'My career in Product was built across different types of businesses and complexities: B2C, B2B, B2B2C, SaaS, mobile apps, dashboards, and data-driven platforms. I have worked on journeys from discovery to delivery, always seeking to transform complex contexts into clearer, more functional, and results-oriented experiences. In recent years, I have been incorporating AI into my processes to accelerate analysis, ideation, and prototyping.',
       showMore: 'See more experiences',
       showLess: 'Collapse',
     },

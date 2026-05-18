@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, MouseEvent } from 'react';
 import { flushSync } from 'react-dom';
 import lightImage from '../images/light.webp';
 import darkImage from '../images/dark.webp';
+import aboutImage from '../images/about.webp';
 import finvityCase from '../images/finvityAI.webp';
 import miioCase from '../images/miioOne.webp';
 import tembiciCase from '../images/Tembici.webp';
@@ -189,7 +190,6 @@ export default function App() {
             onClick={scrollToTop}
           >
             <img src="./Favicon.webp" alt="Rodrigo Silva" className="w-8 h-8 rounded-sm" />
-            <span className="text-xl font-bold tracking-tighter hidden sm:block">Rodrigo Silva</span>
           </div>
 
           {/* Center: Links */}
@@ -300,22 +300,40 @@ export default function App() {
 
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center relative z-10">
 
-          {/* Left: Big Typographic Statement & Metrics */}
+          {/* Left: Image */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-7"
+            className="lg:col-span-5"
           >
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-[1.3] mb-8">
-              {t.about.headline(
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-color)] to-emerald-600">
-                  {lang === 'pt' ? 'IA ao meu processo' : 'AI into my process'}
-                </span>
-              )}
-            </h2>
+            <div className="relative rounded-[2.5rem] overflow-hidden aspect-square w-full max-w-[400px] mx-auto group">
+              <img 
+                src={aboutImage} 
+                alt="Rodrigo Silva" 
+                className="w-full h-full object-cover transition-all duration-500 grayscale group-hover:grayscale-0"
+              />
+            </div>
+          </motion.div>
 
-            <div className="grid grid-cols-2 gap-8 mt-16 pt-12 border-t border-[var(--glass-border)]">
+          {/* Right: Text & Metrics */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-7 relative"
+          >
+            <div className="mb-12">
+              <p className="text-[var(--text-secondary)] text-xl leading-relaxed mb-6">
+                {t.about.bio1}
+              </p>
+              <p className="text-[var(--text-secondary)] text-xl leading-relaxed">
+                {t.about.bio2}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 pt-12 border-t border-[var(--glass-border)]">
               <div>
                 <span className="block text-5xl md:text-6xl font-bold text-[var(--text-primary)] mb-2 tracking-tighter">
                   <AnimatedCounter value={t.about.metric1Value} prefix="+" suffix={t.about.metric1Suffix} />
@@ -331,32 +349,6 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* Right: Detailed Text & Bio inside a Glass Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="liquid-glass p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden">
-              {/* Subtle top highlight for the card */}
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-              <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                {t.about.bio1}
-              </p>
-
-              <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-10">
-                {t.about.bio2}
-              </p>
-
-              <a href="#contact" className="inline-flex items-center gap-2 border-b-2 border-[var(--brand-color)] pb-1 text-[var(--brand-color)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-colors font-medium">
-                {t.about.cta} <ArrowRight />
-              </a>
-            </div>
-          </motion.div>
-
         </div>
       </section>
 
@@ -368,7 +360,10 @@ export default function App() {
           viewport={{ once: true, margin: "-100px" }}
           className="mb-16 md:mb-24"
         >
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">{t.experience.title}</h2>
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">{t.experience.title}</h2>
+          <p className="text-[var(--text-secondary)] text-xl leading-relaxed max-w-4xl">
+            {t.experience.subtitle}
+          </p>
         </motion.div>
 
         <div className="relative border-l border-[var(--glass-border)] ml-4 md:ml-0 md:pl-12 flex flex-col gap-16">
