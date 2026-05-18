@@ -35,8 +35,18 @@ function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: number, p
 }
 
 export const trackEvent = (eventName: string, params?: Record<string, any>) => {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', eventName, params);
+  console.log(`[Analytics] Tentando disparar evento: ${eventName}`, params);
+  
+  if (typeof window !== 'undefined') {
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', eventName, params);
+      console.log(`[Analytics] Disparado via gtag: ${eventName}`);
+    } else if ((window as any).dataLayer) {
+      (window as any).dataLayer.push(['event', eventName, params]);
+      console.log(`[Analytics] Disparado via dataLayer: ${eventName}`);
+    } else {
+      console.warn('[Analytics] Google Analytics não encontrado no window.');
+    }
   }
 };
 
