@@ -2,7 +2,6 @@
 
 @theme {
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --color-brand-primary: #FF3700;
 }
 
 :root {
@@ -13,10 +12,7 @@
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: rgba(0, 0, 0, 0.5);
-  --nav-gradient-start: #1A1A1A;
-  --nav-gradient-mid: rgba(26, 26, 26, 0.8);
   --brand-color: #52BA52;
-  --brand-shadow: rgba(82, 186, 82, 0.3);
 }
 
 :root.light {
@@ -27,10 +23,7 @@
   --glass-bg: rgba(0, 0, 0, 0.03);
   --glass-border: rgba(0, 0, 0, 0.1);
   --glass-shadow: rgba(0, 0, 0, 0.1);
-  --nav-gradient-start: #FAF9F6;
-  --nav-gradient-mid: rgba(250, 249, 246, 0.8);
   --brand-color: #026502;
-  --brand-shadow: rgba(2, 101, 2, 0.3);
 }
 
 body {
@@ -56,4 +49,14 @@ body {
               0 20px 40px -15px var(--glass-shadow);
   color: var(--text-primary);
   transition: all 0.3s ease;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }

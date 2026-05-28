@@ -8,9 +8,8 @@ import finSite from '../images/Finvity/finSite.webp';
 import miioHeader from '../images/miio/miioHeader.webp';
 import miioDecisao from '../images/miio/miioDecisao.webp';
 import miioMone from '../images/miio/miioMone.webp';
-import temApoio from '../images/tembici/temApoio.webp';
+
 import temMockup from '../images/tembici/temMockup.webp';
-import temBike from '../images/tembici/temBike.webp';
 import temProblema from '../images/tembici/temProblema.webp';
 
 const img = (src: string, alt: string) => (
@@ -19,10 +18,16 @@ const img = (src: string, alt: string) => (
   </div>
 );
 
-const h = (t: string) => <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6 mt-8">{t}</h3>;
+const embedIframe = (src: string) => (
+  <div className="w-full rounded-2xl border border-[var(--glass-border)] overflow-hidden mb-12 bg-[var(--bg-alt)]">
+    <iframe className="w-full aspect-video" src={src} frameBorder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowFullScreen></iframe>
+  </div>
+);
+
+const h = (t: string) => <h3 id={t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} className="text-2xl font-bold text-[var(--text-primary)] mb-6 mt-8 scroll-mt-24">{t}</h3>;
 const p = (t: string, mb = 4) => <p className={`mb-${mb}`}>{t}</p>;
 const p12 = (t: string) => <p className="mb-12">{t}</p>;
-const lead = (t: string) => <p className="text-xl md:text-2xl text-[var(--text-primary)] leading-relaxed mb-12 font-medium border-l-4 border-[var(--brand-color)] pl-6">{t}</p>;
+
 
 const ul = (items: string[]) => (
   <ul className="list-disc pl-6 space-y-2 mb-12">
@@ -44,7 +49,7 @@ const statsGrid = (items: {value: string, label: string}[]) => (
 export function getFinvityContent(lang: Lang): ReactNode {
   if (lang === 'en') return (
     <>
-      {lead("How I redesigned flows, modules, and data visualization in a SaaS platform for wealth, succession, and tax management, making complex analyses clearer for lawyers, financial advisors, and multi-family offices.")}
+
       {h("Executive summary")}
       {p("Finvity is a SaaS platform for wealth and succession management. The product needs to handle a naturally complex domain: family structure, wealth, debts, succession, risks, holding companies, tax intelligence, financial projections, and reports.")}
       {p12("The challenge was not just to improve the interface. It was to organize a system where every registered data could impact multiple future analyses. The work involved redesigning flows, structuring modules, improving data reading, evolving the platform's visual consistency, and aligning the brand's external positioning with the product's new moment.")}
@@ -128,7 +133,7 @@ export function getFinvityContent(lang: Lang): ReactNode {
 
   return (
     <>
-      {lead("Como redesenhei fluxos, módulos e visualização de dados em uma plataforma SaaS para gestão patrimonial, sucessória e tributária, tornando análises complexas mais claras para advogados, assessores financeiros e multi-family offices.")}
+
       {h("Resumo executivo")}
       {p("A Finvity é uma plataforma SaaS voltada à gestão patrimonial e sucessória. O produto precisa lidar com um domínio naturalmente complexo: estrutura familiar, patrimônio, dívidas, sucessão, riscos, holding, inteligência tributária, projeções financeiras e relatórios.")}
       {p12("O desafio não era apenas melhorar a interface. Era organizar um sistema em que cada dado cadastrado poderia impactar múltiplas análises futuras. O trabalho envolveu redesenhar fluxos, estruturar módulos, melhorar a leitura dos dados, evoluir a consistência visual da plataforma e alinhar o posicionamento externo da marca com o novo momento do produto.")}
@@ -214,7 +219,7 @@ export function getFinvityContent(lang: Lang): ReactNode {
 export function getMiioContent(lang: Lang): ReactNode {
   if (lang === 'en') return (
     <>
-      {lead("How I created monetization experiences for an electric mobility app, connecting savings, subscriptions, checkout, communication, and vehicle data in real moments of the user's journey.")}
+
       {h("Executive summary")}
       {p("miio is a B2C electric mobility app used for charging electric vehicles. The product already solved an important functional need, but needed to evolve its monetization model without compromising user trust.")}
       {p12("The challenge was to create a subscription experience that didn't feel like just another charge. The plan needed to demonstrate value within real usage: savings on charging, connectivity with the vehicle, consumption insights, store benefits, and priority support.")}
@@ -319,7 +324,7 @@ export function getMiioContent(lang: Lang): ReactNode {
 
   return (
     <>
-      {lead("Como criei experiências de monetização para um app de mobilidade elétrica, conectando economia, assinatura, checkout, comunicação e dados do veículo em momentos reais da jornada do usuário.")}
+
       {h("Resumo executivo")}
       {p("A miio é um app B2C de mobilidade elétrica usado para carregamento de veículos elétricos. O produto já resolvia uma necessidade funcional importante, mas precisava evoluir seu modelo de monetização sem comprometer a confiança do usuário.")}
       {p12("O desafio era criar uma experiência de assinatura que não parecesse apenas uma cobrança adicional. O plano precisava demonstrar valor dentro do uso real: economia em carregamentos, conectividade com o veículo, insights de consumo, benefícios na loja e suporte prioritário.")}
@@ -423,10 +428,11 @@ export function getMiioContent(lang: Lang): ReactNode {
   );
 }
 
+
 export function getTembiciContent(lang: Lang): ReactNode {
   if (lang === 'en') return (
     <>
-      {lead("How a behavior that pressured operations, NPS, and financial results turned into a dedicated product for delivery riders, helping eliminate a monthly deficit of approximately R$1M and reach breakeven in about 10 months.")}
+
       {h("Executive summary")}
       {p("During the pandemic, the growth of delivery completely changed the use of Tembici's shared bicycles. A product designed for short trips and leisure began to be used intensively by delivery riders, creating conflict between audiences, low availability at stations, and direct pressure on operations.")}
       {p12("The challenge was to transform this unplanned use into a viable product, without stalling validation by depending on development from the very first moment. The path was to start with a simple operational MVP, validate the model quickly, and then evolve into a more structured digital experience, integrated with physical operations.")}
@@ -462,7 +468,7 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {p("The company needed to react fast. Instead of waiting for a full digital solution, validation began with a simple MVP, using form registration, spreadsheet control, and manual operation.")}
       {p12("This decision accelerated learning, but came at a cost: as adoption grew, the operation became overloaded. This was a conscious trade-off between validation speed and scalability.")}
 
-      {img(temApoio, "Tembici Validation")}
+      {embedIframe("https://miro.com/app/live-embed/uXjVKMHscvA=/?focusWidget=3458764673603693435&embedMode=view_only_without_ui&embedId=334270980465")}
 
       {h("3. Transform the MVP into a more predictable digital journey")}
       {p("After validating demand, the focus shifted to reducing operational effort and providing more clarity to the delivery rider.")}
@@ -508,7 +514,7 @@ export function getTembiciContent(lang: Lang): ReactNode {
       ])}
       {p12("More than creating screens, the work helped redesign the relationship between product, operations, and business model.")}
 
-      {img(temBike, "Tembici Impact")}
+
 
       {h("Learnings / Next Steps")}
       {p("This project reinforced that a product doesn't just fail due to interface issues. Often, it fails because it tries to serve incompatible behaviors within the same logic.")}
@@ -519,95 +525,115 @@ export function getTembiciContent(lang: Lang): ReactNode {
 
   return (
     <>
-      {lead("Como um comportamento que pressionava operação, NPS e resultado financeiro virou um produto dedicado para entregadores, ajudando a eliminar um prejuízo mensal de aproximadamente R$1M e alcançar breakeven em cerca de 10 meses.")}
-      {h("Resumo executivo")}
-      {p("Durante a pandemia, o crescimento do delivery mudou completamente o uso das bicicletas compartilhadas da Tembici. Um produto pensado para deslocamentos curtos e lazer passou a ser usado intensivamente por entregadores, criando conflito entre públicos, baixa disponibilidade nas estações e pressão direta na operação.")}
-      {p12("O desafio era transformar esse uso não planejado em um produto viável, sem travar a validação por depender de desenvolvimento desde o primeiro momento. O caminho foi começar com um MVP operacional simples, validar o modelo rapidamente e depois evoluir para uma experiência digital mais estruturada, integrada à operação física.")}
-
       {h("Contexto")}
-      {p("A Tembici tinha um sistema de bicicletas compartilhadas voltado principalmente para deslocamentos urbanos ocasionais. Com o aumento das entregas por aplicativo, um novo perfil de usuário passou a utilizar o produto de forma muito mais intensa: os entregadores.")}
-      {p("O problema não era apenas o aumento de uso. Eram comportamentos diferentes disputando o mesmo sistema.")}
-      {p12("Usuários ocasionais precisavam encontrar bicicletas disponíveis para trajetos curtos. Entregadores precisavam de autonomia, previsibilidade e tempo prolongado de uso para trabalhar. A mesma experiência não atendia bem nenhum dos dois públicos.")}
+      {p("A Tembici nasceu oferecendo bicicletas compartilhadas para mobilidade urbana. O modelo original era voltado para o público geral: pessoas que usavam as bikes para lazer ou como parte do deslocamento diário, retirando e devolvendo bicicletas em estações espalhadas pela cidade.")}
+      {p("Durante a pandemia, esse comportamento mudou de forma brusca. O uso das bicicletas pelo público geral caiu, enquanto a demanda por delivery cresceu. A partir desse contexto, surgiu uma parceria com o iFood para que entregadores também pudessem usar as bicicletas da Tembici.")}
+      {p12("O problema é que, com o tempo, entregadores e usuários comuns passaram a disputar o mesmo ativo, no mesmo sistema de retirada, com necessidades completamente diferentes.")}
 
-      {img(temProblema, "Problema Tembici")}
-
-      {h("Desafio")}
-      {p("O desafio era equilibrar três forças ao mesmo tempo:")}
+      {h("O problema")}
+      {p("Os entregadores eram heavy users. Eles usavam as bicicletas por muito mais tempo, em rotinas intensas de trabalho, muitas vezes com planos de até 4 horas. Isso aumentava desgaste, manutenção, indisponibilidade e afetava diretamente a experiência do público geral.")}
+      {p("Na prática, o mesmo produto estava tentando atender dois comportamentos incompatíveis:")}
       {ul([
-        "reduzir o impacto financeiro e operacional gerado pelo uso inadequado do produto;",
-        "preservar a experiência dos usuários tradicionais;",
-        "criar uma solução útil para entregadores, que tinham uma necessidade real e recorrente."
+        "usuários comuns, que faziam viagens curtas e ocasionais;",
+        "entregadores, que dependiam da bicicleta como ferramenta de trabalho."
       ])}
-      {p("A decisão mais óbvia seria bloquear ou restringir o uso dos entregadores. Mas isso ignoraria um sinal importante de mercado: havia demanda real por um produto dedicado a esse público.")}
-      {p12("A oportunidade estava em transformar um comportamento problemático em uma nova linha de produto.")}
+      {p("Essa sobreposição gerava impacto em cadeia: bicicletas quebradas ou sem bateria, aumento no custo operacional, piora na percepção do serviço, queda de NPS e risco para indicadores estratégicos do negócio.")}
+      {p12("A hipótese que construímos foi simples: se resolvêssemos melhor a experiência dos entregadores, também reduziríamos parte dos problemas vividos pelo público geral.")}
+      {img(temProblema, "Diagrama de problema Tembici")}
 
       {h("Meu papel")}
-      {p("Atuei no desenho da experiência do produto para entregadores, colaborando com Produto, Operação, Engenharia e stakeholders de negócio.")}
-      {p("Meu trabalho envolveu entender a jornada do entregador, mapear os pontos de atrito da operação, desenhar fluxos de cadastro e ativação, prototipar soluções, apoiar validações e evoluir a experiência para um modelo mais escalável.")}
-      {p12("Também participei das discussões sobre trade-offs entre velocidade de validação, qualidade da experiência e capacidade operacional.")}
-
-      {h("Principais decisões de design")}
-      
-      {h("1. Separar o comportamento dos entregadores do produto de lazer")}
-      {p("O primeiro passo foi reconhecer que o problema não era apenas “uso excessivo”. Era incompatibilidade de jornadas.")}
-      {p12("Entregadores precisavam de outra proposta de valor: uso prolongado, previsibilidade, retirada planejada e regras próprias. Por isso, o produto passou a ser pensado como uma experiência separada, não como uma adaptação do modelo existente.")}
-
-      {h("2. Validar o modelo antes de construir a solução ideal")}
-      {p("A empresa precisava reagir rápido. Em vez de esperar por uma solução digital completa, a validação começou com um MVP simples, usando cadastro via formulário, controle em planilhas e operação manual.")}
-      {p12("Essa decisão acelerou o aprendizado, mas teve um custo: conforme a adesão crescia, a operação passou a ficar sobrecarregada. Esse foi um trade-off consciente entre velocidade de validação e escalabilidade.")}
-
-      {img(temApoio, "Validação Tembici")}
-
-      {h("3. Transformar o MVP em uma jornada digital mais previsível")}
-      {p("Depois de validar a demanda, o foco passou a ser reduzir esforço operacional e dar mais clareza ao entregador.")}
-      {p12("A experiência evoluiu para fluxos de cadastro, envio de documentos, pagamento, agendamento, check-in, retirada e renovação. O objetivo era deixar explícito o que o usuário precisava fazer, em qual etapa estava e o que poderia bloquear o acesso ao plano.")}
-
-      {h("4. Integrar produto digital e operação física")}
-      {p("A retirada da bicicleta não era apenas uma etapa no app. Ela dependia de ponto físico, operador, documento, pagamento, horário e disponibilidade.")}
-      {p12("Por isso, a experiência precisou conectar interface, regras operacionais e validações no mundo real. O QR Code foi uma solução de compromisso: não era a experiência mais invisível possível, mas era viável dentro das limitações técnicas e operacionais do momento.")}
-
-      {img(temMockup, "Evolução para o produto real")}
-
-      {h("Solução")}
-      {p("A solução evoluiu de um MVP manual para um produto mais estruturado, com jornadas digitais conectadas à operação.")}
-      {p("A experiência passou a contemplar:")}
+      {p("Atuei como Product Designer no projeto, em parceria direta com o PM e com times de negócio, operação, atendimento e engenharia.")}
+      {p("Minha atuação passou por:")}
       {ul([
-        "cadastro e revisão de dados;",
-        "validação de telefone;",
-        "envio e correção de documentação;",
-        "cadastro de endereço;",
-        "adição de forma de pagamento;",
-        "agendamento de retirada;",
-        "check-in no ponto de liberação;",
-        "apresentação de QR Code para o operador;",
-        "retirada da bicicleta;",
-        "regras de uso, devolução e renovação."
+        "análise de dados e pesquisas existentes;",
+        "investigação da jornada dos entregadores;",
+        "dinâmicas de cocriação com stakeholders;",
+        "estruturação da jornada do novo produto;",
+        "prototipação e testes de usabilidade;",
+        "definição de fluxos, estados, mensagens e regras;",
+        "documentação para desenvolvimento;",
+        "acompanhamento pós-lançamento com olhar para operação, adoção e métricas."
       ])}
-      {p12("O foco do design foi reduzir incerteza. O entregador precisava entender rapidamente o que faltava para começar a pedalar, enquanto a operação precisava ter controle suficiente para liberar bicicletas com segurança.")}
+      {p12("O desafio não era apenas desenhar telas. Era redesenhar a lógica do serviço, conectando produto digital, operação física, ativos, atendimento e sustentabilidade financeira.")}
+
+      {h("Diagnóstico")}
+      {p("A primeira etapa foi entender por que a solução existente não escalava.")}
+      {p("Analisamos métricas, dados de NPS, comportamento dos entregadores e impactos operacionais. Também realizamos pesquisas e conversas com entregadores para entender como eles usavam as bicicletas, quais fricções enfrentavam e o que tornava a solução atual insuficiente para a rotina de trabalho.")}
+      {p("A partir disso, ficou claro que o problema não estava apenas na interface. O modelo operacional precisava mudar.")}
+      {p12("A principal decisão foi separar os entregadores do público geral. Em vez de usar as mesmas bicicletas e as mesmas estações, os entregadores passariam a ter uma experiência própria, com outro tipo de bicicleta, outro fluxo de retirada e outra lógica de uso.")}
+      {embedIframe("https://miro.com/app/live-embed/uXjVKMHscvA=/?focusWidget=3458764673071380377&embedMode=view_only_without_ui&embedId=517565179592")}
+
+      {h("MVP")}
+      {p("Antes de construir uma solução completa, validamos a hipótese com um MVP operacional.")}
+      {p("O primeiro modelo funcionava com Google Forms e Google Sheets. Entregadores eram pré-selecionados com base no comportamento de uso, principalmente heavy users, que tinham maior impacto na operação atual. Depois, passaram a se cadastrar por formulário, ter seus dados analisados e, se aprovados, retirar a bicicleta em um ponto de apoio.")}
+      {p("A bicicleta deixava de ser retirada de forma autônoma nas estações e passava a ser retirada em um local específico, com conferência de documentação e orientação operacional. O entregador ficava com a bike por uma semana.")}
+      {p("Esse MVP ajudou a validar três pontos importantes:")}
+      {ul([
+        "havia demanda real dos entregadores;",
+        "separar o uso profissional do uso comum fazia sentido;",
+        "o modelo poderia reduzir pressão sobre as bicicletas do público geral."
+      ])}
+      {p12("Mas o MVP também deixou claro que a operação manual não era sustentável. Havia muitas pessoas envolvidas, muita dependência de planilhas e um fluxo pouco escalável para cadastro, aprovação, retirada e acompanhamento do plano.")}
+      {embedIframe("https://miro.com/app/live-embed/uXjVKMHscvA=/?focusWidget=3458764673603693435&embedMode=view_only_without_ui&embedId=334270980465")}
+
+      {h("Do MVP para o produto")}
+      {p("Com a hipótese validada, o desafio passou a ser transformar uma operação manual em um produto escalável.")}
+      {p("A solução foi criar uma experiência dentro do app iFood Pedal, que já fazia parte da rotina dos entregadores. Em vez de criar um novo canal, inserimos o produto onde o usuário já estava.")}
+      {p("Dentro do app, o entregador acessava a área “Bike pra Você”, onde podia:")}
+      {ul([
+        "conhecer o plano;",
+        "entender como funcionava a retirada da bicicleta;",
+        "iniciar ou revisar o cadastro;",
+        "enviar documentos;",
+        "acompanhar pendências;",
+        "receber aprovação ou reprovação;",
+        "pagar o plano;",
+        "agendar ou realizar a retirada;",
+        "escanear o QR Code da bicicleta;",
+        "gerenciar o plano semanal;",
+        "solicitar suporte em caso de problema."
+      ])}
+      {p12("A experiência precisava ser simples, mas também precisava lidar com muitos estados operacionais: cadastro incompleto, documentação pendente, aprovação, pagamento, retirada, plano ativo, erro, suporte e restrições de uso.")}
+      {embedIframe("https://miro.com/app/live-embed/uXjVKMHscvA=/?focusWidget=3458764673603812160&embedMode=view_only_without_ui&embedId=35061022419")}
+
+      {h("Design da experiência")}
+      {p("O ponto central do design foi reduzir a dependência da operação manual sem remover os controles necessários para o negócio.")}
+      {p("Para isso, estruturei a jornada em etapas claras: entrada no produto, explicação do funcionamento, cadastro, validação, pagamento, retirada e gestão do plano.")}
+      {p("Também trabalhei nos textos e estados de interface para que o entregador soubesse exatamente o que precisava fazer em cada momento. Como havia etapas fora do digital, como levar documentos e retirar a bicicleta em um ponto físico, a comunicação precisava ser objetiva e evitar ambiguidade.")}
+      {p12("Outro cuidado foi desenhar a experiência considerando que o entregador estava em contexto de trabalho. O fluxo precisava ser direto, mobile first e tolerante a interrupções.")}
+      {img(temMockup, "Design Mockup Tembici")}
+
+      {h("Validação")}
+      {p("Antes da entrega final, os fluxos foram prototipados e testados com foco em clareza da jornada, compreensão das etapas e viabilidade operacional.")}
+      {p("A validação ajudou a ajustar textos, estados intermediários, mensagens de erro e momentos em que o entregador precisava receber instruções mais explícitas.")}
+      {p12("Como o produto dependia de múltiplas áreas, o teste não era apenas sobre usabilidade da interface. Também validávamos se o fluxo fazia sentido para operação, atendimento, tecnologia e negócio.")}
+      {embedIframe("https://embed.figma.com/proto/v65YY7OjnfpFDJkBRXsQWG/iFood---Entregador?node-id=4731-28401&p=f&viewport=6114%2C682%2C0.17&scaling=scale-down&content-scaling=fixed&starting-point-node-id=4731%3A28401&show-proto-sidebar=1&page-id=4731%3A23943&embed-host=share")}
+
+      {h("Handoff e acompanhamento")}
+      {p("Após a definição da solução, preparei a documentação para desenvolvimento, contemplando fluxos, estados, regras, mensagens, componentes, cenários alternativos e comportamentos esperados.")}
+      {p("Também acompanhei o time de desenvolvimento para garantir que a implementação respeitasse a lógica da jornada e os pontos críticos da experiência.")}
+      {p12("Depois do lançamento, acompanhei indicadores relacionados à adoção, operação, experiência e resultado financeiro. Esse acompanhamento foi importante para entender se a solução estava reduzindo atrito, melhorando a operação e contribuindo para a sustentabilidade do produto.")}
 
       {h("Resultado")}
-      {p("O projeto contribuiu para transformar um uso que gerava prejuízo e instabilidade em uma operação dedicada, com regras próprias e maior previsibilidade.")}
-      {p12("Entre os principais resultados:")}
-      
+      {p("O projeto ajudou a transformar uma operação problemática em um produto mais sustentável, claro e escalável.")}
+      {p("Entre os principais resultados:")}
       {statsGrid([
-        { value: "R$1M", label: "prejuízo mensal eliminado" },
-        { value: "10m", label: "para atingir breakeven" }
+        { value: "R$1M", label: "redução de aprox. R$1M/mês em prejuízo" },
+        { value: "10m", label: "breakeven em cerca de 10 meses" }
       ])}
-
       {ul([
-        "melhoria nos indicadores de NPS;",
-        "redução de conflito entre usuários ocasionais e entregadores;",
-        "maior previsibilidade para operação;",
-        "evolução de um MVP manual para um produto digital mais escalável."
+        "melhora nos indicadores de NPS acompanhados;",
+        "aumento de receita com um produto mais adequado ao perfil dos entregadores;",
+        "redução de custos operacionais associados ao processo manual;",
+        "mais clareza para entregadores em etapas críticas de cadastro, aprovação e retirada;",
+        "separação entre a experiência do público geral e a experiência dos entregadores."
       ])}
-      {p12("Mais do que criar telas, o trabalho ajudou a redesenhar a relação entre produto, operação e modelo de negócio.")}
+      {p12("Mais do que uma melhoria de interface, o projeto redesenhou a forma como entregadores acessavam, entendiam e utilizavam o serviço, conectando produto digital, operação física e sustentabilidade de negócio.")}
 
-      {img(temBike, "Impacto Tembici")}
-
-      {h("Aprendizados / próximos passos")}
-      {p("Esse projeto reforçou que produto não falha apenas por problemas de interface. Muitas vezes, falha porque tenta atender comportamentos incompatíveis dentro da mesma lógica.")}
-      {p("Também mostrou que MVP não é sinônimo de experiência ruim. Um MVP pode ser simples e manual, desde que deixe claro o que está sendo validado, quais riscos estão sendo assumidos e quando precisa evoluir.")}
-      {p12("Se eu evoluísse esse projeto hoje, aprofundaria a mensuração de abandono por etapa, tempo médio de liberação e impacto operacional por fluxo, para tornar as próximas decisões ainda mais orientadas por dados.")}
+      {h("Aprendizados")}
+      {p("Esse projeto reforçou que produtos digitais não existem isolados da operação. Em contextos com logística, ativos físicos e múltiplos stakeholders, uma boa experiência depende tanto da interface quanto da estrutura que sustenta o serviço.")}
+      {p("Também ficou claro que usuários diferentes não devem ser forçados dentro da mesma lógica de produto. O entregador tinha necessidades, frequência de uso e expectativas muito diferentes do usuário B2C tradicional. Tratar esse público como uma variação do mesmo usuário seria um erro estratégico.")}
+      {p12("O principal aprendizado foi que design pode ter impacto direto no resultado financeiro quando atua sobre o sistema inteiro: jornada, regras, operação, comunicação, atendimento e métricas de negócio.")}
     </>
   );
 }
