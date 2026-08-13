@@ -8,6 +8,7 @@ import { getFinvityContent, getMiioContent, getTembiciContent } from '../caseCon
 
 import finHeader from '../../images/Finvity/finHeader.webp';
 import temHeader from '../../images/tembici/temHeader.webp';
+import miioHero from '../../images/miioOne.webp';
 
 import finvityCase from '../../images/finvityAI.webp';
 import miioCase from '../../images/miioOne.webp';
@@ -60,48 +61,27 @@ export function CaseStudy() {
     if (id === 'finvity') {
       return {
         title: t.caseTitles.finvity,
-        resumo: t.caseDescriptions.finvity,
-        role: "Desk Research, Análise de métricas, UX, UI",
-        readTime: "4 min",
-        timeline: "2024",
+        ...t.caseMeta.finvity,
+        timeline: "2025",
         heroImage: finHeader,
-        impact: [
-          { label: "Complexidade", text: "Organização de fluxos para um domínio naturalmente denso." },
-          { label: "Design System", text: "Consistência e componentes reutilizáveis aplicados." },
-          { label: "Escalabilidade", text: "Base de dados que alimenta múltiplos módulos." }
-        ],
         content: getFinvityContent(lang)
       };
     }
     if (id === 'miio') {
       return {
         title: t.caseTitles.miio,
-        resumo: t.caseDescriptions.miio,
-        role: "Análise de métricas, UX, UI",
-        readTime: "3 min",
-        timeline: "2023",
-        heroImage: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1200",
-        impact: [
-          { label: "Adoção", text: "Mais de 2.000 usuários engajados na fase beta do plano." },
-          { label: "Redução de atrito", text: "Diminuição de 31% no atrito durante o onboarding." },
-          { label: "Conversão", text: "Criação de percepção de valor antes da venda direta." }
-        ],
+        ...t.caseMeta.miio,
+        timeline: "2025",
+        heroImage: miioHero,
         content: getMiioContent(lang)
       };
     }
     if (id === 'tembici') {
       return {
         title: t.caseTitles.tembici,
-        resumo: t.caseDescriptions.tembici,
-        role: "Design de estratégia, UX, UI, Pesquisa de Usuário e Análise de métricas",
-        readTime: "5 min",
+        ...t.caseMeta.tembici,
         timeline: "2022",
         heroImage: temHeader,
-        impact: [
-          { label: "Impacto Financeiro", text: "Prejuízo mensal de ~R$1M eliminado através da nova jornada." },
-          { label: "Breakeven", text: "Atingido em aproximadamente 10 meses de operação do produto." },
-          { label: "Previsibilidade", text: "Maior segurança para a operação de compartilhamento." }
-        ],
         content: getTembiciContent(lang)
       };
     }
@@ -142,13 +122,13 @@ export function CaseStudy() {
       const extracted = h3s.map(h => ({
         id: h.id,
         text: h.textContent || ''
-      })).filter(h => h.id && !h.text.match(/^[0-9]\./)); // filter out numbered subheadings if any, or keep all
-      
+      })).filter(h => h.id);
+
       setHeadings(extracted);
 
       const handleScroll = () => {
         const h3Elements = Array.from(document.querySelectorAll('.prose h3'))
-          .filter(h => h.id && !(h.textContent || '').match(/^[0-9]\./));
+          .filter(h => h.id);
         let currentSection = '';
         
         for (const h of h3Elements) {
@@ -212,7 +192,7 @@ export function CaseStudy() {
         >
           <div className="md:col-span-6">
             <h4 className="text-xl font-bold text-[var(--brand-color)] mb-2">{t.cases.summary}</h4>
-            <p className="text-[var(--text-secondary)] leading-relaxed">{caseData.resumo}</p>
+            <p className="text-[var(--text-secondary)] leading-relaxed">{caseData.summary}</p>
           </div>
           <div className="md:col-span-3">
             <h4 className="text-xl font-bold text-[var(--brand-color)] mb-2">{t.cases.role}</h4>

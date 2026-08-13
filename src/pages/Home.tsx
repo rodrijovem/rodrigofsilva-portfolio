@@ -111,15 +111,15 @@ export function Home() {
               <div className="flex flex-row items-center gap-12 md:gap-16 pt-6 border-t border-[var(--glass-border)]">
                 <div>
                   <span className="block text-4xl md:text-5xl font-bold text-[var(--brand-color)] tracking-tighter mb-1">
-                    <AnimatedCounter value={6} prefix="+" /> {t.home.aboutYears}
+                    <AnimatedCounter value={13} /> {t.home.aboutYears}
                   </span>
-                  <span className="text-sm font-medium text-[var(--text-secondary)]">{t.home.aboutRole}</span>
+                  <span className="text-sm font-medium text-[var(--text-secondary)]">{t.home.aboutMetric1Label}</span>
                 </div>
                 <div>
                   <span className="block text-4xl md:text-5xl font-bold text-[var(--brand-color)] tracking-tighter mb-1">
-                    <AnimatedCounter value={16} prefix="+" />
+                    <AnimatedCounter value={6} /> {t.home.aboutYears}
                   </span>
-                  <span className="text-sm font-medium text-[var(--text-secondary)]">{t.home.aboutProjects}</span>
+                  <span className="text-sm font-medium text-[var(--text-secondary)]">{t.home.aboutMetric2Label}</span>
                 </div>
               </div>
               

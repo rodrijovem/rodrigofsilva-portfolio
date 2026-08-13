@@ -11,6 +11,13 @@ interface Experience {
   description: string[];
 }
 
+interface CaseMeta {
+  summary: string;
+  role: string;
+  readTime: string;
+  impact: { label: string; text: string }[];
+}
+
 interface Translations {
   nav: {
     home: string;
@@ -35,8 +42,8 @@ interface Translations {
     aboutSubtitle: string;
     aboutDescription: string;
     aboutYears: string;
-    aboutRole: string;
-    aboutProjects: string;
+    aboutMetric1Label: string;
+    aboutMetric2Label: string;
     aboutCta: string;
     casesTitle: string;
     casesDescription: string;
@@ -99,6 +106,11 @@ interface Translations {
     miio: string;
     tembici: string;
   };
+  caseMeta: {
+    finvity: CaseMeta;
+    miio: CaseMeta;
+    tembici: CaseMeta;
+  };
   testimonialsTitle: string;
   testimonials: {
     content: string;
@@ -133,8 +145,8 @@ export const translations: Record<Lang, Translations> = {
       aboutSubtitle: 'Sou paulista e atualmente moro em Porto Alegre.',
       aboutDescription: 'Atualmente Product Designer mas comecei minha trajetória no Design Gráfico e no Web Design. Com o tempo, fui me aproximando de UX/UI até migrar para Produto, onde passei a atuar mais perto de estratégia, experiência e construção de soluções digitais.',
       aboutYears: 'anos',
-      aboutRole: 'Como Product Designer',
-      aboutProjects: 'Projetos entregues',
+      aboutMetric1Label: 'Em design',
+      aboutMetric2Label: 'Como Product Designer',
       aboutCta: 'Conheça mais sobre mim',
       casesTitle: 'Projetos selecionados',
       casesDescription: 'Minha carreira em Produto foi construída em diferentes tipos de negócio e complexidade: B2C, B2B, B2B2C, SaaS, mobile apps e plataformas orientadas a dados.',
@@ -148,12 +160,12 @@ export const translations: Record<Lang, Translations> = {
       whatsappDesc: 'Mensagens diretas',
     },
     about: {
-      metric1Value: 6,
+      metric1Value: 13,
       metric1Suffix: ' anos',
-      metric1Label: 'como Product Designer',
-      metric2Value: 16,
-      metric2Suffix: '',
-      metric2Label: 'Projetos entregues',
+      metric1Label: 'em design',
+      metric2Value: 6,
+      metric2Suffix: ' anos',
+      metric2Label: 'como Product Designer',
       bio1: 'Sou Product Designer e comecei minha trajetória no Design Gráfico e no Web Design. Com o tempo, fui me aproximando de UX/UI até migrar para Produto, onde passei a atuar mais perto de estratégia, experiência e construção de soluções digitais.',
       bio2: 'Sou paulista e atualmente moro em Porto Alegre. Essa mudança de áreas ajudou a formar meu olhar para design: mais visual no início, mais funcional e orientado ao uso conforme minha carreira evoluiu.',
       downloadResume: 'Baixar currículo',
@@ -176,7 +188,7 @@ export const translations: Record<Lang, Translations> = {
     },
     cases: {
       title: 'Cases Selecionados',
-      subtitle: 'Já trabalhei em projetos que ajudaram a eliminar prejuízo de R$1M/mês, reduzir onboarding em 31% e estruturar plataformas financeiras complexas orientadas à tomada de decisão.',
+      subtitle: 'Projetos que economizaram ~R$1M/mês em operação, converteram 2.000 assinantes em um app que era gratuito e derrubaram em 60% as dúvidas que chegavam ao suporte de uma plataforma financeira.',
       impactOverview: 'Visão Geral do Impacto',
       summary: 'Resumo',
       role: 'Minha participação',
@@ -270,14 +282,46 @@ export const translations: Record<Lang, Translations> = {
       }
     ],
     caseDescriptions: {
-      finvity: "Redesenho de uma plataforma SaaS para gestão patrimonial, sucessória e tributária, conectando fluxos, dados, simulações e relatórios em uma experiência mais clara, consistente e escalável.",
-      miio: "Criação de uma experiência de monetização para um app de mobilidade elétrica, integrando economia, conectividade, checkout e comunicação em momentos reais da jornada do usuário.",
-      tembici: "Criação e evolução de um produto para entregadores, validando um novo modelo operacional e digital que ajudou a reduzir prejuízo, melhorar previsibilidade e atingir breakeven em cerca de 10 meses.",
+      finvity: "Único designer de uma plataforma de gestão patrimonial e sucessória usada por um dos maiores bancos do Brasil. Redesenhei produto, marca e site — e as dúvidas que chegavam ao suporte caíram 60%.",
+      miio: "O app de recarga elétrica era grátis e a liderança queria um paywall. Argumentei contra, com dados — e a assinatura, apresentada dentro do uso real, fechou 2.000 assinantes no beta.",
+      tembici: "Entregadores e ciclistas casuais disputavam a mesma bicicleta — e quem pagava a conta era a manutenção. Separar as frotas economizou ~R$1M/mês e levou a operação ao breakeven em 10 meses.",
     },
     caseTitles: {
       finvity: "Finvity",
       miio: "miio",
       tembici: "Tembici & iFood",
+    },
+    caseMeta: {
+      tembici: {
+        summary: "Entregadores usavam a bicicleta 4 horas por dia; ciclistas casuais, 20 minutos por semana. Mesma frota, mesma estação, mesmo sistema — e uma conta de manutenção que não fechava. Separei as duas operações e desenhei a jornada que tornou a nova possível sem planilha.",
+        role: "Único Product Designer do time. Conduzi a pesquisa (50+ respostas quantitativas e 9 entrevistas), o workshop que definiu a estratégia e o desenho da jornada ponta a ponta.",
+        readTime: "5 min",
+        impact: [
+          { label: "Custo operacional", text: "~R$1M/mês economizados em manutenção, retirada e reposição de bicicletas — média dos 6 primeiros meses do produto." },
+          { label: "Manutenção", text: "Queda de 72% nos problemas de bateria descarregada, pneu furado e banco quebrado." },
+          { label: "Sustentabilidade", text: "Breakeven da operação em cerca de 10 meses." }
+        ]
+      },
+      miio: {
+        summary: "Um app de recarga de veículos elétricos, grátis, precisava começar a cobrar de uma base que compara preço de kWh centavo a centavo. A liderança queria paywall. Levei um estudo mostrando por que não funcionaria e desenhei o caminho oposto — o plano aparecendo onde o benefício era demonstrável.",
+        role: "Product Designer nos fluxos de assinatura, checkout, onboarding e conexão com veículo. Produto sediado em Portugal — atuei do Brasil, no fuso de Lisboa.",
+        readTime: "4 min",
+        impact: [
+          { label: "Assinantes", text: "2.000 pessoas assinaram o plano depois de passar pelo beta." },
+          { label: "Cadastro", text: "Tempo da jornada de cadastro 31% menor, medido por Google Analytics em teste A/B." },
+          { label: "Modelo", text: "Monetização apresentada em contexto de uso, não como bloqueio — decisão defendida contra a proposta de paywall da liderança." }
+        ]
+      },
+      finvity: {
+        summary: "Único designer de uma plataforma SaaS de gestão patrimonial, sucessória e tributária, respondendo direto ao CEO. Redesenhei o produto, a identidade visual e o site institucional — e as dúvidas que chegavam ao suporte caíram 60%.",
+        role: "Único Product Designer da empresa, reportando ao CEO. Produto, identidade visual e site institucional.",
+        readTime: "4 min",
+        impact: [
+          { label: "Suporte", text: "60% menos dúvidas chegando ao suporte após o redesign — incluindo as que vinham pelo maior cliente da plataforma, um dos maiores bancos do Brasil." },
+          { label: "Escopo", text: "Único designer da empresa: produto, marca e site institucional passavam por mim." },
+          { label: "Processo", text: "Protótipos de alta fidelidade gerados com IA — Google Stitch com design.md, depois Claude via MCP — para testar caminhos antes de construir." }
+        ]
+      }
     },
     testimonialsTitle: "Como é trabalhar comigo!",
     testimonials: [
@@ -331,8 +375,8 @@ export const translations: Record<Lang, Translations> = {
       aboutSubtitle: 'I am from São Paulo and currently live in Porto Alegre.',
       aboutDescription: 'Currently a Product Designer but I started my journey in Graphic Design and Web Design. Over time, I got closer to UX/UI until I migrated to Product, where I started working closer to strategy, experience, and building digital solutions.',
       aboutYears: 'years',
-      aboutRole: 'As a Product Designer',
-      aboutProjects: 'Delivered projects',
+      aboutMetric1Label: 'In design',
+      aboutMetric2Label: 'As a Product Designer',
       aboutCta: 'Learn more about me',
       casesTitle: 'Selected projects',
       casesDescription: 'My career in Product was built across different types of business and complexity: B2C, B2B, B2B2C, SaaS, mobile apps, and data-driven platforms.',
@@ -346,12 +390,12 @@ export const translations: Record<Lang, Translations> = {
       whatsappDesc: 'Direct messages',
     },
     about: {
-      metric1Value: 6,
+      metric1Value: 13,
       metric1Suffix: ' years',
-      metric1Label: 'as Product Designer',
-      metric2Value: 16,
-      metric2Suffix: '',
-      metric2Label: 'Delivered projects',
+      metric1Label: 'in design',
+      metric2Value: 6,
+      metric2Suffix: ' years',
+      metric2Label: 'as Product Designer',
       bio1: 'I am a Product Designer and started my journey in Graphic Design and Web Design. Over time, I got closer to UX/UI until I migrated to Product, where I started to work closer to strategy, experience, and the construction of digital solutions.',
       bio2: 'I am from São Paulo and currently live in Porto Alegre. This shift in areas helped shape my view on design: more visual at the beginning, more functional and use-oriented as my career evolved.',
       downloadResume: 'Download resume',
@@ -374,7 +418,7 @@ export const translations: Record<Lang, Translations> = {
     },
     cases: {
       title: 'Selected Cases',
-      subtitle: "I've worked on projects that helped eliminate a R$1M/month deficit, reduce onboarding by 31%, and structure complex financial platforms geared towards decision-making.",
+      subtitle: "Projects that saved ~R$1M/month in operations, converted 2,000 subscribers in an app that used to be free, and cut support questions by 60% on a financial platform.",
       impactOverview: 'Impact Overview',
       summary: 'Summary',
       role: 'My Role',
@@ -468,14 +512,46 @@ export const translations: Record<Lang, Translations> = {
       }
     ],
     caseDescriptions: {
-      finvity: "Redesign of a SaaS platform for wealth, succession, and tax management, connecting flows, data, simulations, and reports into a clearer, more consistent, and scalable experience.",
-      miio: "Creation of a monetization experience for an electric mobility app, integrating savings, connectivity, checkout, and communication in real moments of the user's journey.",
-      tembici: "Creation and evolution of a product for delivery riders, validating a new operational and digital model that helped reduce deficit, improve predictability, and reach breakeven in about 10 months.",
+      finvity: "Sole designer of a wealth and succession management platform used by one of Brazil's largest banks. I redesigned the product, the brand, and the website — and support questions dropped 60%.",
+      miio: "The EV charging app was free and leadership wanted a paywall. I argued against it with data — and the subscription, surfaced inside real usage, closed 2,000 subscribers in the beta.",
+      tembici: "Delivery riders and casual cyclists were competing for the same bike — and maintenance paid the bill. Splitting the fleets saved ~R$1M/month and took the operation to breakeven in 10 months.",
     },
     caseTitles: {
       finvity: "Finvity",
       miio: "miio",
       tembici: "Tembici & iFood",
+    },
+    caseMeta: {
+      tembici: {
+        summary: "Delivery riders used the bike 4 hours a day; casual cyclists, 20 minutes a week. Same fleet, same station, same system — and a maintenance bill that did not add up. I split the two operations and designed the journey that made the new one possible without a spreadsheet.",
+        role: "Sole Product Designer on the team. I ran the research (50+ survey responses and 9 interviews), the workshop that set the strategy, and the end-to-end journey design.",
+        readTime: "5 min",
+        impact: [
+          { label: "Operating cost", text: "~R$1M/month saved in maintenance, pickup operations, and bike replacement — average over the product's first 6 months." },
+          { label: "Maintenance", text: "72% drop in dead battery, flat tire, and broken seat incidents." },
+          { label: "Sustainability", text: "The operation reached breakeven in about 10 months." }
+        ]
+      },
+      miio: {
+        summary: "A free EV charging app had to start charging a user base that compares kWh prices cent by cent. Leadership wanted a paywall. I brought a study showing why it would not work and designed the opposite path — the plan showing up where the benefit was demonstrable.",
+        role: "Product Designer on subscription, checkout, onboarding, and vehicle connection flows. Product based in Portugal — I worked from Brazil on Lisbon time.",
+        readTime: "4 min",
+        impact: [
+          { label: "Subscribers", text: "2,000 people subscribed to the plan after going through the beta." },
+          { label: "Sign-up", text: "31% shorter sign-up journey, measured with Google Analytics in an A/B test." },
+          { label: "Model", text: "Monetization presented in context of use, not as a blocker — a decision defended against leadership's paywall proposal." }
+        ]
+      },
+      finvity: {
+        summary: "Sole designer of a SaaS platform for wealth, succession, and tax management, reporting directly to the CEO. I redesigned the product, the visual identity, and the institutional website — and support questions dropped 60%.",
+        role: "Sole Product Designer at the company, reporting to the CEO. Product, visual identity, and institutional website.",
+        readTime: "4 min",
+        impact: [
+          { label: "Support", text: "60% fewer questions reaching support after the redesign — including those coming through the platform's largest client, one of Brazil's biggest banks." },
+          { label: "Scope", text: "Sole designer at the company: product, brand, and institutional website all went through me." },
+          { label: "Process", text: "High-fidelity prototypes generated with AI — Google Stitch with a design.md, later Claude over MCP — to test paths before building them." }
+        ]
+      }
     },
     testimonialsTitle: "What it's like working with me!",
     testimonials: [
