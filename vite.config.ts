@@ -4,12 +4,24 @@ import tailwindcss from '@tailwindcss/vite'
 
 /*
   O GitHub Pages serve arquivos estaticos: uma rota como /cases/finvity nao
-  existe em disco e devolve 404 antes do React carregar. Servindo o mesmo HTML
-  como 404.html, o Pages entrega o app em qualquer rota e o router assume dali.
+  existe em disco e devolve 404 antes do React carregar.
 
-  Emitido a partir do bundle (e nao copiado de public/) porque o index.html
+  Duas saidas, e as duas sao necessarias:
+
+  - 404.html, que o Pages entrega em qualquer rota nao encontrada. Resolve a
+    navegacao, mas a resposta sai com status 404 — o visitante ve a pagina, o
+    crawler ve um erro.
+  - um index.html em cada rota conhecida, que o Pages acha em disco e serve
+    com 200. E o que torna as paginas indexaveis.
+
+  Emitidos a partir do bundle (e nao copiados de public/) porque o index.html
   precisa ja estar com os assets com hash injetados pelo build.
+
+  ATENCAO: esta lista e mantida a mao. Um case novo em CASE_ORDER que nao
+  entrar aqui volta a responder 404 — renderiza, mas nao indexa.
 */
+const PRERENDERED_ROUTES = ['about', 'cases/tembici', 'cases/miio', 'cases/finvity']
+
 function spaFallback(): Plugin {
   return {
     name: 'spa-fallback-404',
@@ -18,7 +30,16 @@ function spaFallback(): Plugin {
     generateBundle(_options, bundle) {
       const index = bundle['index.html']
       if (index?.type !== 'asset') return
+
       this.emitFile({ type: 'asset', fileName: '404.html', source: index.source })
+
+      for (const route of PRERENDERED_ROUTES) {
+        this.emitFile({
+          type: 'asset',
+          fileName: `${route}/index.html`,
+          source: index.source,
+        })
+      }
     },
   }
 }
