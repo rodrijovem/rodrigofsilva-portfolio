@@ -1,52 +1,99 @@
-import React, { useRef, useState, MouseEvent } from 'react';
+import React, { useRef, useState, PointerEvent } from 'react';
+import { Link } from 'react-router-dom';
 
-interface RippleHoverButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface RippleHoverButtonProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   children: React.ReactNode;
+  /** Rota interna — navega pelo router, sem recarregar a pagina */
+  to?: string;
+  /** Link externo */
+  href?: string;
 }
 
-export function RippleHoverButton({ children, className = '', ...props }: RippleHoverButtonProps) {
-  const buttonRef = useRef<HTMLAnchorElement>(null);
-  const [spanStyle, setSpanStyle] = useState({ left: '50%', top: '50%' });
+/**
+ * Pointer Events cobrem mouse e toque com o mesmo codigo: o ripple existe
+ * tanto para quem tem cursor quanto para quem toca a tela.
+ */
+export function RippleHoverButton({
+  children,
+  className = '',
+  to,
+  href,
+  ...props
+}: RippleHoverButtonProps) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const [origin, setOrigin] = useState({ left: '50%', top: '50%' });
+  const [open, setOpen] = useState(false);
 
-  const handleMouseEnter = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      setSpanStyle({ left: `${x}px`, top: `${y}px` });
-    }
-    if (props.onMouseEnter) props.onMouseEnter(e);
+  const originFrom = (e: PointerEvent<HTMLAnchorElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setOrigin({ left: `${e.clientX - rect.left}px`, top: `${e.clientY - rect.top}px` });
   };
 
-  const handleMouseLeave = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      setSpanStyle({ left: `${x}px`, top: `${y}px` });
-    }
-    if (props.onMouseLeave) props.onMouseLeave(e);
+  const handlePointerEnter = (e: PointerEvent<HTMLAnchorElement>) => {
+    if (e.pointerType === 'touch') return; // no toque quem manda e o pointerdown
+    originFrom(e);
+    setOpen(true);
   };
 
-  return (
-    <a
-      ref={buttonRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden group ${className}`}
-      {...props}
-    >
-      <div 
-        className="absolute pointer-events-none z-0" 
-        style={{ left: spanStyle.left, top: spanStyle.top }}
-      >
+  const handlePointerLeave = (e: PointerEvent<HTMLAnchorElement>) => {
+    originFrom(e);
+    setOpen(false);
+  };
+
+  const handlePointerDown = (e: PointerEvent<HTMLAnchorElement>) => {
+    originFrom(e);
+    setOpen(true);
+  };
+
+  const handlePointerUp = () => {
+    if (ref.current?.matches(':hover')) return; // mouse continua sobre o botao
+    setOpen(false);
+  };
+
+  const handlers = {
+    onPointerEnter: handlePointerEnter,
+    onPointerLeave: handlePointerLeave,
+    onPointerDown: handlePointerDown,
+    onPointerUp: handlePointerUp,
+    onPointerCancel: () => setOpen(false),
+  };
+
+  const inner = (
+    <>
+      <span className="absolute pointer-events-none z-0" style={origin} aria-hidden="true">
         <span
-          className="block w-[400px] h-[400px] bg-[var(--bg-color)] rounded-full -translate-x-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-transform duration-[600ms] ease-out"
+          className={`block w-[400px] h-[400px] bg-[var(--bg-color)] rounded-full -translate-x-1/2 -translate-y-1/2 transition-transform duration-350 ease-out ${
+            open ? 'scale-100' : 'scale-0'
+          }`}
+          style={{ transitionDuration: '350ms' }}
         />
-      </div>
-      <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 text-[var(--bg-color)] group-hover:text-[var(--brand-color)]">
+      </span>
+      <span
+        className={`relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 ${
+          open ? 'text-[var(--brand-color)]' : 'text-[var(--bg-color)]'
+        }`}
+      >
         {children}
       </span>
+    </>
+  );
+
+  const classes = `relative overflow-hidden ${className}`;
+
+  if (to) {
+    return (
+      <Link ref={ref} to={to} className={classes} {...handlers} {...props}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <a ref={ref} href={href} className={classes} {...handlers} {...props}>
+      {inner}
     </a>
   );
 }

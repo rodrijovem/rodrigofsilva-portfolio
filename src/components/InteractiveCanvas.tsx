@@ -1,109 +1,133 @@
 import { useEffect, useRef } from 'react';
 
+type Point = { x: number; y: number; life: number };
+
 export function InteractiveCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    // Sem cursor fino nao ha o que desenhar — nao vale manter um rAF vivo no celular
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let width = canvas.offsetWidth;
     let height = canvas.offsetHeight;
-    
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    ctx.scale(dpr, dpr);
 
-    let points: { x: number; y: number; life: number }[] = [];
-    let animationFrameId: number;
-
-    const handleResize = () => {
+    const size = () => {
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
       canvas.width = width * dpr;
       canvas.height = height * dpr;
-      ctx.scale(dpr, dpr);
+      ctx.scale(dpr, dpr); // definir canvas.width ja reseta a transform
     };
+    size();
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      // Capturar o movimento apenas se estiver na área do canvas
-      if (x >= -50 && x <= width + 50 && y >= -50 && y <= height + 50) {
-        points.push({ x, y, life: 1.0 });
+    let points: Point[] = [];
+    let frameId = 0;
+    let running = false;
+
+    // getComputedStyle a cada frame forca recalculo de estilo — lemos uma vez
+    // e reavaliamos so quando o tema muda.
+    let rgb = '0, 0, 0';
+    const readBrandColor = () => {
+      const raw = getComputedStyle(document.documentElement)
+        .getPropertyValue('--brand-color')
+        .trim();
+      if (raw.startsWith('#')) {
+        const hex =
+          raw.length === 4
+            ? raw[1] + raw[1] + raw[2] + raw[2] + raw[3] + raw[3]
+            : raw.slice(1);
+        const n = parseInt(hex, 16);
+        rgb = `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
       }
     };
+    readBrandColor();
 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
+    const themeObserver = new MutationObserver(readBrandColor);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      
-      if (points.length > 1) {
-        const computedStyle = getComputedStyle(document.documentElement);
-        let brandColor = computedStyle.getPropertyValue('--brand-color').trim() || '#000000';
-        
-        let r = 0, g = 0, b = 0;
-        if (brandColor.startsWith('#')) {
-          if (brandColor.length === 4) {
-            r = parseInt(brandColor[1] + brandColor[1], 16);
-            g = parseInt(brandColor[2] + brandColor[2], 16);
-            b = parseInt(brandColor[3] + brandColor[3], 16);
-          } else if (brandColor.length === 7) {
-            r = parseInt(brandColor.substring(1, 3), 16);
-            g = parseInt(brandColor.substring(3, 5), 16);
-            b = parseInt(brandColor.substring(5, 7), 16);
-          }
-        }
-        
-        for (let i = 0; i < points.length - 1; i++) {
-          const p1 = points[i];
-          const p2 = points[i + 1];
-          
-          if (p1.life <= 0) continue;
-          
-          const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-          if (dist > 100) continue; // Quebra a linha se o mouse pulou
-          
-          ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${p1.life})`;
-          ctx.lineWidth = 4;
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          ctx.stroke();
-          
-          p1.life -= 0.02; // Velocidade de fade da linha
-        }
-        if (points.length > 0) {
-            points[points.length - 1].life -= 0.02;
-        }
-      }
-      
-      points = points.filter(p => p.life > 0);
 
-      animationFrameId = requestAnimationFrame(draw);
+      for (let i = 0; i < points.length - 1; i++) {
+        const p1 = points[i];
+        const p2 = points[i + 1];
+        if (p1.life <= 0) continue;
+
+        // Quebra a linha se o cursor pulou
+        if (Math.hypot(p2.x - p1.x, p2.y - p1.y) > 100) continue;
+
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(${rgb}, ${p1.life})`;
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+
+        p1.life -= 0.02;
+      }
+
+      if (points.length > 0) {
+        points[points.length - 1].life -= 0.02;
+      }
+
+      points = points.filter((p) => p.life > 0);
+
+      // Nada para desenhar: para o loop em vez de queimar frames a toa
+      if (points.length === 0) {
+        running = false;
+        return;
+      }
+
+      frameId = requestAnimationFrame(draw);
     };
 
-    draw();
+    const start = () => {
+      if (running) return;
+      running = true;
+      frameId = requestAnimationFrame(draw);
+    };
+
+    const handlePointerMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      if (x >= -50 && x <= width + 50 && y >= -50 && y <= height + 50) {
+        points.push({ x, y, life: 1.0 });
+        start();
+      }
+    };
+
+    window.addEventListener('resize', size);
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', size);
+      window.removeEventListener('pointermove', handlePointerMove);
+      themeObserver.disconnect();
+      cancelAnimationFrame(frameId);
     };
   }, []);
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
       className="absolute inset-0 w-full h-full z-10 pointer-events-none"
     />
   );

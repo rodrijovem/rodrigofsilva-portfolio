@@ -32,3 +32,8 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Ferramental local do Claude Code (skills, config da maquina) — nao e do site
+.agents/
+.claude/
+skills-lock.json

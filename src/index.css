@@ -13,6 +13,13 @@
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: rgba(0, 0, 0, 0.5);
   --brand-color: #52BA52;
+
+  /* Altura da navbar — fonte única de verdade para o espaçamento das páginas */
+  --nav-h: 72px;
+}
+
+@media (min-width: 768px) {
+  :root { --nav-h: 88px; }
 }
 
 :root.light {
@@ -39,7 +46,44 @@ body {
   mix-blend-mode: normal;
 }
 
-/* Taste Skill Liquid Glass */
+/* ---------------------------------------------------------------
+   Resposta: feedback no pointer-down, nao no release.
+   Vale para mouse e toque — no toque nao existe hover.
+   --------------------------------------------------------------- */
+a,
+button,
+[role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:active,
+button:active:not(:disabled),
+[role="button"]:active {
+  transform: scale(0.97);
+}
+
+/* Elementos grandes (cards) afundam menos que botoes pequenos */
+.press-subtle:active {
+  transform: scale(0.99);
+}
+
+a,
+button,
+[role="button"] {
+  transition: transform 100ms ease-out;
+}
+
+/* ---------------------------------------------------------------
+   Foco visivel — o Tailwind remove o outline padrao do navegador
+   --------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--brand-color);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Vidro translucido */
 .liquid-glass {
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
@@ -48,10 +92,33 @@ body {
   box-shadow: inset 0 1px 0 var(--glass-border),
               0 20px 40px -15px var(--glass-shadow);
   color: var(--text-primary);
-  transition: all 0.3s ease;
+  transition: background-color 300ms ease, border-color 300ms ease;
 }
 
-/* Marquee Animation */
+/* Superficie solida: usada dentro de chrome que ja e translucido,
+   para nunca empilhar vidro sobre vidro */
+.solid-chrome {
+  background: var(--bg-alt);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-border);
+  color: var(--text-primary);
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+
+/* Scroll edge effect: o conteudo encontra a chrome flutuante com um
+   gradiente curto, em vez de uma divisoria de 1px */
+.scroll-edge::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 24px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--bg-color), transparent);
+}
+
+/* Marquee */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -59,4 +126,70 @@ body {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover,
+.marquee-wrap:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ---------------------------------------------------------------
+   Preferencias do sistema
+   --------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Feedback de pressao continua existindo — so perde o movimento */
+  a:active,
+  button:active:not(:disabled),
+  [role="button"]:active {
+    transform: none;
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-glass {
+    background: var(--bg-alt);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .translucent-chrome {
+    background: var(--bg-color) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --text-secondary: #d1d5db;
+    --glass-border: rgba(255, 255, 255, 0.35);
+  }
+
+  :root.light {
+    --text-secondary: #1f2937;
+    --glass-border: rgba(0, 0, 0, 0.4);
+  }
+
+  .liquid-glass,
+  .translucent-chrome {
+    background: var(--bg-alt);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
