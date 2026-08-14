@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DownloadSimple, LinkedinLogo, CaretLeft, CaretRight } from '@phosphor-icons/react';
-import { useAppContext } from '../contexts/AppContext';
+import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
 import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
-import { AppProvider, useAppContext } from './contexts/AppContext';
+import { AppProvider } from './contexts/AppContext';
+import { useAppContext } from './contexts/useAppContext';
 import { translations } from './i18n';
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';

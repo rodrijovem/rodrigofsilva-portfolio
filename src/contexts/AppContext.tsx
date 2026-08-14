@@ -1,45 +1,15 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, MouseEvent } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, MouseEvent } from 'react';
 import { flushSync } from 'react-dom';
 import { Lang } from '../i18n';
 import { prefersReducedMotion } from '../lib/motion';
-
-interface AppContextType {
-  isDarkMode: boolean;
-  toggleTheme: (e: MouseEvent) => void;
-  lang: Lang;
-  setLang: (lang: Lang) => void;
-}
-
-const AppContext = createContext<AppContextType | undefined>(undefined);
-
-const THEME_KEY = 'rs-theme';
-const LANG_KEY = 'rs-lang';
-
-/**
- * So existe quando o usuario clicou no toggle. Enquanto for null, o site
- * ainda esta seguindo o sistema.
- */
-function storedTheme(): 'dark' | 'light' | null {
-  if (typeof window === 'undefined') return null;
-  const saved = window.localStorage.getItem(THEME_KEY);
-  return saved === 'dark' || saved === 'light' ? saved : null;
-}
-
-/** Escolha salva > preferencia do sistema > escuro. */
-function initialTheme(): boolean {
-  const saved = storedTheme();
-  if (saved) return saved === 'dark';
-  if (typeof window === 'undefined') return true;
-  return !window.matchMedia('(prefers-color-scheme: light)').matches;
-}
-
-/** Escolha salva > idioma do navegador > portugues. */
-function initialLang(): Lang {
-  if (typeof window === 'undefined') return 'pt';
-  const saved = window.localStorage.getItem(LANG_KEY);
-  if (saved === 'pt' || saved === 'en') return saved;
-  return navigator.language?.toLowerCase().startsWith('pt') ? 'pt' : 'en';
-}
+import { AppContext } from './useAppContext';
+import {
+  initialLang,
+  initialTheme,
+  persistLang,
+  persistTheme,
+  storedTheme,
+} from '../lib/preferences';
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useState(initialTheme);
@@ -74,13 +44,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [hasThemeChoice]);
 
   const setLang = useCallback((next: Lang) => {
-    window.localStorage.setItem(LANG_KEY, next);
+    persistLang(next);
     setLangState(next);
   }, []);
 
   /** A partir daqui o sistema deixa de mandar: a escolha e do usuario. */
   const chooseTheme = useCallback((dark: boolean) => {
-    window.localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
+    persistTheme(dark);
     setHasThemeChoice(true);
     setIsDarkMode(dark);
   }, []);
@@ -144,12 +114,4 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
-}
-
-export function useAppContext() {
-  const context = useContext(AppContext);
-  if (context === undefined) {
-    throw new Error('useAppContext must be used within an AppProvider');
-  }
-  return context;
 }

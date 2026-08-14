@@ -1,6 +1,6 @@
 import { ArrowRight, Sun, Moon } from '@phosphor-icons/react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAppContext } from '../contexts/AppContext';
+import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
 import { RippleHoverButton } from './RippleHoverButton';
 

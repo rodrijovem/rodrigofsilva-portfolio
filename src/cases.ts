@@ -1,5 +1,7 @@
 import { translations } from './i18n';
-import type { CaseId, Lang } from './i18n';
+import type { Lang } from './i18n';
+import { CASE_ORDER } from './caseIds';
+import type { CaseId } from './caseIds';
 
 import finvityThumb from '../images/finvityAI.webp';
 import miioThumb from '../images/miioOne.webp';
@@ -11,24 +13,20 @@ import tembiciThumb from '../images/Tembici.webp';
   com anos diferentes nos dois arquivos. Nenhum dos dois campos chegava a ser
   renderizado, entao a divergencia passou despercebida.
 
-  Titulo e descricao vem do i18n; aqui ficam so a ordem e as imagens, que nao
-  dependem de idioma. Um case novo entra em CASE_ORDER, em thumbnails e no
-  i18n — o resto se propaga.
+  Titulo e descricao vem do i18n; aqui ficam so as imagens, que nao dependem
+  de idioma. A ordem e a lista de ids moraram aqui ate virarem `caseIds.ts`,
+  que o build tambem le. Um case novo entra la, em thumbnails e no i18n — o
+  resto se propaga, e cada um destes tres quebra o build se ficar para tras.
 */
 
-/** Ordem de exibicao na home e na lista de "mais cases". */
-export const CASE_ORDER: CaseId[] = ['tembici', 'miio', 'finvity'];
+export { CASE_ORDER, isCaseId } from './caseIds';
+export type { CaseId } from './caseIds';
 
 const thumbnails: Record<CaseId, string> = {
   tembici: tembiciThumb,
   miio: miioThumb,
   finvity: finvityThumb,
 };
-
-/** Estreita uma string vinda da URL, que nao oferece garantia nenhuma. */
-export function isCaseId(value: string | undefined): value is CaseId {
-  return value !== undefined && value in thumbnails;
-}
 
 export interface CaseSummary {
   id: CaseId;

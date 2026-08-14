@@ -1,7 +1,9 @@
+import type { CaseId } from '../caseIds';
+
 export type Lang = 'pt' | 'en';
 
-/** Os cases publicados. A ordem de exibicao vive em `src/cases.ts`. */
-export type CaseId = 'tembici' | 'miio' | 'finvity';
+/** Reexportado por conveniencia: a fonte e `src/caseIds.ts`. */
+export type { CaseId };
 
 export interface Experience {
   period: string;

@@ -2,7 +2,7 @@ import { useParams, Navigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Lightbulb, ArrowRight } from '@phosphor-icons/react';
 import { useEffect, useRef, useState } from 'react';
-import { useAppContext } from '../contexts/AppContext';
+import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
 import { isCaseId, listCases } from '../cases';
 import type { CaseSummary } from '../cases';

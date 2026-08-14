@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, LinkedinLogo, WhatsappLogo } from '@phosphor-icons/react';
 import { LuMail } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
-import { useAppContext } from '../contexts/AppContext';
+import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
 import { AnimatedCounter } from '../components/AnimatedCounter';
 import { InteractiveCanvas } from '../components/InteractiveCanvas';

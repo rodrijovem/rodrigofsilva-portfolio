@@ -1,6 +1,7 @@
 import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { CASE_ORDER } from './src/caseIds'
 
 /*
   O GitHub Pages serve arquivos estaticos: uma rota como /cases/finvity nao
@@ -17,10 +18,12 @@ import tailwindcss from '@tailwindcss/vite'
   Emitidos a partir do bundle (e nao copiados de public/) porque o index.html
   precisa ja estar com os assets com hash injetados pelo build.
 
-  ATENCAO: esta lista e mantida a mao. Um case novo em CASE_ORDER que nao
-  entrar aqui volta a responder 404 — renderiza, mas nao indexa.
+  A lista de cases vem de `src/caseIds.ts`, o mesmo array que a home percorre.
+  Mantida a mao, um case novo respondia 404 aqui — renderizava, mas nao
+  indexava. Derivada, entra sozinho. So `about` fica declarado, por ser a
+  unica rota estatica que nao sai de um case.
 */
-const PRERENDERED_ROUTES = ['about', 'cases/tembici', 'cases/miio', 'cases/finvity']
+const PRERENDERED_ROUTES = ['about', ...CASE_ORDER.map((id) => `cases/${id}`)]
 
 function spaFallback(): Plugin {
   return {

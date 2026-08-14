@@ -1,0 +1,10 @@
+# Sem isto o hook segue depois de uma etapa falhar e termina com o codigo da
+# ultima — lint reprovado, commit aceito assim mesmo.
+set -e
+
+# lint + testes relacionados, so nos arquivos em stage
+npx lint-staged
+
+# typecheck e do projeto inteiro, nao por arquivo: uma mudanca em caseIds.ts
+# quebra i18n e caseDetail, que podem nao estar em stage. Roda em ~1s.
+npm run typecheck

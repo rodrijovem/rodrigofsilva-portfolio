@@ -1,0 +1,31 @@
+{
+  /*
+    O `tsconfig.json` cobre `src`, que roda no browser. Este cobre os arquivos
+    de build, que rodam no Node — libs e module resolution diferentes, por isso
+    um projeto separado em vez de um `include` a mais.
+
+    Sem isto o `vite.config.ts` nao era checado por ninguem: `tsc -b` seguia a
+    lista do `include`, e o Vite so transpila o config, nao verifica tipos.
+
+    Dois programas independentes, e nao um project reference, porque reference
+    exige emit — e aqui nao ha nada para emitir. O script `typecheck` roda os
+    dois; `caseIds.ts` entra neste pelo import do config e e checado duas
+    vezes, com as libs de cada lado. Custo irrelevante, e e o arquivo que mais
+    interessa que esteja certo nos dois contextos.
+  */
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts", "vitest.config.ts"]
+}

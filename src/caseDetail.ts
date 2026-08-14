@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
 import { translations } from './i18n';
 import type { CaseId, CaseMeta, Lang } from './i18n';
-import { getFinvityContent, getMiioContent, getTembiciContent } from './caseContent';
+import { getFinvityContent } from './content/finvity';
+import { getMiioContent } from './content/miio';
+import { getTembiciContent } from './content/tembici';
 
 import finHero from '../images/Finvity/finHeader.webp';
 import miioHero from '../images/miioOne.webp';
