@@ -6,46 +6,26 @@ import { useAppContext } from '../contexts/AppContext';
 import { translations } from '../i18n';
 import { AnimatedCounter } from '../components/AnimatedCounter';
 import { InteractiveCanvas } from '../components/InteractiveCanvas';
+import { listCases } from '../cases';
 import { calm, calmSlow, stagger, revealFrom, revealTo } from '../lib/motion';
 
 import aboutImage from '../../images/about.webp';
-
-import finvityCase from '../../images/finvityAI.webp';
-import miioCase from '../../images/miioOne.webp';
-import tembiciCase from '../../images/Tembici.webp';
 
 /* Estados de hover usam --bg-color, nao branco: branco sobre o verde da marca
    em dark mode da 2.47:1 e reprova no AA. --bg-color da 7.05:1. */
 const contactCardClass =
   'press-subtle group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-[var(--glass-bg)] border border-[var(--glass-border)] hover:border-[var(--brand-color)] hover:bg-[var(--brand-color)] transition-[background-color,border-color] duration-300';
 
+/* Numeros, nao texto: nao entram no i18n porque seriam os mesmos nos dois
+   idiomas — so os rotulos ao lado mudam. */
+const YEARS_IN_DESIGN = 13;
+const YEARS_AS_PRODUCT_DESIGNER = 6;
+
 export function Home() {
   const { lang } = useAppContext();
   const t = translations[lang];
 
-  const cases = [
-    {
-      id: "tembici",
-      title: t.caseTitles.tembici,
-      description: t.caseDescriptions.tembici,
-      thumbnail: tembiciCase,
-      year: "2023"
-    },
-    {
-      id: "miio",
-      title: t.caseTitles.miio,
-      description: t.caseDescriptions.miio,
-      thumbnail: miioCase,
-      year: "2025"
-    },
-    {
-      id: "finvity",
-      title: t.caseTitles.finvity,
-      description: t.caseDescriptions.finvity,
-      thumbnail: finvityCase,
-      year: "2026"
-    }
-  ];
+  const cases = listCases(lang);
 
   const contacts = [
     {
@@ -145,13 +125,13 @@ export function Home() {
               <div className="flex flex-row items-center gap-12 md:gap-16 pt-6 border-t border-[var(--glass-border)]">
                 <div>
                   <span className="block text-4xl md:text-5xl font-bold text-[var(--brand-color)] tracking-tighter mb-1">
-                    <AnimatedCounter value={13} /> {t.home.aboutYears}
+                    <AnimatedCounter value={YEARS_IN_DESIGN} /> {t.home.aboutYears}
                   </span>
                   <span className="text-sm font-medium text-[var(--text-secondary)]">{t.home.aboutMetric1Label}</span>
                 </div>
                 <div>
                   <span className="block text-4xl md:text-5xl font-bold text-[var(--brand-color)] tracking-tighter mb-1">
-                    <AnimatedCounter value={6} /> {t.home.aboutYears}
+                    <AnimatedCounter value={YEARS_AS_PRODUCT_DESIGNER} /> {t.home.aboutYears}
                   </span>
                   <span className="text-sm font-medium text-[var(--text-secondary)]">{t.home.aboutMetric2Label}</span>
                 </div>

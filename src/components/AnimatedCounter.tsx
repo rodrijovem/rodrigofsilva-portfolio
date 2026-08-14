@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { useInView, animate } from 'framer-motion';
 import { prefersReducedMotion } from '../lib/motion';
 
-export function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: number, prefix?: string, suffix?: string }) {
+export function AnimatedCounter({ value }: { value: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -12,7 +12,7 @@ export function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: nu
 
     // A animacao nao pode virar atraso de informacao: o numero final e o dado.
     if (prefersReducedMotion()) {
-      el.textContent = `${prefix}${value}${suffix}`;
+      el.textContent = String(value);
       return;
     }
 
@@ -20,18 +20,18 @@ export function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: nu
       duration: 1.1,
       ease: [0.22, 1, 0.36, 1],
       onUpdate(v) {
-        el.textContent = `${prefix}${Math.round(v)}${suffix}`;
+        el.textContent = String(Math.round(v));
       },
     });
 
     return () => controls.stop();
-  }, [isInView, value, prefix, suffix]);
+  }, [isInView, value]);
 
   // O valor real fica acessivel para leitores de tela desde o inicio
   return (
     <>
-      <span ref={ref} aria-hidden="true">{`${prefix}0${suffix}`}</span>
-      <span className="sr-only">{`${prefix}${value}${suffix}`}</span>
+      <span ref={ref} aria-hidden="true">0</span>
+      <span className="sr-only">{value}</span>
     </>
   );
 }

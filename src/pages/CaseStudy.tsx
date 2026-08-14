@@ -1,26 +1,18 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Lightbulb, ArrowRight } from '@phosphor-icons/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAppContext } from '../contexts/AppContext';
 import { translations } from '../i18n';
-import { getFinvityContent, getMiioContent, getTembiciContent } from '../caseContent';
+import { isCaseId, listCases } from '../cases';
+import type { CaseSummary } from '../cases';
+import { caseDetail } from '../caseDetail';
 import { calm, revealFrom, revealTo } from '../lib/motion';
 
-import finHeader from '../../images/Finvity/finHeader.webp';
-import temHeader from '../../images/tembici/temHeader.webp';
-import miioHero from '../../images/miioOne.webp';
-
-import finvityCase from '../../images/finvityAI.webp';
-import miioCase from '../../images/miioOne.webp';
-import tembiciCase from '../../images/Tembici.webp';
-
-type CaseItem = { id: string; title: string; description: string; thumbnail: string };
-
-function OtherCasesStack({ cases }: { cases: CaseItem[] }) {
+function OtherCasesStack({ cases }: { cases: CaseSummary[] }) {
   // Hook no topo do componente — nunca dentro do map
   const { lang } = useAppContext();
-  const readCase = translations[lang]?.cases?.readCase || 'Ler estudo de caso';
+  const readCase = translations[lang].cases.readCase;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -58,60 +50,31 @@ export function CaseStudy() {
   const { lang } = useAppContext();
   const t = translations[lang];
 
+  const contentRef = useRef<HTMLDivElement>(null);
   const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
   const [activeSection, setActiveSection] = useState<string>('');
 
-  const getCaseData = () => {
-    if (id === 'finvity') {
-      return {
-        title: t.caseTitles.finvity,
-        ...t.caseMeta.finvity,
-        timeline: "2025",
-        heroImage: finHeader,
-        content: getFinvityContent(lang)
-      };
-    }
-    if (id === 'miio') {
-      return {
-        title: t.caseTitles.miio,
-        ...t.caseMeta.miio,
-        timeline: "2025",
-        heroImage: miioHero,
-        content: getMiioContent(lang)
-      };
-    }
-    if (id === 'tembici') {
-      return {
-        title: t.caseTitles.tembici,
-        ...t.caseMeta.tembici,
-        timeline: "2022",
-        heroImage: temHeader,
-        content: getTembiciContent(lang)
-      };
-    }
-    return null;
-  };
-
-  const caseData = getCaseData();
-
-  const allCases = [
-    { id: "tembici", title: t.caseTitles.tembici, description: t.caseDescriptions.tembici, thumbnail: tembiciCase },
-    { id: "miio", title: t.caseTitles.miio, description: t.caseDescriptions.miio, thumbnail: miioCase },
-    { id: "finvity", title: t.caseTitles.finvity, description: t.caseDescriptions.finvity, thumbnail: finvityCase }
-  ];
-
-  const otherCases = allCases.filter(c => c.id !== id);
+  const valid = isCaseId(id);
+  const caseData = valid ? caseDetail(id, lang) : null;
+  const otherCases = valid ? listCases(lang).filter((c) => c.id !== id) : [];
 
   /*
     Um IntersectionObserver no lugar do par setTimeout + listener de scroll.
     Dependencias sao apenas [id, lang]: caseData e um objeto novo a cada render
     e, como dependencia, fazia o efeito reexecutar indefinidamente, acumulando
     listeners que nunca eram removidos.
+
+    A busca sai do ref do proprio conteudo, e nao de um querySelectorAll global
+    por '.prose h3' — assim o indice nao depende de qual outro componente da
+    pagina por acaso usa a mesma classe.
   */
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>('.prose h3')).filter(h => h.id);
+    const root = contentRef.current;
+    if (!root) return;
 
-    setHeadings(els.map(h => ({ id: h.id, text: h.textContent || '' })));
+    const els = Array.from(root.querySelectorAll<HTMLElement>('h3')).filter((h) => h.id);
+
+    setHeadings(els.map((h) => ({ id: h.id, text: h.textContent || '' })));
     if (els.length === 0) return;
 
     setActiveSection(els[0].id);
@@ -123,13 +86,13 @@ export function CaseStudy() {
           if (entry.isIntersecting) visible.add(entry.target.id);
           else visible.delete(entry.target.id);
         }
-        const first = els.find(h => visible.has(h.id));
+        const first = els.find((h) => visible.has(h.id));
         if (first) setActiveSection(first.id);
       },
       { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
     );
 
-    els.forEach(el => observer.observe(el));
+    els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [id, lang]);
 
@@ -208,8 +171,8 @@ export function CaseStudy() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {caseData.impact.map((item, i) => (
-              <div key={i} className="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-6 rounded-2xl">
+            {caseData.impact.map((item) => (
+              <div key={item.label} className="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-6 rounded-2xl">
                 <h3 className="font-bold text-[var(--text-primary)] mb-2">{item.label}</h3>
                 <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.text}</p>
               </div>
@@ -227,7 +190,7 @@ export function CaseStudy() {
           className="hidden lg:block w-64 shrink-0 sticky top-[calc(var(--nav-h)+2rem)]"
         >
           <div className="border-l border-[var(--glass-border)] pl-4 flex flex-col gap-3 py-2">
-            {headings.map(h => (
+            {headings.map((h) => (
               <a
                 key={h.id}
                 href={`#${h.id}`}
@@ -250,6 +213,7 @@ export function CaseStudy() {
 
         {/* Main Content */}
         <motion.div
+          ref={contentRef}
           initial={revealFrom}
           whileInView={revealTo}
           viewport={{ once: true, margin: '-80px' }}

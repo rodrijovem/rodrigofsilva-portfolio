@@ -1,14 +1,23 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { AppProvider, useAppContext } from './contexts/AppContext';
 import { translations } from './i18n';
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { CaseStudy } from './pages/CaseStudy';
+import { isCaseId } from './cases';
 import { prefersReducedMotion } from './lib/motion';
 
+/*
+  A home fica no bundle inicial — e a rota de entrada, adiar so atrasaria a
+  primeira tela. As outras duas saem em chunks proprios: /about carrega onze
+  SVGs de ferramentas e /cases/:id carrega a prosa e as imagens dos tres cases,
+  peso que o visitante da home nao tem por que baixar.
+*/
+const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })));
+const CaseStudy = lazy(() => import('./pages/CaseStudy').then((m) => ({ default: m.CaseStudy })));
+
 const SITE_NAME = 'Rodrigo Silva';
+const ROLE = 'Product Designer';
 
 /**
  * Unica autoridade sobre a posicao de scroll entre rotas.
@@ -71,18 +80,17 @@ function DocumentTitle() {
   const t = translations[lang];
 
   useEffect(() => {
-    const role = lang === 'pt' ? 'Product Designer' : 'Product Designer';
-    let title = `${SITE_NAME} — ${role}`;
+    let title = `${SITE_NAME} — ${ROLE}`;
     let description = t.home.heroDescription;
 
     if (pathname === '/about') {
       title = `${t.nav.about} — ${SITE_NAME}`;
     } else if (pathname.startsWith('/cases/')) {
-      const id = pathname.split('/')[2] as keyof typeof t.caseTitles;
-      const caseTitle = t.caseTitles[id];
-      if (caseTitle) {
-        title = `${caseTitle} — ${SITE_NAME}`;
-        description = t.caseDescriptions[id] ?? description;
+      // A URL nao garante nada: o guard e quem autoriza indexar o objeto.
+      const id = pathname.split('/')[2];
+      if (isCaseId(id)) {
+        title = `${t.caseTitles[id]} — ${SITE_NAME}`;
+        description = t.caseDescriptions[id];
       }
     }
 
@@ -110,13 +118,16 @@ export default function App() {
       <BrowserRouter>
         <ScrollManager />
         <DocumentTitle />
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/cases/:id" element={<CaseStudy />} />
-          </Route>
-        </Routes>
+        {/* Altura minima para o rodape nao subir enquanto o chunk carrega */}
+        <Suspense fallback={<div className="min-h-[100dvh]" />}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/cases/:id" element={<CaseStudy />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </AppProvider>
   );

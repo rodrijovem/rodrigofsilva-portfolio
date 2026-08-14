@@ -16,9 +16,6 @@ export const calm: Transition = { type: 'spring', bounce: 0, duration: 0.4 };
 /** Um pouco mais lento, para entradas de blocos grandes. */
 export const calmSlow: Transition = { type: 'spring', bounce: 0, duration: 0.55 };
 
-/** Só onde houve momento fisico (arraste, flick). */
-export const springy: Transition = { type: 'spring', bounce: 0.2, duration: 0.4 };
-
 /** Entrada padrao de secoes reveladas no scroll. */
 export const revealFrom = { opacity: 0, y: 24 };
 export const revealTo = { opacity: 1, y: 0 };

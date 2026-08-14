@@ -1,14 +1,20 @@
 import React, { useRef, useState, PointerEvent } from 'react';
 import { Link } from 'react-router-dom';
 
-interface RippleHoverButtonProps
-  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
+type RippleHoverButtonBase = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
   children: React.ReactNode;
+};
+
+/*
+  Um destino e obrigatorio, e so um dos dois. Com ambos opcionais era possivel
+  montar o botao sem nenhum: saia um <a> sem href, que nao recebe foco pelo
+  teclado nem e anunciado como link.
+*/
+type RippleHoverButtonProps =
   /** Rota interna — navega pelo router, sem recarregar a pagina */
-  to?: string;
+  | (RippleHoverButtonBase & { to: string; href?: never })
   /** Link externo */
-  href?: string;
-}
+  | (RippleHoverButtonBase & { href: string; to?: never });
 
 /**
  * Pointer Events cobrem mouse e toque com o mesmo codigo: o ripple existe
@@ -65,7 +71,9 @@ export function RippleHoverButton({
     <>
       <span className="absolute pointer-events-none z-0" style={origin} aria-hidden="true">
         <span
-          className={`block w-[400px] h-[400px] bg-[var(--bg-color)] rounded-full -translate-x-1/2 -translate-y-1/2 transition-transform duration-350 ease-out ${
+          // 350ms nao existe na escala do Tailwind: a duracao vem do style,
+          // e a classe duration-* seria ignorada.
+          className={`block w-[400px] h-[400px] bg-[var(--bg-color)] rounded-full -translate-x-1/2 -translate-y-1/2 transition-transform ease-out ${
             open ? 'scale-100' : 'scale-0'
           }`}
           style={{ transitionDuration: '350ms' }}
