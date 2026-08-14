@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+tsconfig.tsbuildinfo
 
 # Editor folders and files
 .vscode/*
@@ -36,4 +37,8 @@ dist-ssr
 # Ferramental local do Claude Code (skills, config da maquina) — nao e do site
 .agents/
 .claude/
+agent/
 skills-lock.json
+CLAUDE.md
+docs/agents/
+.scratch/
