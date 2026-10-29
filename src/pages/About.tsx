@@ -92,20 +92,33 @@ export function About() {
         </motion.div>
       </section>
 
-      {/* Ferramentas — estaticas: o carrossel infinito era movimento sem
-          informacao, e o que importa aqui e so a lista */}
+      {/* Ferramentas — faixa em loop. A lista e renderizada duas vezes
+          porque o loop depende disso; a segunda copia e decorativa e sai
+          do alcance do leitor de tela para os nomes nao serem lidos em
+          dobro. */}
       <section className={`${SHELL} py-10`}>
-        <div className="rule flex flex-wrap items-center gap-x-10 gap-y-6 pt-10">
-          {tools.map((tool) => (
-            <img
-              key={tool.name}
-              src={tool.src}
-              alt={tool.name}
-              title={tool.name}
-              loading="lazy"
-              className="h-6 w-auto opacity-45 grayscale transition-opacity duration-300 hover:opacity-100 md:h-7"
-            />
-          ))}
+        <div className="rule pt-10">
+          <div className="marquee">
+            <ul className="marquee-track">
+              {[0, 1].map((copy) => (
+                <li key={copy} aria-hidden={copy === 1 ? true : undefined} className="contents">
+                  <ul className="flex shrink-0 items-center gap-x-12 pr-12 md:gap-x-16 md:pr-16">
+                    {tools.map((tool) => (
+                      <li key={`${copy}-${tool.name}`} className="shrink-0">
+                        <img
+                          src={tool.src}
+                          alt={copy === 0 ? tool.name : ''}
+                          title={tool.name}
+                          loading="lazy"
+                          className="h-6 w-auto opacity-45 grayscale transition-opacity duration-300 hover:opacity-100 md:h-7"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 

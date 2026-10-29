@@ -101,6 +101,37 @@ body {
 }
 
 /* ---------------------------------------------------------------
+   Marquee de ferramentas — loop continuo.
+
+   A faixa carrega a lista duas vezes e anda exatamente -50%: no fim
+   do ciclo a segunda copia esta onde a primeira comecou, entao o
+   corte cai em cima de si mesmo e o loop nao tem emenda. Qualquer
+   outro deslocamento faz a faixa "pular" a cada volta.
+   --------------------------------------------------------------- */
+.marquee {
+  overflow: hidden;
+  /* As pontas somem no papel em vez de bater numa borda dura */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------------------------------------------------------------
    Resposta: feedback no pointer-down, nao no release.
    Vale para mouse e toque — no toque nao existe hover.
    --------------------------------------------------------------- */
@@ -143,6 +174,18 @@ button:active:not(:disabled),
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Parado, a faixa esconderia o fim da lista: devolve o scroll manual */
+  .marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
   }
 
   /* Feedback de pressao continua existindo — so perde o movimento */
