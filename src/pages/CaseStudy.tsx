@@ -1,48 +1,54 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Lightbulb, ArrowRight } from '@phosphor-icons/react';
-import { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
+import { useEffect, useState } from 'react';
 import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
 import { isCaseId, listCases } from '../cases';
-import type { CaseSummary } from '../cases';
 import { caseDetail } from '../caseDetail';
-import { calm, revealFrom, revealTo } from '../lib/motion';
+import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 
-function OtherCasesStack({ cases }: { cases: CaseSummary[] }) {
-  // Hook no topo do componente — nunca dentro do map
-  const { lang } = useAppContext();
-  const readCase = translations[lang].cases.readCase;
+const SHELL = 'mx-auto w-full max-w-[1180px] px-6 md:px-10';
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-      {cases.map((project) => (
-        <Link
-          key={project.id}
-          to={`/cases/${project.id}`}
-          className="press-subtle group flex flex-col md:flex-row gap-6 items-center bg-[var(--bg-alt)] border border-[var(--glass-border)] rounded-2xl p-5 hover:border-[var(--brand-color)] transition-colors duration-300"
-        >
-          {/* Thumbnail */}
-          <div className="w-full md:w-[140px] h-[120px] rounded-xl overflow-hidden shrink-0 bg-[var(--glass-bg)] border border-[var(--glass-border)]">
-            <img src={project.thumbnail} alt="" loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
+/** O indice lateral: so existe se o conteudo tiver secoes com ancora. */
+function useHeadings(deps: unknown[]) {
+  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
+  const [active, setActive] = useState('');
 
-          {/* Info */}
-          <div className="flex flex-col justify-center flex-1 min-w-0">
-            <h3 className="text-lg font-bold tracking-tight mb-1 text-[var(--brand-color)]">
-              {project.title}
-            </h3>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4 line-clamp-2">
-              {project.description}
-            </p>
-            <span className="inline-flex items-center gap-1.5 text-[var(--brand-color)] font-semibold text-sm group-hover:gap-3 transition-all">
-              {readCase} <ArrowRight weight="bold" size={16} />
-            </span>
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
+  useEffect(() => {
+    let cleanup = () => {};
+
+    /*
+      O conteudo e montado pelo React no mesmo commit que dispara este efeito,
+      entao a leitura do DOM ja encontra os titulos. O timeout de um frame
+      cobre imagens que empurram layout tarde.
+    */
+    const timer = window.setTimeout(() => {
+      const nodes = Array.from(document.querySelectorAll<HTMLElement>('#case-content h2[id]'));
+      setHeadings(nodes.map((n) => ({ id: n.id, text: n.textContent ?? '' })));
+
+      const onScroll = () => {
+        let current = '';
+        for (const node of nodes) {
+          if (node.getBoundingClientRect().top <= 160) current = node.id;
+          else break;
+        }
+        setActive(current || nodes[0]?.id || '');
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      cleanup = () => window.removeEventListener('scroll', onScroll);
+    }, 0);
+
+    return () => {
+      clearTimeout(timer);
+      cleanup();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+
+  return { headings, active };
 }
 
 export function CaseStudy() {
@@ -50,189 +56,155 @@ export function CaseStudy() {
   const { lang } = useAppContext();
   const t = translations[lang];
 
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
-  const [activeSection, setActiveSection] = useState<string>('');
-
   const valid = isCaseId(id);
-  const caseData = valid ? caseDetail(id, lang) : null;
-  const otherCases = valid ? listCases(lang).filter((c) => c.id !== id) : [];
+  const { headings, active } = useHeadings([id, lang]);
 
-  /*
-    Um IntersectionObserver no lugar do par setTimeout + listener de scroll.
-    Dependencias sao apenas [id, lang]: caseData e um objeto novo a cada render
-    e, como dependencia, fazia o efeito reexecutar indefinidamente, acumulando
-    listeners que nunca eram removidos.
+  if (!valid) return <Navigate to="/" replace />;
 
-    A busca sai do ref do proprio conteudo, e nao de um querySelectorAll global
-    por '.prose h3' — assim o indice nao depende de qual outro componente da
-    pagina por acaso usa a mesma classe.
-  */
-  useEffect(() => {
-    const root = contentRef.current;
-    if (!root) return;
+  const data = caseDetail(id, lang);
+  const others = listCases(lang).filter((c) => c.id !== id);
 
-    const els = Array.from(root.querySelectorAll<HTMLElement>('h3')).filter((h) => h.id);
-
-    setHeadings(els.map((h) => ({ id: h.id, text: h.textContent || '' })));
-    if (els.length === 0) return;
-
-    setActiveSection(els[0].id);
-
-    const visible = new Set<string>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) visible.add(entry.target.id);
-          else visible.delete(entry.target.id);
-        }
-        const first = els.find((h) => visible.has(h.id));
-        if (first) setActiveSection(first.id);
-      },
-      { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
-    );
-
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [id, lang]);
-
-  if (!caseData) {
-    return <Navigate to="/" replace />;
-  }
-
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div className="w-full bg-[var(--bg-color)]">
-
-      {/* Title */}
-      <section className="pt-[calc(var(--nav-h)+3rem)] pb-12 px-6 md:px-12 lg:px-24 max-w-[1200px] mx-auto relative">
-        <Link to="/" className="inline-flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--brand-color)] transition-colors mb-8 font-medium">
-          <ArrowLeft size={20} weight="bold" /> {t.cases.back}
+    <div className="w-full">
+      {/* Cabecalho */}
+      <section className={`${SHELL} pt-[calc(var(--nav-h)+2.5rem)] md:pt-[calc(var(--nav-h)+4rem)]`}>
+        <Link
+          to="/#work"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
+        >
+          <ArrowLeft size={15} weight="bold" aria-hidden="true" className="transition-transform duration-200 group-hover:-translate-x-1" />
+          {t.cases.back}
         </Link>
 
-        <motion.h1
-          initial={revealFrom}
-          animate={revealTo}
-          transition={calm}
-          className="text-5xl md:text-6xl font-bold tracking-tighter leading-[1.02] text-balance text-[var(--brand-color)] mb-12"
-        >
-          {caseData.title}
-        </motion.h1>
-
-        {/* Metadata Grid */}
-        <motion.div
-          initial={revealFrom}
-          animate={revealTo}
-          transition={{ ...calm, delay: 0.08 }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-[var(--glass-border)] pt-8"
-        >
-          <div className="md:col-span-6">
-            <h2 className="text-xl font-bold text-[var(--brand-color)] mb-2">{t.cases.summary}</h2>
-            <p className="text-[var(--text-secondary)] leading-relaxed">{caseData.summary}</p>
-          </div>
-          <div className="md:col-span-3">
-            <h2 className="text-xl font-bold text-[var(--brand-color)] mb-2">{t.cases.role}</h2>
-            <p className="text-[var(--text-secondary)] leading-relaxed">{caseData.role}</p>
-          </div>
-          <div className="md:col-span-3">
-            <h2 className="text-xl font-bold text-[var(--brand-color)] mb-2">{t.cases.readTime}</h2>
-            <p className="text-[var(--text-secondary)] leading-relaxed">{caseData.readTime}</p>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Hero Image */}
-      <section className="px-6 md:px-12 lg:px-24 max-w-[1200px] mx-auto mb-24">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ ...calm, delay: 0.14 }}
-          className="w-full aspect-video md:aspect-[21/9] rounded-[2rem] overflow-hidden border border-[var(--glass-border)]"
-        >
-          <img src={caseData.heroImage} alt="" className="w-full h-full object-cover" />
-        </motion.div>
-      </section>
-
-      {/* Impact Overview */}
-      <section className="px-6 md:px-12 lg:px-24 max-w-[1200px] mx-auto mb-24">
-        <motion.div
-          initial={revealFrom}
-          whileInView={revealTo}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={calm}
-        >
-          <div className="flex items-center gap-2 mb-8 text-[var(--brand-color)]">
-            <Lightbulb size={32} weight="fill" aria-hidden="true" />
-            <h2 className="text-2xl font-bold tracking-tight">{t.cases.impactOverview}</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {caseData.impact.map((item) => (
-              <div key={item.label} className="bg-[var(--glass-bg)] border border-[var(--glass-border)] p-6 rounded-2xl">
-                <h3 className="font-bold text-[var(--text-primary)] mb-2">{item.label}</h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Content Rendering with TOC */}
-      <section className="px-6 md:px-12 lg:px-24 max-w-[1200px] mx-auto pb-32 flex items-start gap-16 relative">
-
-        {/* Floating TOC */}
-        <nav
-          aria-label={t.cases.impactOverview}
-          className="hidden lg:block w-64 shrink-0 sticky top-[calc(var(--nav-h)+2rem)]"
-        >
-          <div className="border-l border-[var(--glass-border)] pl-4 flex flex-col gap-3 py-2">
-            {headings.map((h) => (
-              <a
-                key={h.id}
-                href={`#${h.id}`}
-                onClick={(e) => scrollToSection(e, h.id)}
-                aria-current={activeSection === h.id ? 'location' : undefined}
-                className={`text-sm transition-colors duration-300 relative ${activeSection === h.id ? 'text-[var(--text-primary)] font-bold' : 'text-[var(--text-secondary)] hover:text-[var(--brand-color)]'}`}
-              >
-                {activeSection === h.id && (
-                  <motion.div
-                    layoutId="activeToc"
-                    transition={calm}
-                    className="absolute -left-[17px] top-1/2 -translate-y-1/2 w-[2px] h-full bg-[var(--brand-color)]"
-                  />
-                )}
-                {h.text}
-              </a>
-            ))}
-          </div>
-        </nav>
-
-        {/* Main Content */}
-        <motion.div
-          ref={contentRef}
-          initial={revealFrom}
-          whileInView={revealTo}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={calm}
-          className="flex-1 prose prose-lg dark:prose-invert max-w-none prose-headings:text-[var(--text-primary)] prose-headings:text-balance prose-p:text-[var(--text-secondary)]"
-        >
-          {caseData.content}
+        <motion.div initial={revealFrom} animate={revealTo} transition={calm} className="mt-10">
+          <p className="eyebrow">{t.caseContext[id]}</p>
+          <h1 className="display mt-5 max-w-[14ch]">{data.title}</h1>
+          <p className="lead mt-8 max-w-[56ch]">{data.summary}</p>
         </motion.div>
 
-      </section>
-
-      {/* Other Cases Section */}
-      <section className="pt-12 pb-24 px-6 md:px-12 lg:px-24 max-w-[1200px] mx-auto">
-        <div className="w-full">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tighter leading-[1.05] mb-10 text-[var(--brand-color)]">{t.cases.moreCases}</h2>
-          <OtherCasesStack cases={otherCases} />
+        <div className="rule mt-14 grid grid-cols-1 gap-8 pt-8 md:grid-cols-12 md:gap-10">
+          <div className="md:col-span-7">
+            <h2 className="eyebrow">{t.cases.role}</h2>
+            <p className="mt-3 max-w-[56ch] text-[var(--body)]">{data.role}</p>
+          </div>
+          <div className="md:col-span-5">
+            <h2 className="eyebrow">{t.cases.readTime}</h2>
+            <p className="mt-3 text-[var(--body)]">{data.readTime}</p>
+          </div>
         </div>
       </section>
 
+      {/* Imagem de capa */}
+      <section className={`${SHELL} mt-14 md:mt-16`}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ...calm, delay: 0.1 }}
+          className="overflow-hidden rounded-[3px] border border-[var(--rule)]"
+        >
+          <img src={data.heroImage} alt="" className="aspect-[16/9] w-full object-cover md:aspect-[21/9]" />
+        </motion.div>
+      </section>
+
+      {/* Visao geral do impacto */}
+      <section className={`${SHELL} py-20 md:py-24`}>
+        <h2 className="eyebrow">{t.cases.impactOverview}</h2>
+        <div className="mt-8 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-3">
+          {data.impact.map((item, i) => (
+            <motion.div
+              key={item.label}
+              initial={revealFrom}
+              whileInView={revealTo}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={stagger(i)}
+              className="rule pt-6"
+            >
+              <h3 className="text-sm font-medium text-[var(--ink)]">{item.label}</h3>
+              <p className="mt-2 max-w-[40ch] text-[var(--body)]">{item.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Conteudo + indice */}
+      <section className={`${SHELL} flex items-start gap-16 pb-24`}>
+        <nav aria-label={t.cases.summary} className="sticky top-[calc(var(--nav-h)+2rem)] hidden w-56 shrink-0 lg:block">
+          <ul className="flex flex-col gap-3 border-l border-[var(--rule)] pl-5">
+            {headings.map((hd) => (
+              <li key={hd.id}>
+                <a
+                  href={`#${hd.id}`}
+                  onClick={(e) => scrollTo(e, hd.id)}
+                  className={`block text-[0.8125rem] leading-snug transition-colors duration-200 ${
+                    active === hd.id ? 'font-medium text-[var(--brand)]' : 'text-[var(--muted)] hover:text-[var(--ink)]'
+                  }`}
+                >
+                  {hd.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <motion.div
+          id="case-content"
+          initial={revealFrom}
+          whileInView={revealTo}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={calm}
+          className="min-w-0 flex-1"
+        >
+          {data.content}
+        </motion.div>
+      </section>
+
+      {/* Mais cases */}
+      <section className={`${SHELL} pb-24`}>
+        <h2 className="eyebrow">{t.cases.moreCases}</h2>
+        <div className="mt-6">
+          {others.map((project, i) => (
+            <motion.div
+              key={project.id}
+              initial={revealFrom}
+              whileInView={revealTo}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={stagger(i)}
+              className="rule"
+            >
+              <Link
+                to={`/cases/${project.id}`}
+                className="group grid grid-cols-1 items-center gap-6 py-8 md:grid-cols-12 md:gap-10"
+              >
+                <div className="md:col-span-8">
+                  <p className="eyebrow">{t.caseContext[project.id]}</p>
+                  <h3 className="title-m mt-3 transition-colors duration-200 group-hover:text-[var(--brand)]">
+                    {project.title}
+                  </h3>
+                  <p className="mt-3 text-[0.9375rem] font-medium text-[var(--brand)]">
+                    {t.caseHighlight[project.id]}
+                  </p>
+                </div>
+                <div className="flex md:col-span-4 md:justify-end">
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-[var(--ink)]">
+                    {t.cases.readCase}
+                    <ArrowRight
+                      size={15}
+                      weight="bold"
+                      aria-hidden="true"
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                    />
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

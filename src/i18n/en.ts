@@ -9,23 +9,24 @@ export const en: Translations = {
     resume: 'Resume',
   },
   home: {
-    heroTitle1: 'Hi, I am Rodrigo.',
-    heroTitle2: 'Product Designer.',
-    heroDescription: 'With 13 years of experience in design and working on digital products for fintech, mobility, and B2B/B2C platforms.',
-    aboutTitle: 'A little about me',
-    aboutSubtitle: 'I am from São Paulo and currently live in Porto Alegre.',
-    aboutDescription: 'Currently a Product Designer but I started my journey in Graphic Design and Web Design. Over time, I got closer to UX/UI until I migrated to Product, where I started working closer to strategy, experience, and building digital solutions.',
-    aboutYears: 'years',
-    aboutMetric1Label: 'In design',
-    aboutMetric2Label: 'As a Product Designer',
-    aboutCta: 'Learn more about me',
-    casesTitle: 'Selected projects',
-    casesDescription: 'My career in Product was built across different types of business and complexity: B2C, B2B, B2B2C, SaaS, mobile apps, and data-driven platforms.',
+    heroEyebrow: 'Product Designer · SaaS · Mobility · Fintech',
+    heroTitle: 'I design the whole system, not just the screen.',
+    heroLead: 'I work on SaaS, mobile, and B2B/B2C platforms where design decisions run into operations, business model, and data. Currently at Lojas Renner; before that, Finvity, miio, and Tembici.',
+    facts: [
+      { value: '13 years', label: 'in design, 6 of them as a Product Designer' },
+      { value: '~R$1M/mo', label: 'in operating cost removed at Tembici' },
+      { value: '2,000', label: 'subscribers at the launch of miio\'s paid plan' },
+    ],
+    workEyebrow: 'Selected work',
+    workNote: 'Three open case studies and one under NDA. Each starts with the conflict and ends on the number.',
     casesCta: 'Read case study',
-    contactTitle1: "Let's build",
-    contactTitle2: 'something amazing together.',
-    contactDescription1: 'I am always open to discussing new projects, opportunities in Product, or just exchanging ideas about design and technology.',
-    contactDescription2: 'Feel free to reach out to me through the channels on the side.',
+    aboutEyebrow: 'About',
+    aboutTitle: 'I started in graphic design. Today I argue about data modeling.',
+    aboutText: 'I am from São Paulo and live in Porto Alegre. I came from graphic and web design, moved through UX/UI, and then into product, where I got closer to strategy, operations, and building. I use AI inside the process — research, exploration, and prototyping — without giving up critical thinking about user and business.',
+    aboutCta: 'See my career',
+    contactEyebrow: 'Contact',
+    contactTitle: "Let's talk about the next problem.",
+    contactLead: 'I am open to opportunities in Product, conversations about design, and exchanges about AI in the process. I reply quickly on all three channels.',
     linkedinDesc: 'Connections and networking',
     emailDesc: 'Detailed matters',
     whatsappDesc: 'Direct messages',
@@ -44,6 +45,7 @@ export const en: Translations = {
     ]
   },
   experience: {
+    title: 'Career',
     showMore: 'See more experiences',
     showLess: 'Collapse',
   },
@@ -55,6 +57,16 @@ export const en: Translations = {
     back: 'Back',
     moreCases: 'More cases',
     readCase: 'Read case study',
+  },
+  footer: {
+    role: 'Product Designer · Porto Alegre, Brazil',
+    rights: `© ${new Date().getFullYear()} Rodrigo Silva`,
+  },
+  confidential: {
+    context: 'Retail · Digital product · Current',
+    title: 'Lojas Renner',
+    description: 'My current work is under NDA: I cannot publish screens or numbers here. What I can do is talk — I will walk you through the problem, the decisions I made, and what I learned, in as much detail as the contract allows.',
+    cta: 'Talk about this project',
   },
   resumeFile: resumeFile,
   experiences: [
@@ -145,6 +157,16 @@ export const en: Translations = {
     miio: "miio",
     tembici: "Tembici & iFood",
   },
+  caseContext: {
+    tembici: 'Mobility · B2B2C · 2022–2024',
+    miio: 'Electric mobility · B2C · Portugal · 2025',
+    finvity: 'Wealth management · B2B SaaS · 2025',
+  },
+  caseHighlight: {
+    tembici: '~R$1M/mo saved · breakeven in 10 months',
+    miio: '2,000 subscribers · 31% faster sign-up',
+    finvity: '60% fewer support questions',
+  },
   caseMeta: {
     tembici: {
       summary: "Delivery riders used the bike 4 hours a day; casual cyclists, 20 minutes a week. Same fleet, same station, same system — and a maintenance bill that did not add up. I split the two operations and designed the journey that made the new one possible without a spreadsheet.",
@@ -180,16 +202,24 @@ export const en: Translations = {
   testimonialsTitle: "What it's like working with me!",
   testimonials: [
     {
-      content: '"I had the opportunity to work with Rodrigo through Levva on an extremely challenging project. And working with him was very light and peaceful. Because he is a highly dedicated and committed professional, delivering his best to the product. All demands directed to him were carried out clearly and with concern not only for the designer\'s visual, but also for the user experience and the expectations of stakeholders. I hope we can work with you again soon. You are a talent!"'
+      content: '"I had the opportunity to work with Rodrigo through Levva on an extremely challenging project. And working with him was very light and peaceful. Because he is a highly dedicated and committed professional, delivering his best to the product. All demands directed to him were carried out clearly and with concern not only for the designer\'s visual, but also for the user experience and the expectations of stakeholders. I hope we can work with you again soon. You are a talent!"',
+      name: 'Jaqueline Figueiredo',
+      role: 'Product Manager',
     },
     {
-      content: '"I worked with Ro on the Tembici design team for almost two years! He always stood out for his high technical knowledge of prototyping, componentization, animation, tools and Figma plugins. He helped us build the Tembici Design System and also brought good ideas for unconventional solutions."'
+      content: '"I worked with Ro on the Tembici design team for almost two years! He always stood out for his high technical knowledge of prototyping, componentization, animation, tools and Figma plugins. He helped us build the Tembici Design System and also brought good ideas for unconventional solutions."',
+      name: 'Daniela Narumi',
+      role: 'Product Designer',
     },
     {
-      content: '"Working with Ro at Tembici was great, he is always looking for a positive and open approach to challenges. He has extensive knowledge in prototyping, as well as a remarkable ability to navigate Figma. His willingness to help the team is evident, and he has always shown great willingness to collaborate and teach what he knows to his peers. When Ro gets involved in a project that motivates him, he gives his best, making his eyes shine with enthusiasm. Thank you for the exchanges and the time we shared working together!"'
+      content: '"Working with Ro at Tembici was great, he is always looking for a positive and open approach to challenges. He has extensive knowledge in prototyping, as well as a remarkable ability to navigate Figma. His willingness to help the team is evident, and he has always shown great willingness to collaborate and teach what he knows to his peers. When Ro gets involved in a project that motivates him, he gives his best, making his eyes shine with enthusiasm. Thank you for the exchanges and the time we shared working together!"',
+      name: 'Paula Dantas',
+      role: 'Head of Product Design',
     },
     {
-      content: '"Rodrigo is an extraordinary UX Designer who\'s been nothing short of amazing. 🌟 His mastery of Figma, chatbot flows, and UX in general has been evident from our time working together. As a UX Writer myself, I couldn\'t have asked for a better mentor and friend to guide me through design intricacies that time. He\'s a natural-born teacher, always willing to share his expertise and help others level up their skills. So, if you ever get the chance to work with Rodrigo, seize it!"'
+      content: '"Rodrigo is an extraordinary UX Designer who\'s been nothing short of amazing. 🌟 His mastery of Figma, chatbot flows, and UX in general has been evident from our time working together. As a UX Writer myself, I couldn\'t have asked for a better mentor and friend to guide me through design intricacies that time. He\'s a natural-born teacher, always willing to share his expertise and help others level up their skills. So, if you ever get the chance to work with Rodrigo, seize it!"',
+      name: 'Domi Rocha',
+      role: 'Content Designer',
     }
   ]
 };

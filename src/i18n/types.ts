@@ -28,26 +28,39 @@ export interface Translations {
     resume: string;
   };
   home: {
-    heroTitle1: string;
-    heroTitle2: string;
-    heroDescription: string;
-    aboutTitle: string;
-    aboutSubtitle: string;
-    aboutDescription: string;
-    aboutYears: string;
-    aboutMetric1Label: string;
-    aboutMetric2Label: string;
-    aboutCta: string;
-    casesTitle: string;
-    casesDescription: string;
+    heroEyebrow: string;
+    heroTitle: string;
+    heroLead: string;
+    /** Tres numeros logo abaixo do hero: e o que o recrutador le em 5 segundos. */
+    facts: { value: string; label: string }[];
+    workEyebrow: string;
+    workNote: string;
     casesCta: string;
-    contactTitle1: string;
-    contactTitle2: string;
-    contactDescription1: string;
-    contactDescription2: string;
+    aboutEyebrow: string;
+    aboutTitle: string;
+    aboutText: string;
+    aboutCta: string;
+    contactEyebrow: string;
+    contactTitle: string;
+    contactLead: string;
     linkedinDesc: string;
     emailDesc: string;
     whatsappDesc: string;
+  };
+  footer: {
+    role: string;
+    rights: string;
+  };
+  /*
+    O trabalho atual, que existe no site sem ter pagina: o projeto esta sob
+    confidencialidade. Fica no fim da lista de cases, encostado no contato,
+    porque e dali que a conversa comeca.
+  */
+  confidential: {
+    context: string;
+    title: string;
+    description: string;
+    cta: string;
   };
   about: {
     downloadResume: string;
@@ -58,6 +71,7 @@ export interface Translations {
     education: { title: string; location: string }[];
   };
   experience: {
+    title: string;
     showMore: string;
     showLess: string;
   };
@@ -74,9 +88,11 @@ export interface Translations {
   experiences: Experience[];
   caseDescriptions: Record<CaseId, string>;
   caseTitles: Record<CaseId, string>;
+  /** Linha de contexto do card: setor, modelo de negocio e ano. */
+  caseContext: Record<CaseId, string>;
+  /** O numero que o card carrega, curto o bastante para ser lido de relance. */
+  caseHighlight: Record<CaseId, string>;
   caseMeta: Record<CaseId, CaseMeta>;
   testimonialsTitle: string;
-  /* Sem atribuicao por enquanto: os campos de autor existiam mas nunca eram
-     renderizados. Voltam quando o card mostrar quem assina. */
-  testimonials: { content: string }[];
+  testimonials: { content: string; name: string; role: string }[];
 }

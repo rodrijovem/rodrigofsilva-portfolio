@@ -1,5 +1,4 @@
 import { createContext, useContext } from 'react';
-import type { MouseEvent } from 'react';
 import type { Lang } from '../i18n';
 
 /*
@@ -10,8 +9,6 @@ import type { Lang } from '../i18n';
 */
 
 export interface AppContextType {
-  isDarkMode: boolean;
-  toggleTheme: (e: MouseEvent) => void;
   lang: Lang;
   setLang: (lang: Lang) => void;
 }

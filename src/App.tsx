@@ -82,7 +82,7 @@ function DocumentTitle() {
 
   useEffect(() => {
     let title = `${SITE_NAME} — ${ROLE}`;
-    let description = t.home.heroDescription;
+    let description = t.home.heroLead;
 
     if (pathname === '/about') {
       title = `${t.nav.about} — ${SITE_NAME}`;
