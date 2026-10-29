@@ -63,29 +63,42 @@ export const pt: Translations = {
     rights: `© ${new Date().getFullYear()} Rodrigo Silva`,
   },
   confidential: {
-    context: 'Varejo · Produto digital · Atual',
+    context: 'Varejo · B2C · 2026 – Atual',
     title: 'Lojas Renner',
-    description: 'Meu trabalho atual está sob confidencialidade: não posso publicar telas nem números aqui. O que dá para fazer é conversar — te conto o problema, as decisões que tomei e o que aprendi, no nível de detalhe que o contrato permite.',
-    cta: 'Conversar sobre esse projeto',
+    description: 'Senior Product Designer desde maio de 2026. Lidero o discovery do programa de afiliadas — mais de 12 mil cadastradas — e atuei no login com MFA e na recuperação de conta por biometria facial, em uma plataforma com mais de 5 milhões de logins por mês. As telas e o detalhe das decisões estão sob confidencialidade; conversar sobre elas, não.',
+    highlight: '80% menos pedidos de troca de e-mail no atendimento',
+    cta: 'Conversar sobre esse trabalho',
   },
   resumeFile: curriculoFile,
   experiences: [
     {
-      period: "2025 - Atual",
+      period: "2026 - Atual",
+      company: "LOJAS RENNER",
+      role: "Senior Product Designer",
+      location: "Porto Alegre, Brasil",
+      description: [
+        "Atuo no ecossistema digital da Renner, entre o programa de afiliadas e a plataforma de autenticação.",
+        "• Lidero o discovery do programa de afiliadas (+12 mil cadastros): pesquisa quanti e quali, desk research e mapeamento da jornada com o time interno, identificando dores em todas as etapas do programa.",
+        "• Redesenhei a landing page do programa e validei com stakeholders uma nova proposta de produto para a gestão das afiliadas, com foco em mais visibilidade para as afiliadas e expansão do negócio.",
+        "• Contribuí para o login com MFA e a recuperação de conta por biometria facial, em uma plataforma com mais de 5 milhões de logins/mês (app e site), reduzindo em 80% os pedidos de troca de e-mail no atendimento."
+      ]
+    },
+    {
+      period: "2025 - 2026",
       company: "FINVITY",
-      role: "Product Designer",
+      role: "Senior Product Designer",
       location: "Brasil - Remoto",
       description: [
-        "Atuo como Product Designer em uma plataforma de gestão patrimonial e sucessória para advogados, assessores financeiros e multi-family offices.",
-        "• Estruturo fluxos complexos, dashboards, simulações e visualização de dados para apoiar decisões patrimoniais, sucessórias e tributárias.",
-        "• Trabalho em módulos como patrimônio, evolução patrimonial, análise de riscos, sucessão, holding, inteligência tributária, relatórios, painel administrativo e gestão de clientes.",
+        "Fui o único designer de uma plataforma de gestão patrimonial e sucessória para advogados, assessores financeiros e multi-family offices.",
+        "• Estruturei fluxos complexos, dashboards, simulações e visualização de dados para apoiar decisões patrimoniais, sucessórias e tributárias.",
+        "• Trabalhei em módulos como patrimônio, evolução patrimonial, análise de riscos, sucessão, holding, inteligência tributária, relatórios, painel administrativo e gestão de clientes.",
         "• Também contribuí para a evolução da identidade visual da Finvity e para o redesenho do site institucional, alinhando a percepção externa da marca à sofisticação do produto."
       ]
     },
     {
       period: "2025 - 2025",
       company: "MIIO",
-      role: "UX/UI Designer",
+      role: "Product Designer",
       location: "Portugal - Remoto",
       description: [
         "Atuei no design de um app B2C de mobilidade elétrica, com foco em experiência mobile, onboarding, assinatura, checkout, integração com veículo e otimização da jornada do usuário.",
@@ -160,7 +173,7 @@ export const pt: Translations = {
   caseContext: {
     tembici: 'Mobilidade · B2B2C · 2022–2024',
     miio: 'Mobilidade elétrica · B2C · Portugal · 2025',
-    finvity: 'Gestão patrimonial · SaaS B2B · 2025',
+    finvity: 'Gestão patrimonial · SaaS B2B · 2025–2026',
   },
   caseHighlight: {
     tembici: '~R$1M/mês economizados · breakeven em 10 meses',

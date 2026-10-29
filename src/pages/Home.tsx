@@ -131,6 +131,9 @@ export function Home() {
                 <p className="eyebrow">{t.confidential.context}</p>
                 <h3 className="title-l mt-4">{t.confidential.title}</h3>
                 <p className="mt-5 max-w-[50ch] text-[var(--body)]">{t.confidential.description}</p>
+                <p className="mt-5 text-[0.9375rem] font-medium text-[var(--brand)]">
+                  {t.confidential.highlight}
+                </p>
                 <Link
                   to="/#contact"
                   className="group mt-7 inline-flex items-center gap-2 border-b border-[var(--brand)] pb-1 text-sm font-medium text-[var(--brand)]"

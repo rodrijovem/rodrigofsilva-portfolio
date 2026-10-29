@@ -63,29 +63,42 @@ export const en: Translations = {
     rights: `© ${new Date().getFullYear()} Rodrigo Silva`,
   },
   confidential: {
-    context: 'Retail · Digital product · Current',
+    context: 'Retail · B2C · 2026 – Present',
     title: 'Lojas Renner',
-    description: 'My current work is under NDA: I cannot publish screens or numbers here. What I can do is talk — I will walk you through the problem, the decisions I made, and what I learned, in as much detail as the contract allows.',
-    cta: 'Talk about this project',
+    description: 'Senior Product Designer since May 2026. I lead discovery for the affiliate program — 12,000+ registered affiliates — and worked on MFA login and facial-biometrics account recovery on a platform with 5M+ logins a month. The screens and the detail behind the decisions are under NDA; talking about them is not.',
+    highlight: '80% fewer email-change requests to support',
+    cta: 'Talk about this work',
   },
   resumeFile: resumeFile,
   experiences: [
     {
-      period: "2025 - Present",
+      period: "2026 - Present",
+      company: "LOJAS RENNER",
+      role: "Senior Product Designer",
+      location: "Porto Alegre, Brazil",
+      description: [
+        "I work across Renner's digital ecosystem, between the affiliate program and the authentication platform.",
+        "• I lead discovery for the affiliate program (12,000+ registered affiliates): quantitative and qualitative research, desk research and journey mapping with the internal team, uncovering pain points across every stage of the program.",
+        "• Redesigned the program's landing page and validated a new product proposal for affiliate management with stakeholders, focused on giving affiliates more visibility and enabling business expansion.",
+        "• Contributed to MFA login and facial-biometrics account recovery on a platform with 5M+ monthly logins (app and web), reducing email-change requests to customer support by 80%."
+      ]
+    },
+    {
+      period: "2025 - 2026",
       company: "FINVITY",
-      role: "Product Designer",
+      role: "Senior Product Designer",
       location: "Brazil - Remote",
       description: [
-        "I work as a Product Designer on a platform for wealth and succession planning, designed for lawyers, financial advisors, and multi-family offices.",
-        "• I structure complex flows, dashboards, simulations, and data visualization experiences to support wealth, succession, and tax-related decision-making.",
-        "• I work on modules such as assets, wealth evolution, risk analysis, succession, holding structures, tax intelligence, reports, admin panels, and client management.",
+        "I was the only designer on a platform for wealth and succession planning, designed for lawyers, financial advisors, and multi-family offices.",
+        "• I structured complex flows, dashboards, simulations, and data visualization experiences to support wealth, succession, and tax-related decision-making.",
+        "• I worked on modules such as assets, wealth evolution, risk analysis, succession, holding structures, tax intelligence, reports, admin panels, and client management.",
         "• I also contributed to the evolution of Finvity’s visual identity and the redesign of its institutional website, aligning the brand perception with the sophistication of the product."
       ]
     },
     {
       period: "2025 - 2025",
       company: "MIIO",
-      role: "UX/UI Designer",
+      role: "Product Designer",
       location: "Portugal - Remote",
       description: [
         "I worked on the design of a B2C electric mobility app, focused on mobile experience, onboarding, subscription flows, checkout, vehicle integration, and user journey optimization.",
@@ -160,7 +173,7 @@ export const en: Translations = {
   caseContext: {
     tembici: 'Mobility · B2B2C · 2022–2024',
     miio: 'Electric mobility · B2C · Portugal · 2025',
-    finvity: 'Wealth management · B2B SaaS · 2025',
+    finvity: 'Wealth management · B2B SaaS · 2025–2026',
   },
   caseHighlight: {
     tembici: '~R$1M/mo saved · breakeven in 10 months',

@@ -60,6 +60,7 @@ export interface Translations {
     context: string;
     title: string;
     description: string;
+    highlight: string;
     cta: string;
   };
   about: {
