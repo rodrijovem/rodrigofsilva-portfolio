@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
 import { AnimatedCounter } from '../components/AnimatedCounter';
-import { InteractiveCanvas } from '../components/InteractiveCanvas';
+import { StardustBackground } from '../components/StardustBackground';
 import { listCases } from '../cases';
 import { calm, calmSlow, stagger, revealFrom, revealTo } from '../lib/motion';
 
@@ -56,19 +56,7 @@ export function Home() {
       {/* Hero Section — o fundo passa por baixo da chrome translucida,
           e o conteudo comeca abaixo dela via --nav-h */}
       <section className="relative min-h-[90dvh] flex flex-col justify-center px-6 md:px-12 lg:px-24 overflow-hidden pt-[calc(var(--nav-h)+3rem)] pb-16">
-        {/* Background Dot Pattern */}
-        <div
-          className="absolute inset-0 z-0 pointer-events-none"
-          aria-hidden="true"
-          style={{
-            backgroundImage: 'radial-gradient(var(--text-primary) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-            opacity: 0.1
-          }}
-        ></div>
-
-        {/* Interactive Drawing Canvas */}
-        <InteractiveCanvas />
+        <StardustBackground />
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-[1400px] mx-auto w-full">
