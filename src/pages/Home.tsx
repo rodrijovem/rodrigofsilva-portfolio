@@ -60,18 +60,7 @@ export function Home() {
           Trabalho — uma linha por case. A regua separa; nao ha card.
           --------------------------------------------------------------- */}
       <section id="work" className={`${SHELL} scroll-mt-[calc(var(--nav-h)+1rem)] py-20 md:py-28`}>
-        <motion.div
-          initial={revealFrom}
-          whileInView={revealTo}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={calm}
-          className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between"
-        >
-          <h2 className="eyebrow">{t.home.workEyebrow}</h2>
-          <p className="meta max-w-[46ch] md:text-right">{t.home.workNote}</p>
-        </motion.div>
-
-        <div className="mt-10">
+        <div>
           {cases.map((project, i) => (
             <motion.article
               key={project.id}

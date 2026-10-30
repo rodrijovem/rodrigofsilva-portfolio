@@ -17,8 +17,6 @@ export const en: Translations = {
       { value: '~R$1M/mo', label: 'in operating cost removed at Tembici' },
       { value: '2,000', label: 'subscribers at the launch of miio\'s paid plan' },
     ],
-    workEyebrow: 'Selected work',
-    workNote: 'Three open case studies and one under NDA. Each starts with the conflict and ends on the number.',
     casesCta: 'Read case study',
     aboutEyebrow: 'About',
     aboutTitle: 'I started in graphic design. Today I argue about data modeling.',

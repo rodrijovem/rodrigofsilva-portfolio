@@ -17,8 +17,6 @@ export const pt: Translations = {
       { value: '~R$1M/mês', label: 'em custo operacional eliminado na Tembici' },
       { value: '2.000', label: 'assinantes no lançamento da monetização da miio' },
     ],
-    workEyebrow: 'Trabalho selecionado',
-    workNote: 'Três cases abertos e um sob confidencialidade. Cada um começa pelo conflito e termina no número.',
     casesCta: 'Ler estudo de caso',
     aboutEyebrow: 'Sobre',
     aboutTitle: 'Comecei no design gráfico. Hoje discuto modelagem de dados.',

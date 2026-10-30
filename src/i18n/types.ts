@@ -33,8 +33,6 @@ export interface Translations {
     heroLead: string;
     /** Tres numeros logo abaixo do hero: e o que o recrutador le em 5 segundos. */
     facts: { value: string; label: string }[];
-    workEyebrow: string;
-    workNote: string;
     casesCta: string;
     aboutEyebrow: string;
     aboutTitle: string;
