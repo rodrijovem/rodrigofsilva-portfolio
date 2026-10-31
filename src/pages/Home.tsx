@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, LockSimple } from '@phosphor-icons/react';
+import { ArrowRight, ArrowUpRight } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
@@ -7,6 +7,7 @@ import { listCases } from '../cases';
 import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 
 import aboutImage from '../../images/about.webp';
+import rennerCover from '../../images/covers/renner.jpg';
 
 const LINKEDIN = 'https://www.linkedin.com/in/rodrigo-fsilva/';
 const EMAIL = 'mailto:rodrigo_silva05@live.com';
@@ -137,8 +138,9 @@ export function Home() {
                 </Link>
               </div>
 
-              <div className="flex aspect-[4/3] items-center justify-center rounded-[3px] bg-[var(--brand-soft)] md:col-span-5">
-                <LockSimple size={28} weight="light" className="text-[var(--brand)]" aria-hidden="true" />
+              {/* Telas reais com todo texto trocado por barras: mostra o produto sem expor dado */}
+              <div className="overflow-hidden rounded-[3px] border border-[var(--rule)] md:col-span-5">
+                <img src={rennerCover} alt="" loading="lazy" className="aspect-[4/3] w-full object-cover" />
               </div>
             </div>
           </motion.article>
