@@ -64,7 +64,6 @@ export const en: Translations = {
     context: 'Retail · B2C · 2026 – Present',
     title: 'Lojas Renner',
     description: 'Senior Product Designer since May 2026. I lead discovery for the affiliate program — 12,000+ registered affiliates — and worked on MFA login and facial-biometrics account recovery on a platform with 5M+ logins a month. The screens and the detail behind the decisions are under NDA; talking about them is not.',
-    highlight: '80% fewer email-change requests to support',
     cta: 'Talk about this work',
   },
   resumeFile: resumeFile,
@@ -172,11 +171,6 @@ export const en: Translations = {
     tembici: 'Mobility · B2B2C · 2022–2024',
     miio: 'Electric mobility · B2C · Portugal · 2025',
     finvity: 'Wealth management · B2B SaaS · 2025–2026',
-  },
-  caseHighlight: {
-    tembici: '~R$1M/mo saved · breakeven in 10 months',
-    miio: '2,000 subscribers · 31% faster sign-up',
-    finvity: '60% fewer support questions',
   },
   caseMeta: {
     tembici: {

@@ -58,7 +58,6 @@ export interface Translations {
     context: string;
     title: string;
     description: string;
-    highlight: string;
     cta: string;
   };
   about: {
@@ -90,7 +89,6 @@ export interface Translations {
   /** Linha de contexto do card: setor, modelo de negocio e ano. */
   caseContext: Record<CaseId, string>;
   /** O numero que o card carrega, curto o bastante para ser lido de relance. */
-  caseHighlight: Record<CaseId, string>;
   caseMeta: Record<CaseId, CaseMeta>;
   testimonialsTitle: string;
   testimonials: { content: string; name: string; role: string }[];

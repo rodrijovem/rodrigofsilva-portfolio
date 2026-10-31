@@ -185,9 +185,6 @@ export function CaseStudy() {
                   <h3 className="title-m mt-3 transition-colors duration-200 group-hover:text-[var(--brand)]">
                     {project.title}
                   </h3>
-                  <p className="mt-3 text-[0.9375rem] font-medium text-[var(--brand)]">
-                    {t.caseHighlight[project.id]}
-                  </p>
                 </div>
                 <div className="flex md:col-span-4 md:justify-end">
                   <span className="inline-flex items-center gap-2 text-sm font-medium text-[var(--ink)]">

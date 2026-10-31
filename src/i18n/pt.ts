@@ -64,7 +64,6 @@ export const pt: Translations = {
     context: 'Varejo · B2C · 2026 – Atual',
     title: 'Lojas Renner',
     description: 'Senior Product Designer desde maio de 2026. Lidero o discovery do programa de afiliadas — mais de 12 mil cadastradas — e atuei no login com MFA e na recuperação de conta por biometria facial, em uma plataforma com mais de 5 milhões de logins por mês. As telas e o detalhe das decisões estão sob confidencialidade; conversar sobre elas, não.',
-    highlight: '80% menos pedidos de troca de e-mail no atendimento',
     cta: 'Conversar sobre esse trabalho',
   },
   resumeFile: curriculoFile,
@@ -172,11 +171,6 @@ export const pt: Translations = {
     tembici: 'Mobilidade · B2B2C · 2022–2024',
     miio: 'Mobilidade elétrica · B2C · Portugal · 2025',
     finvity: 'Gestão patrimonial · SaaS B2B · 2025–2026',
-  },
-  caseHighlight: {
-    tembici: '~R$1M/mês economizados · breakeven em 10 meses',
-    miio: '2.000 assinantes · cadastro 31% mais rápido',
-    finvity: '60% menos dúvidas no suporte',
   },
   caseMeta: {
     tembici: {
