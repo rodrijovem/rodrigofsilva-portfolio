@@ -168,7 +168,7 @@ export const pt: Translations = {
     tembici: "Tembici & iFood",
   },
   caseContext: {
-    tembici: 'Mobilidade · B2B2C · 2022–2024',
+    tembici: 'Mobilidade · B2B2C · 2024',
     miio: 'Mobilidade elétrica · B2C · Portugal · 2025',
     finvity: 'Gestão patrimonial · SaaS B2B · 2025–2026',
   },
