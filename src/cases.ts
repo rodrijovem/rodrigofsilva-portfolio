@@ -3,9 +3,9 @@ import type { Lang } from './i18n';
 import { CASE_ORDER } from './caseIds';
 import type { CaseId } from './caseIds';
 
-import finvityThumb from '../images/covers/finvity.jpg';
-import miioThumb from '../images/covers/miio.jpg';
-import tembiciThumb from '../images/covers/tembici.jpg';
+import finvityThumb from '../images/covers/finvity.webp';
+import miioThumb from '../images/covers/miio.webp';
+import tembiciThumb from '../images/covers/tembici.webp';
 
 /*
   Fonte unica dos cases. Antes esta lista existia duas vezes — uma na Home e

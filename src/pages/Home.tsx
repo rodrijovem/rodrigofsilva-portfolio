@@ -7,7 +7,7 @@ import { listCases } from '../cases';
 import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 
 import aboutImage from '../../images/about.webp';
-import rennerCover from '../../images/covers/renner.jpg';
+import rennerCover from '../../images/covers/renner.webp';
 
 const LINKEDIN = 'https://www.linkedin.com/in/rodrigo-fsilva/';
 const EMAIL = 'mailto:rodrigo_silva05@live.com';
