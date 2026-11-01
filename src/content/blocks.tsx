@@ -11,7 +11,7 @@ const caption = (text?: string) => (
 
 export const img = (src: string, alt: string, legend?: string) => (
   <figure className="my-12 w-full">
-    <div className="w-full overflow-hidden rounded-[3px] border border-[var(--rule)]">
+    <div className="w-full overflow-hidden rounded-2xl border border-[var(--rule)]">
       <img src={src} alt={alt} className="h-auto w-full object-cover" />
     </div>
     {caption(legend)}
@@ -20,7 +20,7 @@ export const img = (src: string, alt: string, legend?: string) => (
 
 export const embedIframe = (src: string, legend?: string) => (
   <figure className="my-12 w-full">
-    <div className="w-full overflow-hidden rounded-[3px] border border-[var(--rule)] bg-[var(--surface)]">
+    <div className="w-full overflow-hidden rounded-2xl border border-[var(--rule)] bg-[var(--surface)]">
       <iframe className="aspect-video w-full" src={src} frameBorder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowFullScreen></iframe>
     </div>
     {caption(legend)}

@@ -105,7 +105,7 @@ export function CaseStudy() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ ...calm, delay: 0.1 }}
-          className="overflow-hidden rounded-[3px] border border-[var(--rule)]"
+          className="overflow-hidden rounded-2xl border border-[var(--rule)]"
         >
           <img src={data.heroImage} alt="" className="aspect-[16/9] w-full object-cover md:aspect-[21/9]" />
         </motion.div>

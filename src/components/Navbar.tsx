@@ -48,7 +48,7 @@ export function Navbar() {
           {/* O botao mostra o idioma de destino, nao o atual */}
           <button
             onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')}
-            className="shrink-0 border border-[var(--rule)] px-2 py-1 text-[0.6875rem] font-medium tracking-[0.12em] text-[var(--muted)] transition-colors duration-200 hover:border-[var(--brand)] hover:text-[var(--brand)]"
+            className="shrink-0 rounded border border-[var(--rule)] px-2 py-1 text-[0.6875rem] font-medium tracking-[0.12em] text-[var(--muted)] transition-colors duration-200 hover:border-[var(--brand)] hover:text-[var(--brand)]"
             aria-label={lang === 'pt' ? 'Switch to English' : 'Mudar para português'}
           >
             {lang === 'pt' ? 'EN' : 'PT'}

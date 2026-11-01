@@ -92,7 +92,7 @@ export function Home() {
                   </span>
                 </div>
 
-                <div className="overflow-hidden rounded-[3px] border border-[var(--rule)] md:col-span-5">
+                <div className="overflow-hidden rounded-2xl border border-[var(--rule)] md:col-span-5">
                   <img
                     src={project.thumbnail}
                     alt=""
@@ -133,7 +133,7 @@ export function Home() {
               </div>
 
               {/* Telas reais com todo texto trocado por barras: mostra o produto sem expor dado */}
-              <div className="overflow-hidden rounded-[3px] border border-[var(--rule)] md:col-span-5">
+              <div className="overflow-hidden rounded-2xl border border-[var(--rule)] md:col-span-5">
                 <img src={rennerCover} alt="" loading="lazy" className="aspect-[4/3] w-full object-cover" />
               </div>
             </div>
