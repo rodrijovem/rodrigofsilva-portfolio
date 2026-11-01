@@ -41,7 +41,10 @@ export function Navbar() {
             {t.nav.resume}
           </a>
 
-          <Link to="/#contact" className="text-[var(--muted)] transition-colors duration-200 hover:text-[var(--ink)]">
+          <Link
+            to="/#contact"
+            className="whitespace-nowrap rounded bg-[var(--brand)] px-2.5 py-1.5 md:px-3 text-[var(--on-brand)] transition-opacity duration-200 hover:opacity-85"
+          >
             {t.nav.cta}
           </Link>
 

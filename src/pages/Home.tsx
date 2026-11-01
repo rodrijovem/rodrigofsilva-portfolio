@@ -184,7 +184,8 @@ export function Home() {
       </section>
 
       {/* ---------------------------------------------------------------
-          Contato
+          Contato — o unico bloco cheio da cor de marca. O resto do site e
+          papel branco; aqui a pagina muda de tom para marcar o fim e a acao.
           --------------------------------------------------------------- */}
       <section id="contact" className={`${SHELL} scroll-mt-[calc(var(--nav-h)+1rem)] py-20 md:py-28`}>
         <motion.div
@@ -192,12 +193,12 @@ export function Home() {
           whileInView={revealTo}
           viewport={{ once: true, margin: '-80px' }}
           transition={calm}
-          className="grid grid-cols-1 gap-12 md:grid-cols-12"
+          className="grid grid-cols-1 gap-12 rounded-2xl bg-[var(--brand)] px-6 py-12 md:grid-cols-12 md:px-14 md:py-16"
         >
           <div className="md:col-span-6">
-            <p className="eyebrow">{t.home.contactEyebrow}</p>
-            <h2 className="title-l mt-5 max-w-[18ch]">{t.home.contactTitle}</h2>
-            <p className="mt-6 max-w-[44ch] text-[var(--body)]">{t.home.contactLead}</p>
+            <p className="eyebrow !text-[var(--on-brand-muted)]">{t.home.contactEyebrow}</p>
+            <h2 className="title-l mt-5 max-w-[18ch] !text-[var(--on-brand)]">{t.home.contactTitle}</h2>
+            <p className="mt-6 max-w-[44ch] text-[var(--on-brand-muted)]">{t.home.contactLead}</p>
           </div>
 
           <div className="md:col-span-6 md:pt-10">
@@ -206,19 +207,17 @@ export function Home() {
                 key={c.label}
                 href={c.href}
                 {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                className="rule group flex items-center justify-between gap-6 py-5 transition-colors duration-200 hover:text-[var(--brand)]"
+                className="group flex items-center justify-between gap-6 border-t border-[var(--on-brand-rule)] py-5"
               >
                 <span className="flex flex-col">
-                  <span className="text-lg font-medium text-[var(--ink)] transition-colors duration-200 group-hover:text-[var(--brand)]">
-                    {c.label}
-                  </span>
-                  <span className="meta mt-0.5">{c.desc}</span>
+                  <span className="text-lg font-medium text-[var(--on-brand)]">{c.label}</span>
+                  <span className="meta mt-0.5 !text-[var(--on-brand-muted)]">{c.desc}</span>
                 </span>
                 <ArrowUpRight
                   size={20}
                   weight="bold"
                   aria-hidden="true"
-                  className="shrink-0 text-[var(--muted)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--brand)]"
+                  className="shrink-0 text-[var(--on-brand-muted)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--on-brand)]"
                 />
               </a>
             ))}
