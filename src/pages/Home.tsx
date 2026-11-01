@@ -153,12 +153,12 @@ export function Home() {
           className="rule grid grid-cols-1 gap-10 pt-16 md:grid-cols-12 md:gap-12"
         >
           <div className="md:col-span-4">
-            <div className="overflow-hidden rounded-[3px] border border-[var(--rule)]">
+            <div className="overflow-hidden rounded-2xl border border-[var(--rule)]">
               <img
                 src={aboutImage}
                 alt="Rodrigo Silva"
                 loading="lazy"
-                className="aspect-[4/5] w-full object-cover grayscale"
+                className="aspect-[4/5] w-full object-cover"
               />
             </div>
           </div>
