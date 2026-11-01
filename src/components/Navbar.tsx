@@ -23,29 +23,9 @@ export function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/85 backdrop-blur-md">
       <div className="mx-auto flex h-[var(--nav-h)] max-w-[1180px] items-center justify-between gap-6 px-6 md:px-10">
-        <Link to="/" className="shrink-0 text-[0.9375rem] font-medium tracking-tight text-[var(--ink)]">
-          Rodrigo Silva
-        </Link>
-
-        <div className="flex items-center gap-5 text-[0.8125rem] font-medium md:gap-7 md:text-sm">
-          <Link to="/about" aria-current={pathname === '/about' ? 'page' : undefined} className={linkClass(pathname === '/about')}>
-            {t.nav.about}
-          </Link>
-
-          <a
-            href={t.resumeFile}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden text-[var(--muted)] transition-colors duration-200 hover:text-[var(--ink)] sm:inline"
-          >
-            {t.nav.resume}
-          </a>
-
-          <Link
-            to="/#contact"
-            className="whitespace-nowrap rounded bg-[var(--brand)] px-2.5 py-1.5 md:px-3 text-[var(--on-brand)] transition-opacity duration-200 hover:opacity-85"
-          >
-            {t.nav.cta}
+        <div className="flex items-center gap-3">
+          <Link to="/" className="shrink-0 text-[0.9375rem] font-medium tracking-tight text-[var(--ink)]">
+            Rodrigo Silva
           </Link>
 
           {/* O botao mostra o idioma de destino, nao o atual */}
@@ -56,6 +36,19 @@ export function Navbar() {
           >
             {lang === 'pt' ? 'EN' : 'PT'}
           </button>
+        </div>
+
+        <div className="flex items-center gap-5 text-[0.8125rem] font-medium md:gap-7 md:text-sm">
+          <Link to="/about" aria-current={pathname === '/about' ? 'page' : undefined} className={linkClass(pathname === '/about')}>
+            {t.nav.about}
+          </Link>
+
+          <Link
+            to="/#contact"
+            className="whitespace-nowrap rounded bg-[var(--brand)] px-2.5 py-1.5 md:px-3 text-[var(--on-brand)] transition-opacity duration-200 hover:opacity-85"
+          >
+            {t.nav.cta}
+          </Link>
         </div>
       </div>
     </nav>
