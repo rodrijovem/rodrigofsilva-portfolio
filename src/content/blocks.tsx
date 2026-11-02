@@ -63,8 +63,8 @@ export const h = (id: string, t: string) => (
 
 // Classe literal: `mb-${n}` nao e gerada pelo Tailwind, que varre o fonte
 // procurando nomes de classe completos.
-export const p = (t: string) => <p className="mb-5 max-w-[64ch] text-[var(--body)]">{rich(t)}</p>;
-export const p12 = (t: string) => <p className="mb-10 max-w-[64ch] text-[var(--body)]">{rich(t)}</p>;
+export const p = (t: string) => <p className="mb-5 text-[var(--body)]">{rich(t)}</p>;
+export const p12 = (t: string) => <p className="mb-10 text-[var(--body)]">{rich(t)}</p>;
 
 export const note = (t: string) => (
   <p className="meta mb-10 max-w-[64ch] border-l border-[var(--brand)] pl-4">{t}</p>
