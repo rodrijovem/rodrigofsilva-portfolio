@@ -212,3 +212,19 @@ button:active:not(:disabled),
     --rule: rgba(0, 50, 53, 0.4);
   }
 }
+
+/* ---------------------------------------------------------------
+   Lightbox das imagens dos cases (ZoomableImage)
+   --------------------------------------------------------------- */
+.lightbox::backdrop {
+  background: rgba(14, 16, 19, 0.88);
+}
+.lightbox[open] {
+  animation: lightbox-in 180ms ease-out;
+}
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.98); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox[open] { animation: none; }
+}

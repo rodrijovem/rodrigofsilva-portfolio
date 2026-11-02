@@ -5,6 +5,7 @@
 */
 
 import { Fragment, type ReactNode } from 'react';
+import { ZoomableImage } from '../components/ZoomableImage';
 
 /*
   Marcacao minima dentro da prosa: **negrito** para o numero que importa e
@@ -36,7 +37,7 @@ const caption = (text?: string) => (
 export const img = (src: string, alt: string, legend?: string) => (
   <figure className="my-12 w-full">
     <div className="w-full overflow-hidden rounded-2xl border border-[var(--rule)]">
-      <img src={src} alt={alt} className="h-auto w-full object-cover" />
+      <ZoomableImage src={src} alt={alt} />
     </div>
     {caption(legend)}
   </figure>
