@@ -1,11 +1,11 @@
 /*
-  Google Analytics 4 sem cookies.
+  Google Analytics 4 com cookies de medicao, sem banner.
 
-  O consentimento de armazenamento fica sempre negado: o gtag nao grava
-  cookie nem identificador no navegador e manda pings anonimos, que o GA
-  usa para modelar os numeros. Por isso nao ha banner — nao ha o que
-  consentir. A tag so carrega no build de producao, para o `npm run dev`
-  nao sujar os relatorios.
+  Antes o analytics_storage ficava negado (sem cookie nenhum), mas o GA4 nao
+  mostra esses pings anonimos nos relatorios: so os usa para modelagem, que
+  exige um volume que um portfolio nao tem. Na pratica, nada aparecia. Agora
+  so a medicao e liberada; os sinais de anuncio continuam negados. A tag so
+  carrega no build de producao, para o `npm run dev` nao sujar os relatorios.
 */
 const MEASUREMENT_ID = 'G-RL614BKXVT';
 
@@ -32,7 +32,7 @@ export function initAnalytics() {
   };
 
   window.gtag('consent', 'default', {
-    analytics_storage: 'denied',
+    analytics_storage: 'granted',
     ad_storage: 'denied',
     ad_user_data: 'denied',
     ad_personalization: 'denied',
