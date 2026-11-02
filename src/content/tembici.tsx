@@ -10,6 +10,12 @@ import processo from '../../images/tembici/tembici-02-processo.webp';
 import processoEn from '../../images/tembici/tembici-02-processo-en.webp';
 import modelo from '../../images/tembici/tembici-03-modelo-antes-depois.webp';
 import modeloEn from '../../images/tembici/tembici-03-modelo-antes-depois-en.webp';
+import telas from '../../images/tembici/tembici-04-telas-finais.webp';
+import telasEn from '../../images/tembici/tembici-04-telas-finais-en.webp';
+import bloqueio from '../../images/tembici/tembici-05-estados-de-bloqueio.webp';
+import bloqueioEn from '../../images/tembici/tembici-05-estados-de-bloqueio-en.webp';
+import noAr from '../../images/tembici/tembici-06-produto-no-ar.webp';
+import noArEn from '../../images/tembici/tembici-06-produto-no-ar-en.webp';
 
 // Os iframes sao os mesmos nos dois idiomas; muda so o title e a legenda.
 const MIRO_WORKSHOP = "https://miro.com/app/live-embed/uXjVKMHscvA=/?moveToViewport=-43218,-14518,13584,15036&embedMode=view_only_without_ui";
@@ -59,8 +65,13 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {h("into-the-app", "From the spreadsheet to the app they already opened")}
       {p("With the hypothesis validated, I went back to the MVP riders for a second round of interviews and explored alternatives with *Crazy 8* before locking the journey.")}
       {p("The first decision was not to create a new channel. Riders already opened the iFood Pedal app every day, so the product went there, in the \"Bike pra Você\" area, instead of competing for one more icon on their screen.")}
+
+      {img(telasEn, "Four Bike pra Você screens in the iFood Pedal app: home, scheduling, summary with check-in and plan in use", "The final journey inside the iFood Pedal app: from the home entry point to the plan in use, with return date and location always visible.")}
+
       {p("The hard part was not the plan screen. The journey had a leg outside the digital world: bringing documents to a physical point and leaving with a bike. That forced the interface to say what an app normally doesn't have to: what to bring, where to go, what happens if a document is rejected.")}
       {p12("I prioritized the blocking states (pending documents, rejected registration, payment error, late return), because there the rider doesn't lose a screen, they lose a week of work. Each one had to give the reason and the next step, not just the outcome. I validated the journey in usability tests with a Maze prototype and in person with riders, and adjusted the error scenarios before handoff.")}
+
+      {img(bloqueioEn, "Pending documents, rejected registration and payment error screens", "Three blocking states as they shipped: each one says what happened and what the rider does next.")}
 
       {img(temMockup, "iFood Pedal app screens", "\"Bike pra Você\" lives inside the app the rider already opens every day, and the pickup ends in a QR Code with a timer, name, and ID number — the interface working as a document for the operator at the physical point.")}
 
@@ -84,7 +95,10 @@ export function getTembiciContent(lang: Lang): ReactNode {
 
       {p("In the first 6 months of the new model, average savings were ~R$1M per month, from two sources. The first was maintenance: riders stopped using the shared-fleet bikes, which were more expensive, needed more workshop time and handled their workload worse. The second was retention: comparing before and after launch, cancellations from regular users because they couldn't find a bike, or only found broken ones at the station, went down.")}
       {p("The problems that started the project (dead batteries, flat tires, broken seats) dropped 72%, and the operation broke even in ~10 months.")}
-      {p("NPS went up for both audiences, the metric the investor was watching: casual cyclists found bikes available again and riders got a bike that lasted the whole shift. After being validated in São Paulo, the product started rolling out to Porto Alegre and Rio de Janeiro in early 2024, when I left the company.")}
+      {p("NPS went up for both audiences, the metric the investor was watching: casual cyclists found bikes available again and riders got a bike that lasted the whole shift. After being validated in São Paulo, the product started rolling out to Porto Alegre and Rio de Janeiro in early 2024, when I left the company. Today Bike pra Você is still live at [ifood.tembici.com.br](https://ifood.tembici.com.br/).")}
+
+      {img(noArEn, "Delivery rider on the red Bike pra Você e-bike", "The red bike on the streets: Bike pra Você is still live at ifood.tembici.com.br. Photo: Tembici.")}
+
       {p12("To be precise about what is mine: the savings came from changing the operating model, not from a screen. My part was the research that supported the hypothesis, the workshop that turned it into a company decision and the journey that made the model work at scale. After launch, I tracked NPS, events and business metrics with the team.")}
 
       {h("takeaways", "What I take from this project")}
@@ -135,8 +149,13 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {h("into-the-app", "Da planilha para o app que eles já abriam")}
       {p("Com a hipótese validada, voltei aos entregadores do MVP para uma segunda rodada de entrevistas e explorei alternativas em *Crazy 8* antes de fechar a jornada.")}
       {p("A primeira decisão foi não criar um canal novo. O entregador já abria o app iFood Pedal todo dia, então o produto entrou ali, na área \"Bike pra Você\", em vez de disputar mais um ícone na tela dele.")}
+
+      {img(telas, "Quatro telas do Bike pra Você no app iFood Pedal: home, agendamento, resumo com check-in e plano em uso", "A jornada final dentro do app iFood Pedal: da entrada pela home ao plano em uso, com data e local de devolução sempre visíveis.")}
+
       {p("A parte difícil não era a tela do plano. A jornada tinha uma perna fora do digital: levar documento a um ponto físico e sair de lá com uma bike. Isso obrigou a interface a dizer o que um app normalmente não precisa: o que levar, onde ir, o que acontece se o documento for recusado.")}
       {p12("Priorizei os estados de bloqueio (documentação pendente, cadastro reprovado, pagamento com erro, atraso na devolução), porque ali o entregador não perde uma tela, perde a semana de trabalho. Cada um precisava dizer o motivo e o próximo passo, não só o resultado. Validei a jornada em testes de usabilidade com protótipo no Maze e presenciais com entregadores, e ajustei os cenários de erro antes do handoff.")}
+
+      {img(bloqueio, "Telas de documentação pendente, cadastro reprovado e erro de pagamento", "Três estados de bloqueio como foram para o app: cada um diz o que aconteceu e o que o entregador faz agora.")}
 
       {img(temMockup, "Telas do app iFood Pedal", "O “Bike pra Você” vive dentro do app que o entregador já abre todo dia, e a retirada termina em um QR Code com contador, nome e CPF — a interface funcionando como documento para o operador no ponto físico.")}
 
@@ -160,7 +179,10 @@ export function getTembiciContent(lang: Lang): ReactNode {
 
       {p("Nos primeiros 6 meses do novo modelo, a economia média foi de ~R$1M por mês, vinda de duas frentes. A primeira foi manutenção: os entregadores deixaram de usar as bikes da frota compartilhada, mais caras, que exigiam mais tempo de oficina e aguentavam pior o ritmo de trabalho deles. A segunda foi retenção: comparando antes e depois do lançamento, caíram os cancelamentos de usuários comuns por falta de bicicleta ou por só encontrar bike com problema na estação.")}
       {p("Os problemas que originaram o projeto (bateria descarregada, pneu furado, banco quebrado) caíram 72%, e a operação chegou ao breakeven em ~10 meses.")}
-      {p("O NPS subiu nos dois públicos, o indicador que o investidor acompanhava: o ciclista casual voltou a encontrar bike disponível e o entregador ganhou uma bike que durava o turno. Validado em São Paulo, o produto começou a ser levado para Porto Alegre e Rio de Janeiro no início de 2024, quando saí da empresa.")}
+      {p("O NPS subiu nos dois públicos, o indicador que o investidor acompanhava: o ciclista casual voltou a encontrar bike disponível e o entregador ganhou uma bike que durava o turno. Validado em São Paulo, o produto começou a ser levado para Porto Alegre e Rio de Janeiro no início de 2024, quando saí da empresa. Hoje o Bike pra Você segue no ar em [ifood.tembici.com.br](https://ifood.tembici.com.br/).")}
+
+      {img(noAr, "Entregador pedalando a bike elétrica vermelha do Bike pra Você", "A bike vermelha nas ruas: o Bike pra Você continua no ar em ifood.tembici.com.br. Foto: Tembici.")}
+
       {p12("Sendo preciso sobre o que é meu: a economia veio da mudança de modelo operacional, não de uma tela. Minha parte foi a pesquisa que sustentou a hipótese, o workshop que a transformou em decisão da empresa e a jornada que tornou o modelo operável em escala. Depois do lançamento, acompanhei NPS, eventos e métricas de negócio com o time.")}
 
       {h("takeaways", "O que eu levo desse projeto")}

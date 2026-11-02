@@ -8,10 +8,19 @@ import { Fragment, type ReactNode } from 'react';
 
 /*
   Marcacao minima dentro da prosa: **negrito** para o numero que importa e
-  *italico* para nome de tecnica. Qualquer coisa alem disso vira componente.
+  *italico* para nome de tecnica, [texto](url) para link externo. Qualquer
+  coisa alem disso vira componente.
 */
 export const rich = (t: string): ReactNode =>
-  t.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, i) => {
+  t.split(/(\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
+    const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (link) {
+      return (
+        <a key={i} href={link[2]} target="_blank" rel="noopener noreferrer" className="text-[var(--ink)] underline underline-offset-4 hover:text-[var(--brand)]">
+          {link[1]}
+        </a>
+      );
+    }
     if (part.startsWith('**') && part.endsWith('**')) {
       return <strong key={i} className="font-medium text-[var(--ink)]">{part.slice(2, -2)}</strong>;
     }

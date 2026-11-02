@@ -12,12 +12,19 @@ import cadeia from '../../images/Finvity/finvity-02-cadeia-de-dados.webp';
 import cadeiaEn from '../../images/Finvity/finvity-02-cadeia-de-dados-en.webp';
 import ia from '../../images/Finvity/finvity-03-ia-no-processo.webp';
 import iaEn from '../../images/Finvity/finvity-03-ia-no-processo-en.webp';
+import antesDepois from '../../images/Finvity/finvity-04-antes-depois.webp';
+import antesDepoisEn from '../../images/Finvity/finvity-04-antes-depois-en.webp';
+import telas from '../../images/Finvity/finvity-05-telas-finais.webp';
+import telasEn from '../../images/Finvity/finvity-05-telas-finais-en.webp';
 
 export function getFinvityContent(lang: Lang): ReactNode {
   if (lang === 'en') return (
     <>
       {h("the-question", "The question the platform has to answer")}
       {p("A wealth planner has to answer an uncomfortable question: if this client died tomorrow, how much would the family pay in estate tax (ITCMD), how long would probate take and what would be left.")}
+
+      {img(telasEn, "Finvity probate screen with judicial and out-of-court costs and estate tax by state", "The answer on screen: judicial and out-of-court probate costs and estimated estate tax (ITCMD) by state, in the redesign.")}
+
       {p("Getting there takes family structure, assets, debts, holding companies, gifts, income projection and tax rules, all together and all affecting each other. In this domain, oversimplifying is not elegance, it's a loss of precision.")}
       {p12("That's why the platform is not a dashboard with numbers. It's a chain: what goes in one place has to reappear, correctly, in every analysis that depends on it. And the old version broke that chain often enough that support became part of the product.")}
 
@@ -52,6 +59,9 @@ export function getFinvityContent(lang: Lang): ReactNode {
 
       {h("specialist", "Getting closer to what experts already know")}
       {p("The audit surfaced technical jargon with no accessible help, charts with percentages that didn't add up and mixed currency formats on the same screen. Match with the real world and consistency became the criteria for the analysis screens.")}
+
+      {img(antesDepoisEn, "Finvity assets screen before and after the redesign", "Assets before and after: donuts stuck at 25% and duplicated charts gave way to totals, composition and restricted assets in a single view.")}
+
       {p("In tax intelligence and income tax import, I brought the interface logic closer to structures professionals already recognize from their own work, instead of inventing a new, \"cleaner\" organization. The gain is not aesthetic: it reduces learning and saves experts from mentally translating what they already know into the tool's vocabulary.")}
       {p12("The same logic applied to reading the data. Projection, parameters and result sit in the same view, so changing an assumption and seeing the consequence is a single move, not a back-and-forth between screens.")}
 
@@ -80,6 +90,9 @@ export function getFinvityContent(lang: Lang): ReactNode {
     <>
       {h("the-question", "A pergunta que a plataforma precisa responder")}
       {p("Um planejador patrimonial precisa responder algo desconfortável: se esse cliente morrer amanhã, quanto a família paga de ITCMD, quanto tempo leva o inventário e o que sobra.")}
+
+      {img(telas, "Tela de inventário da Finvity com custo judicial, extrajudicial e ITCMD por estado", "A resposta na tela: custo de inventário judicial e extrajudicial e o ITCMD estimado por estado, no redesign.")}
+
       {p("Chegar nessa resposta exige estrutura familiar, patrimônio, dívidas, holding, doações, projeção de renda e regra tributária, tudo junto e tudo se afetando. Nesse domínio, simplificar demais não é elegância, é perda de precisão.")}
       {p12("Por isso a plataforma não é um painel com números. É uma cadeia: o que entra num lugar precisa reaparecer, correto, em cada análise que depende dele. E a versão antiga quebrava essa cadeia com frequência suficiente para o suporte virar parte do produto.")}
 
@@ -114,6 +127,9 @@ export function getFinvityContent(lang: Lang): ReactNode {
 
       {h("specialist", "Aproximar o que o especialista já conhece")}
       {p("A auditoria mostrou jargão técnico sem ajuda acessível, gráficos com percentuais que não fechavam e formatos de moeda misturados na mesma tela. Correspondência com o mundo real e consistência viraram os critérios das telas de análise.")}
+
+      {img(antesDepois, "Tela de Patrimônio da Finvity antes e depois do redesign", "Patrimônio antes e depois: os donuts presos em 25% e os gráficos duplicados deram lugar a totais, composição e bens com restrição numa leitura só.")}
+
       {p("Em inteligência tributária e na importação do imposto de renda, aproximei a lógica da interface das estruturas que o profissional já reconhece do próprio trabalho, em vez de inventar uma organização nova e \"mais limpa\". O ganho não é estético: reduz aprendizado e evita que o especialista traduza mentalmente o que já sabe para o vocabulário da ferramenta.")}
       {p12("A mesma lógica valeu para a leitura dos dados. Projeção, parâmetros e resultado ficam na mesma visão, para que mudar uma premissa e ver a consequência seja um movimento só, e não uma ida e volta entre telas.")}
 

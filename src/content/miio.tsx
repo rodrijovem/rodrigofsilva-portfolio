@@ -13,6 +13,8 @@ import ciclo from '../../images/miio/miio-03-ciclo-assinatura.webp';
 import cicloEn from '../../images/miio/miio-03-ciclo-assinatura-en.webp';
 import evolucao from '../../images/miio/miio-04-evolucao.webp';
 import evolucaoEn from '../../images/miio/miio-04-evolucao-en.webp';
+import telas from '../../images/miio/miio-05-telas-finais.webp';
+import telasEn from '../../images/miio/miio-05-telas-finais-en.webp';
 
 export function getMiioContent(lang: Lang): ReactNode {
   if (lang === 'en') return (
@@ -35,6 +37,8 @@ export function getMiioContent(lang: Lang): ReactNode {
       {p12("In practice, the plan only appeared where there was a number to show: in the charger price, in the cart with the discount already applied, at checkout and after adding the first compatible vehicle, the moment the app finally knew how much that person spent each month.")}
 
       {img(pontosEn, "Journey showing where the miio plan appears to the user", "Where the plan appears: only at the moments when the app already has a savings number to show.")}
+
+      {img(telasEn, "Final miio screens: plan price at the charger, offer, plan selection and connected car", "The final screens: the plan price right at the charger, the offer, choosing between plans and the connected car data.")}
 
       {img(miioDecisao, "Profile screen for a non-subscriber", "A non-subscriber sees how much subscribers save on average per month (+€21.60) before any purchase request. The argument is arithmetic, not a blocked feature.")}
 
@@ -96,6 +100,8 @@ export function getMiioContent(lang: Lang): ReactNode {
       {p12("Na prática, o plano só aparecia onde havia número para mostrar: no preço do posto, no carrinho com o desconto já aplicado, no checkout e depois do cadastro do primeiro veículo compatível, o momento em que o app finalmente sabia quanto aquela pessoa gastava por mês.")}
 
       {img(pontos, "Jornada mostrando onde o plano miio aparece para o usuário", "Onde o plano aparece: só nos momentos em que o app já tem um número de economia para mostrar.")}
+
+      {img(telas, "Telas finais da miio: preço com plano no posto, oferta, escolha de plano e carro conectado", "As telas finais: o preço com o plano direto no posto, a oferta, a escolha entre planos e os dados do carro conectado.")}
 
       {img(miioDecisao, "Tela de perfil de um usuário sem plano", "Quem não assina vê quanto os assinantes economizam em média por mês (+21,60 €) antes de qualquer pedido de compra. O argumento é aritmético, não uma função bloqueada.")}
 
