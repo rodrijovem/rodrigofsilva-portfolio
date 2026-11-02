@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import type { Lang } from '../i18n';
-import { embedIframe, h, img, p, p12, statsGrid } from './blocks';
+import { embedIframe, h, img, p, p12 } from './blocks';
 
 import temMockup from '../../images/tembici/temMockup.webp';
 import temProblema from '../../images/tembici/temProblema.webp';
@@ -85,12 +85,6 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {p12("I negotiated with the PM and tech lead to log it as recorded debt, not as something forgotten: I documented the full automated flow and left it ready for when there was room on the roadmap.")}
 
       {h("results", "R$1M/month and 72% fewer broken bikes")}
-      {statsGrid([
-        { value: "~R$1M", label: "saved per month, average of the first 6 months" },
-        { value: "-72%", label: "maintenance incidents on the fleet" },
-        { value: "10 mo", label: "to reach breakeven" }
-      ])}
-
       {img(modeloEn, "Comparison between the old delivery rider plan and Bike pra Você", "What changed for riders and for the operation between the old plan and Bike pra Você.")}
 
       {p("In the first 6 months of the new model, average savings were ~R$1M per month, from two sources. The first was maintenance: riders stopped using the shared-fleet bikes, which were more expensive, needed more workshop time and handled their workload worse. The second was retention: comparing before and after launch, cancellations from regular users because they couldn't find a bike, or only found broken ones at the station, went down.")}
@@ -169,12 +163,6 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {p12("Negociei com PM e tech lead para que isso entrasse como dívida registrada, não como esquecimento: documentei o fluxo automatizado completo e deixei pronto para quando houvesse espaço no roadmap.")}
 
       {h("results", "R$1M/mês e 72% menos bicicleta quebrada")}
-      {statsGrid([
-        { value: "~R$1M", label: "economizados por mês, média dos 6 primeiros meses" },
-        { value: "-72%", label: "ocorrências de manutenção na frota" },
-        { value: "10 m", label: "para atingir o breakeven" }
-      ])}
-
       {img(modelo, "Comparação entre o plano antigo dos entregadores e o Bike pra Você", "O que mudou para o entregador e para a operação entre o plano antigo e o Bike pra Você.")}
 
       {p("Nos primeiros 6 meses do novo modelo, a economia média foi de ~R$1M por mês, vinda de duas frentes. A primeira foi manutenção: os entregadores deixaram de usar as bikes da frota compartilhada, mais caras, que exigiam mais tempo de oficina e aguentavam pior o ritmo de trabalho deles. A segunda foi retenção: comparando antes e depois do lançamento, caíram os cancelamentos de usuários comuns por falta de bicicleta ou por só encontrar bike com problema na estação.")}
