@@ -19,7 +19,6 @@ import noArEn from '../../images/tembici/tembici-06-produto-no-ar-en.webp';
 
 // Os iframes sao os mesmos nos dois idiomas; muda so o title e a legenda.
 const MIRO_WORKSHOP = "https://miro.com/app/live-embed/uXjVKMHscvA=/?moveToViewport=-43218,-14518,13584,15036&embedMode=view_only_without_ui";
-const MIRO_MVP = "https://miro.com/app/live-embed/uXjVKMHscvA=/?moveToViewport=-25892,-13785,7019,2295&embedMode=view_only_without_ui";
 const MIRO_FINAL_FLOW = "https://miro.com/app/live-embed/uXjVKMHscvA=/?moveToViewport=-5372,-7960,32000,2367&embedMode=view_only_without_ui";
 const FIGMA_PROTO = "https://embed.figma.com/proto/v65YY7OjnfpFDJkBRXsQWG/iFood---Entregador?node-id=4118-17666&starting-point-node-id=4118%3A17666&scaling=scale-down&content-scaling=fixed&hide-ui=1&embed-host=share";
 
@@ -59,8 +58,6 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {p("Before building, we tested the hypothesis with an entirely manual operation, using old e-bikes that had been sitting idle, nicknamed the \"vermelhinhas\" (the little red ones).")}
       {p("The MVP ran on Google Forms and Google Sheets. We selected heavy-user riders with no history of late payment or lost bikes. They filled in the form, someone reviewed the data by hand and, if approved, the rider picked up the bike at a support point, with document checks and in-person guidance, and kept it for a week.")}
       {p12("That confirmed there was demand and that separating professional from casual use made sense. But the most valuable part was what the spreadsheet revealed: how many people it took to keep one person pedaling. Slow registration (riders went back to the support point several times), manual approval and riders forgetting their renewal day. The model worked and did not scale.")}
-
-      {embedIframe(MIRO_MVP, "Manual MVP journey — Bike pra Você", "The manual MVP mapped end to end: every step in this flow was a person, which is exactly what made the model impossible to scale.")}
 
       {h("into-the-app", "From the spreadsheet to the app they already opened")}
       {p("With the hypothesis validated, I went back to the MVP riders for a second round of interviews and explored alternatives with *Crazy 8* before locking the journey.")}
@@ -137,8 +134,6 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {p("Antes de construir, testamos a hipótese com uma operação inteiramente manual, usando bikes elétricas antigas que estavam paradas, as \"vermelhinhas\".")}
       {p("O MVP rodava em Google Forms e Google Sheets. Selecionamos entregadores heavy users, sem histórico de inadimplência ou perda de bike. Eles preenchiam o formulário, alguém analisava os dados à mão e, se aprovado, o entregador retirava a bike num ponto de apoio, com conferência de documento e orientação presencial, e ficava com ela por uma semana.")}
       {p12("Isso confirmou que havia demanda e que separar o uso profissional do casual fazia sentido. Mas o mais valioso foi o que a planilha revelou: quanta gente era necessária para manter uma pessoa pedalando. Cadastro lento (o entregador voltava ao ponto de apoio várias vezes), aprovação manual e entregadores esquecendo o dia de renovar. O modelo funcionava e não escalava.")}
-
-      {embedIframe(MIRO_MVP, "Jornada do MVP manual — Bike pra Você", "O MVP manual mapeado ponta a ponta: cada etapa desse fluxo era uma pessoa, e é exatamente isso que tornava o modelo insustentável em escala.")}
 
       {h("into-the-app", "Da planilha para o app que eles já abriam")}
       {p("Com a hipótese validada, voltei aos entregadores do MVP para uma segunda rodada de entrevistas e explorei alternativas em *Crazy 8* antes de fechar a jornada.")}
