@@ -78,7 +78,6 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {p("It was the piece that took the manual operation out of the way, and it did not fit the development timeline. We launched with registration review still done by hand, which meant the operation stayed in the middle of every approval, exactly the bottleneck the MVP had exposed.")}
       {p12("I negotiated with the PM and tech lead to log it as recorded debt, not as something forgotten: I documented the full automated flow and left it ready for when there was room on the roadmap.")}
 
-      {h("results", "R$1M/month and 72% fewer broken bikes")}
       {img(modeloEn, "Comparison between the old delivery rider plan and Bike pra Você", "What changed for riders and for the operation between the old plan and Bike pra Você.")}
 
       {p("In the first 6 months of the new model, average savings were ~R$1M per month, from two sources. The first was maintenance: riders stopped using the shared-fleet bikes, which were more expensive, needed more workshop time and handled their workload worse. The second was retention: comparing before and after launch, cancellations from regular users because they couldn't find a bike, or only found broken ones at the station, went down.")}
@@ -152,7 +151,6 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {p("Era a peça que tirava a operação manual do caminho, e não coube no prazo de desenvolvimento. Lançamos com a análise de cadastro ainda feita à mão, ou seja, com a operação no meio de cada aprovação, justamente o gargalo que o MVP tinha provado.")}
       {p12("Negociei com PM e tech lead para que isso entrasse como dívida registrada, não como esquecimento: documentei o fluxo automatizado completo e deixei pronto para quando houvesse espaço no roadmap.")}
 
-      {h("results", "R$1M/mês e 72% menos bicicleta quebrada")}
       {img(modelo, "Comparação entre o plano antigo dos entregadores e o Bike pra Você", "O que mudou para o entregador e para a operação entre o plano antigo e o Bike pra Você.")}
 
       {p("Nos primeiros 6 meses do novo modelo, a economia média foi de ~R$1M por mês, vinda de duas frentes. A primeira foi manutenção: os entregadores deixaram de usar as bikes da frota compartilhada, mais caras, que exigiam mais tempo de oficina e aguentavam pior o ritmo de trabalho deles. A segunda foi retenção: comparando antes e depois do lançamento, caíram os cancelamentos de usuários comuns por falta de bicicleta ou por só encontrar bike com problema na estação.")}
