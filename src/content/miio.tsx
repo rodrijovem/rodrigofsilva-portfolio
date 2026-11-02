@@ -3,7 +3,6 @@ import type { Lang } from '../i18n';
 import { h, img, p, p12, statsGrid } from './blocks';
 
 import miioHeader from '../../images/miio/miioHeader.webp';
-import miioDecisao from '../../images/miio/miioDecisao.webp';
 import miioMone from '../../images/miio/miioMone.webp';
 import paywall from '../../images/miio/miio-01-paywall-vs-contexto.webp';
 import paywallEn from '../../images/miio/miio-01-paywall-vs-contexto-en.webp';
@@ -39,8 +38,6 @@ export function getMiioContent(lang: Lang): ReactNode {
       {img(pontosEn, "Journey showing where the miio plan appears to the user", "Where the plan appears: only at the moments when the app already has a savings number to show.")}
 
       {img(telasEn, "Final miio screens: plan price at the charger, offer, plan selection and connected car", "The final screens: the plan price right at the charger, the offer, choosing between plans and the connected car data.")}
-
-      {img(miioDecisao, "Profile screen for a non-subscriber", "A non-subscriber sees how much subscribers save on average per month (+€21.60) before any purchase request. The argument is arithmetic, not a blocked feature.")}
 
       {h("prove-value", "Prove value before charging for it")}
       {p("Without a paywall, the order of delivery became part of the strategy. We split the project into milestones: first the car-to-app connection, so the value existed before any price; then a plan beta; finally, the paid subscription for everyone.")}
@@ -102,8 +99,6 @@ export function getMiioContent(lang: Lang): ReactNode {
       {img(pontos, "Jornada mostrando onde o plano miio aparece para o usuário", "Onde o plano aparece: só nos momentos em que o app já tem um número de economia para mostrar.")}
 
       {img(telas, "Telas finais da miio: preço com plano no posto, oferta, escolha de plano e carro conectado", "As telas finais: o preço com o plano direto no posto, a oferta, a escolha entre planos e os dados do carro conectado.")}
-
-      {img(miioDecisao, "Tela de perfil de um usuário sem plano", "Quem não assina vê quanto os assinantes economizam em média por mês (+21,60 €) antes de qualquer pedido de compra. O argumento é aritmético, não uma função bloqueada.")}
 
       {h("prove-value", "Provar valor antes de cobrar")}
       {p("Sem paywall, a ordem das entregas passou a ser parte da estratégia. Dividimos o projeto em milestones: primeiro a conexão do carro com o app, para o valor existir antes de qualquer preço; depois um beta do plano; por fim, a assinatura paga para todos.")}
