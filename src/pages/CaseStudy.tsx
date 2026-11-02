@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
+import { track } from '../lib/analytics';
 import { isCaseId, listCases } from '../cases';
 import { caseDetail } from '../caseDetail';
 import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
@@ -178,6 +179,7 @@ export function CaseStudy() {
             >
               <Link
                 to={`/cases/${project.id}`}
+                onClick={() => track('case_open', { case_id: project.id, location: 'more_cases' })}
                 className="group grid grid-cols-1 items-center gap-6 py-8 md:grid-cols-12 md:gap-10"
               >
                 <div className="md:col-span-8">

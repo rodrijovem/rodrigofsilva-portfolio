@@ -7,6 +7,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { isCaseId } from './cases';
 import { prefersReducedMotion } from './lib/motion';
+import { initAnalytics, trackPageView } from './lib/analytics';
 
 /*
   A home fica no bundle inicial — e a rota de entrada, adiar so atrasaria a
@@ -113,12 +114,29 @@ function DocumentTitle() {
   return null;
 }
 
+/*
+  Uma page_view por rota. Vem depois de DocumentTitle na arvore, entao o
+  efeito dela ja rodou e o titulo enviado e o da pagina nova. Trocar de
+  idioma nao conta como visita: so o pathname dispara.
+*/
+function PageViews() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    initAnalytics();
+    trackPageView(pathname);
+  }, [pathname]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <AppProvider>
       <BrowserRouter>
         <ScrollManager />
         <DocumentTitle />
+        <PageViews />
         {/* Altura minima para o rodape nao subir enquanto o chunk carrega */}
         <Suspense fallback={<div className="min-h-[100dvh]" />}>
           <Routes>

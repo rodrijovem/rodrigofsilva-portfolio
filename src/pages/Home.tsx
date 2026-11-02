@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
+import { track } from '../lib/analytics';
 import { listCases } from '../cases';
 import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 
@@ -22,10 +23,10 @@ export function Home() {
   const cases = listCases(lang);
 
   const contacts = [
-    { href: LINKEDIN, label: 'LinkedIn', desc: t.home.linkedinDesc, external: true },
-    { href: EMAIL, label: 'Email', desc: t.home.emailDesc, external: false },
-    { href: WHATSAPP, label: 'WhatsApp', desc: t.home.whatsappDesc, external: true },
-  ];
+    { href: LINKEDIN, label: 'LinkedIn', method: 'linkedin', desc: t.home.linkedinDesc, external: true },
+    { href: EMAIL, label: 'Email', method: 'email', desc: t.home.emailDesc, external: false },
+    { href: WHATSAPP, label: 'WhatsApp', method: 'whatsapp', desc: t.home.whatsappDesc, external: true },
+  ] as const;
 
   return (
     <div className="w-full">
@@ -73,6 +74,7 @@ export function Home() {
             >
               <Link
                 to={`/cases/${project.id}`}
+                onClick={() => track('case_open', { case_id: project.id, location: 'home' })}
                 className="press-subtle group grid grid-cols-1 items-start gap-8 py-10 md:grid-cols-12 md:gap-10 md:py-14"
               >
                 <div className="md:col-span-7">
@@ -207,6 +209,7 @@ export function Home() {
                 key={c.label}
                 href={c.href}
                 {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                onClick={() => track('contact_click', { method: c.method, location: 'home_contact' })}
                 className="group flex items-center justify-between gap-6 border-t border-[var(--on-brand-rule)] py-5"
               >
                 <span className="flex flex-col">

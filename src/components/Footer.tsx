@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
+import { track } from '../lib/analytics';
 
 const LINKEDIN = 'https://www.linkedin.com/in/rodrigo-fsilva/';
 const EMAIL = 'mailto:rodrigo_silva05@live.com';
@@ -10,9 +11,9 @@ export function Footer() {
   const t = translations[lang];
 
   const links = [
-    { href: LINKEDIN, label: 'LinkedIn', external: true },
-    { href: EMAIL, label: 'Email', external: false },
-    { href: t.resumeFile, label: t.nav.resume, external: true },
+    { href: LINKEDIN, label: 'LinkedIn', external: true, onClick: () => track('contact_click', { method: 'linkedin', location: 'footer' }) },
+    { href: EMAIL, label: 'Email', external: false, onClick: () => track('contact_click', { method: 'email', location: 'footer' }) },
+    { href: t.resumeFile, label: t.nav.resume, external: true, onClick: () => track('resume_download', { language: lang, location: 'footer' }) },
   ];
 
   return (
@@ -34,6 +35,7 @@ export function Footer() {
                   key={l.label}
                   href={l.href}
                   {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  onClick={l.onClick}
                   className="text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
                 >
                   {l.label}

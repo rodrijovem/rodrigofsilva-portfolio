@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
+import { track } from '../lib/analytics';
 
 /*
   Chrome editorial: palavra-marca a esquerda, links em texto a direita, sem
@@ -30,7 +31,11 @@ export function Navbar() {
 
           {/* O botao mostra o idioma de destino, nao o atual */}
           <button
-            onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')}
+            onClick={() => {
+              const next = lang === 'pt' ? 'en' : 'pt';
+              setLang(next);
+              track('language_change', { language: next });
+            }}
             className="shrink-0 rounded border border-[var(--rule)] px-2 py-1 text-[0.6875rem] font-medium tracking-[0.12em] text-[var(--muted)] transition-colors duration-200 hover:border-[var(--brand)] hover:text-[var(--brand)]"
             aria-label={lang === 'pt' ? 'Switch to English' : 'Mudar para português'}
           >

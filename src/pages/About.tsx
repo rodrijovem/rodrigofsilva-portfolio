@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, DownloadSimple } from '@phosphor-icons/react';
 import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
+import { track } from '../lib/analytics';
 import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 
 import logoAdobe from '../../images/svgs/logoAdobe.svg';
@@ -59,6 +60,7 @@ export function About() {
                   href={t.resumeFile}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track('resume_download', { language: lang, location: 'about' })}
                   className="group inline-flex items-center gap-2 border-b border-[var(--brand)] pb-1 text-sm font-medium text-[var(--brand)]"
                 >
                   <DownloadSimple size={16} weight="bold" aria-hidden="true" />
@@ -68,6 +70,7 @@ export function About() {
                   href={LINKEDIN}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track('contact_click', { method: 'linkedin', location: 'about' })}
                   className="group inline-flex items-center gap-2 border-b border-[var(--rule-strong)] pb-1 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
                 >
                   LinkedIn
