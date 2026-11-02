@@ -4,9 +4,24 @@
   legenda — acontece aqui uma vez e vale para os tres.
 */
 
+import { Fragment, type ReactNode } from 'react';
+
+/*
+  Marcacao minima dentro da prosa: **negrito** para o numero que importa e
+  *italico* para nome de tecnica. Qualquer coisa alem disso vira componente.
+*/
+export const rich = (t: string): ReactNode =>
+  t.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} className="font-medium text-[var(--ink)]">{part.slice(2, -2)}</strong>;
+    }
+    if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) return <em key={i}>{part.slice(1, -1)}</em>;
+    return <Fragment key={i}>{part}</Fragment>;
+  });
+
 /* Interno: chega nos cases sempre pelo `legend` de `img`/`embedIframe`. */
 const caption = (text?: string) => (
-  text ? <figcaption className="meta mt-3 max-w-[64ch]">{text}</figcaption> : null
+  text ? <figcaption className="meta mt-3 max-w-[64ch]">{rich(text)}</figcaption> : null
 );
 
 export const img = (src: string, alt: string, legend?: string) => (
@@ -18,10 +33,10 @@ export const img = (src: string, alt: string, legend?: string) => (
   </figure>
 );
 
-export const embedIframe = (src: string, legend?: string) => (
+export const embedIframe = (src: string, title: string, legend?: string) => (
   <figure className="my-12 w-full">
     <div className="w-full overflow-hidden rounded-2xl border border-[var(--rule)] bg-[var(--surface)]">
-      <iframe className="aspect-video w-full" src={src} frameBorder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowFullScreen></iframe>
+      <iframe className="aspect-video w-full" src={src} title={title} loading="lazy" frameBorder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowFullScreen></iframe>
     </div>
     {caption(legend)}
   </figure>
@@ -39,8 +54,8 @@ export const h = (id: string, t: string) => (
 
 // Classe literal: `mb-${n}` nao e gerada pelo Tailwind, que varre o fonte
 // procurando nomes de classe completos.
-export const p = (t: string) => <p className="mb-5 max-w-[64ch] text-[var(--body)]">{t}</p>;
-export const p12 = (t: string) => <p className="mb-10 max-w-[64ch] text-[var(--body)]">{t}</p>;
+export const p = (t: string) => <p className="mb-5 max-w-[64ch] text-[var(--body)]">{rich(t)}</p>;
+export const p12 = (t: string) => <p className="mb-10 max-w-[64ch] text-[var(--body)]">{rich(t)}</p>;
 
 export const note = (t: string) => (
   <p className="meta mb-10 max-w-[64ch] border-l border-[var(--brand)] pl-4">{t}</p>

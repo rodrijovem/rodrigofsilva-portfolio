@@ -9,31 +9,32 @@ export const en: Translations = {
     resume: 'Resume',
   },
   home: {
-    heroEyebrow: 'Product Designer · SaaS · Mobility · Fintech',
+    heroEyebrow: "Senior Product Designer · Mobility · Fintech · B2B SaaS",
     heroTitle: 'I design the whole system, not just the screen.',
-    heroLead: 'I work on SaaS, mobile, and B2B/B2C platforms where design decisions run into operations, business model, and data. Currently at Lojas Renner; before that, Finvity, miio, and Tembici.',
+    heroLead: "I started in graphic design, and today I work where the screen is the smallest part of the problem: a physical fleet, a subscription model, a tax rule. I bring research and data to the table before the decision, not after. Currently at Lojas Renner; before that, Finvity, miio and Tembici.",
+    metaDescription: 'Senior Product Designer. 13 years in design, 6 in product: mobility, fintech and B2B SaaS, where design decisions move operations, revenue and data.',
     facts: [
-      { value: '13 years', label: 'in design, 6 of them as a Product Designer' },
+      { value: '13 years', label: 'in design, 6 of them in product' },
       { value: '~R$1M/mo', label: 'in operating cost removed at Tembici' },
-      { value: '2,000', label: 'subscribers at the launch of miio\'s paid plan' },
+      { value: '60%', label: 'fewer support questions at Finvity after the redesign' },
     ],
     casesCta: 'Read case study',
     aboutEyebrow: 'About',
     aboutTitle: 'I started in graphic design. Today I argue about data modeling.',
-    aboutText: 'I am from São Paulo and live in Porto Alegre. I came from graphic and web design, moved through UX/UI, and then into product, where I got closer to strategy, operations, and building. I use AI inside the process — research, exploration, and prototyping — without giving up critical thinking about user and business.',
+    aboutText: "I'm from São Paulo and live in Porto Alegre. I went through graphic design, web and UX/UI before landing in product, where the work got closer to strategy, operations and engineering. I use AI in my process to research, explore and prototype faster; the judgment about what is worth building is still mine.",
     aboutCta: 'See my career',
     contactEyebrow: 'Contact',
     contactTitle: "Let's talk about the next problem.",
-    contactLead: 'I am open to opportunities in Product, conversations about design, and exchanges about AI in the process. I reply quickly on all three channels.',
+    contactLead: "I'm open to Senior or Staff Product Designer roles and to conversations about design and AI in the process. I reply quickly on all three channels.",
     linkedinDesc: 'Connections and networking',
     emailDesc: 'Detailed matters',
     whatsappDesc: 'Direct messages',
   },
   about: {
     downloadResume: 'Download resume',
-    introPara1: 'My journey started in visual design and evolved into product when I realized I did not just want to create better interfaces, but understand why certain products work, where users get stuck, and how design decisions affect business, operations, and behavior.',
-    introPara2: 'Today, I work best when I can connect strategic vision and execution: understanding the problem in depth, structuring possible paths, testing hypotheses, collaborating with technical teams, and transforming abstract decisions into concrete experiences.',
-    introPara3: 'The type of challenge that interests me the most is building products that help people and companies make better decisions, operate with less friction, and evolve more intelligently. I have been using artificial intelligence as part of this process to accelerate analysis, exploration, and prototyping, without giving up critical thinking about the user, product, and impact.',
+    introPara1: "I started in graphic design in 2012. I moved through web, UX/UI and chatbots before getting to product, when I realized what interested me was not a better interface but understanding why a product works, where people get stuck and how much that costs the operation.",
+    introPara2: "I do my best work on problems where design touches the business model: a physical fleet that breaks down, a subscription that has to launch without pushing users away, a tax rule the screen cannot oversimplify. In those contexts my work starts before Figma, with data, research and alignment across teams, and ends after launch, tracking the metrics.",
+    introPara3: "I use AI every day for analysis, exploration and working prototypes. It speeds up the path; deciding what is worth building is still a conversation with users, business and engineering.",
     educationTitle: 'Education',
     education: [
       { title: 'Advanced Design System', location: 'Escala, Brazil' },
@@ -57,13 +58,13 @@ export const en: Translations = {
     readCase: 'Read case study',
   },
   footer: {
-    role: 'Product Designer · Porto Alegre, Brazil',
+    role: 'Senior Product Designer · Porto Alegre, Brazil',
     rights: `© ${new Date().getFullYear()} Rodrigo Silva`,
   },
   confidential: {
     context: 'Retail · B2C · 2026 – Present',
     title: 'Lojas Renner',
-    description: 'Senior Product Designer since May 2026. I lead discovery for the affiliate program — 12,000+ registered affiliates — and worked on MFA login and facial-biometrics account recovery on a platform with 5M+ logins a month. The screens and the detail behind the decisions are under NDA; talking about them is not.',
+    description: "Senior Product Designer since May 2026. I lead discovery for the affiliate program, with 12,000+ registered affiliates, and contribute to MFA login and facial-biometrics account recovery on a platform with 5M+ logins a month: email-change requests to customer service dropped 80%. The screens are under NDA; the conversation about the decisions is not.",
     cta: 'Talk about this work',
   },
   resumeFile: resumeFile,
@@ -75,9 +76,9 @@ export const en: Translations = {
       location: "Porto Alegre, Brazil",
       description: [
         "I work across Renner's digital ecosystem, between the affiliate program and the authentication platform.",
-        "• I lead discovery for the affiliate program (12,000+ registered affiliates): quantitative and qualitative research, desk research and journey mapping with the internal team, uncovering pain points across every stage of the program.",
-        "• Redesigned the program's landing page and validated a new product proposal for affiliate management with stakeholders, focused on giving affiliates more visibility and enabling business expansion.",
-        "• Contributed to MFA login and facial-biometrics account recovery on a platform with 5M+ monthly logins (app and web), reducing email-change requests to customer support by 80%."
+        "• I lead discovery for the affiliate program (12,000+ registered): quantitative and qualitative research, desk research and journey mapping with the internal team, with pain points mapped across every stage of the program.",
+        "• I redesigned the program's landing page and validated with stakeholders a new product proposal for affiliate management, focused on giving affiliates visibility into their performance and opening room to grow the business.",
+        "• I contribute to MFA login and facial-biometrics account recovery on a platform with 5M+ logins a month (app and web): email-change requests to customer service dropped 80%."
       ]
     },
     {
@@ -87,9 +88,11 @@ export const en: Translations = {
       location: "Brazil - Remote",
       description: [
         "I was the only designer on a platform for wealth and succession planning, designed for lawyers, financial advisors, and multi-family offices.",
-        "• I structured complex flows, dashboards, simulations, and data visualization experiences to support wealth, succession, and tax-related decision-making.",
-        "• I worked on modules such as assets, wealth evolution, risk analysis, succession, holding structures, tax intelligence, reports, admin panels, and client management.",
-        "• I also contributed to the evolution of Finvity’s visual identity and the redesign of its institutional website, aligning the brand perception with the sophistication of the product."
+        "• Before the redesign, I audited the old platform with a Nielsen heuristic evaluation (11 problems, 7 severe or catastrophic, each rated 0 to 4) and a benchmark of international platforms, adapting their flows to Brazilian law.",
+        "• I redesigned flows, dashboards, simulations and data visualization for wealth, estate and tax decisions, across modules such as assets, wealth projection, risks, succession, holding companies, tax intelligence, reports and the admin panel.",
+        "• I restructured client onboarding so a single data entry feeds every analysis, with income tax return import.",
+        "• Result: 60% fewer questions reaching support, including those from the largest client, one of Brazil's biggest banks.",
+        "• I also redesigned the visual identity and the corporate website using the product's own design language."
       ]
     },
     {
@@ -99,11 +102,11 @@ export const en: Translations = {
       location: "Portugal - Remote",
       description: [
         "I worked on the design of a B2C electric mobility app, focused on mobile experience, onboarding, subscription flows, checkout, vehicle integration, and user journey optimization.",
-        "• Reduced onboarding time by 31% by identifying critical friction points and restructuring the initial flow based on data, benchmarking, and testing.",
-        "• Designed a vehicle-connected mobile feature, validated by 2,000+ beta users, with ratings between 4 and 5 stars.",
-        "• Structured monetization and subscription flows, connecting benefits, trial experience, payment, error states, subscription recovery, and checkout discounts.",
-        "• Worked on data visualization experiences related to consumption, efficiency, charging, and insights to help users better understand their costs and usage behavior.",
-        "• Contributed to the evolution of the Design System, including tokens, components, state variations, and documentation for engineering handoff."
+        "• With my lead, I used market research and a heuristic analysis of competitors to argue for in-context monetization instead of the paywall leadership proposed.",
+        "• I designed the direct vehicle connection (battery, consumption, real-time cost), the first step of a milestone-based launch that led to the paid plan.",
+        "• I designed the full subscription lifecycle: sign-up, trial, payment, failures, renewal, cancellation and the discount applied in the cart and at checkout. Before billing started, 2,000 selected users tested the plan in an A/B beta and rated it 4 to 5 stars.",
+        "• I cut sign-up journey time by 31%, measured in an A/B test in Google Analytics.",
+        "• I contributed to the Design System foundation: typography, icons, feedback-state illustrations and the most-used components."
       ]
     },
     {
@@ -115,7 +118,7 @@ export const en: Translations = {
         "I worked on the redesign of a digital healthcare platform, focused on experience clarity, retention, conversion, and user engagement.",
         "• Conducted interviews with doctors, international benchmarking, and metrics analysis to identify opportunities and guide strategic product decisions.",
         "• Redesigned critical journeys and interfaces, improving information organization and reducing friction across the platform.",
-        "• The redesign contributed to a 400% increase in average session time, indicating stronger engagement and better product adherence.",
+        "• The redesign increased average time on platform by 400%.",
         "• Worked closely with Product, Engineering, and stakeholders to align decisions, prioritize improvements, and ensure consistency from discovery to delivery.",
         "• Also contributed to the adaptation and evolution of the Design System, strengthening visual consistency and interface scalability."
       ]
@@ -127,7 +130,7 @@ export const en: Translations = {
       location: "Brazil - Hybrid",
       description: [
         "I worked on B2C and B2B2C mobility products, covering mobile apps, hardware, physical operations, and the experience of recurring heavy users.",
-        "• I was responsible for a new product for delivery workers in partnership with iFood, helping to eliminate a loss of approximately R$1M/month and reach breakeven in around 10 months, balancing business, operational, and user needs.",
+        "• I was the sole Product Designer on Bike pra Você, a product for delivery riders built with iFood: I ran the research and the workshop that split the fleets and designed the end-to-end journey. The operation saved ~R$1M/month and broke even in ~10 months.",
         "• Worked across discovery, journey mapping, ideation, prototyping, usability testing, continuous validation, and metrics tracking.",
         "• Designed flows for registration, phone validation, documentation, address submission, payment, scheduling, check-in, QR Code, and bike pickup.",
         "• Also participated in the creation of the Design System from scratch to improve consistency and delivery speed."
@@ -158,9 +161,9 @@ export const en: Translations = {
     }
   ],
   caseDescriptions: {
-    finvity: "Sole designer of a wealth and succession management platform used by one of Brazil's largest banks. I redesigned the product, the brand, and the website — and support questions dropped 60%.",
-    miio: "The EV charging app was free and leadership wanted a paywall. I argued against it with data — and the subscription, surfaced inside real usage, closed 2,000 subscribers in the beta.",
-    tembici: "Delivery riders and casual cyclists were competing for the same bike — and maintenance paid the bill. Splitting the fleets saved ~R$1M/month and took the operation to breakeven in 10 months.",
+    finvity: "Sole designer of a wealth and estate planning platform used by one of Brazil's largest banks. I started by auditing the old platform: 11 usability problems, 7 of them severe or catastrophic. After 4 months of redesign, support questions dropped 60%.",
+    miio: "The EV charging app was free and the CEO wanted a paywall. With my lead, I showed why blocking access would push away users who pick a charger by price, and I designed the subscription to appear only where the savings could be calculated. Before charging anyone, 2,000 users tested the plan in an A/B beta.",
+    tembici: "Delivery riders and casual cyclists were competing for the same bike, and maintenance paid the bill. I led the research and the workshop that split the two operations and designed the new product's journey: ~R$1M/month saved and breakeven in 10 months.",
   },
   caseTitles: {
     finvity: "Finvity",
@@ -168,43 +171,43 @@ export const en: Translations = {
     tembici: "Tembici & iFood",
   },
   caseContext: {
-    tembici: 'Mobility · B2B2C · 2024',
+    tembici: "Mobility · B2B2C · 2023–2024",
     miio: 'Electric mobility · B2C · Portugal · 2025',
-    finvity: 'Wealth management · B2B SaaS · 2026',
+    finvity: "Wealth management · B2B SaaS · 2025–2026",
   },
   caseMeta: {
     tembici: {
-      summary: "Delivery riders used the bike 4 hours a day; casual cyclists, 20 minutes a week. Same fleet, same station, same system — and a maintenance bill that did not add up. I split the two operations and designed the journey that made the new one possible without a spreadsheet.",
-      role: "Sole Product Designer on the team. I ran the research (50+ survey responses and 9 interviews), the workshop that set the strategy, and the end-to-end journey design.",
+      summary: "During the pandemic, iFood delivery riders started using the same e-bike fleet as casual cyclists, at an intensity the operation could not handle: broken bikes, falling NPS and expensive maintenance. As the sole Product Designer, I ran the research and the workshop that led the company to split the two operations, and I designed the new product's journey. Result: **~R$1M/month saved** and **breakeven in ~10 months**.",
+      role: "Sole Product Designer, from the second half of 2023 to early 2024. I ran the research (50+ survey responses, 9 interviews), facilitated the workshop that set the strategy and designed the end-to-end journey. Team: PM, 1 front-end, 2 back-ends, 1 QA and 1 shared content designer.",
       readTime: "5 min",
       impact: [
-        { label: "Operating cost", text: "~R$1M/month saved in maintenance, pickup operations, and bike replacement — average over the product's first 6 months." },
-        { label: "Maintenance", text: "72% drop in dead battery, flat tire, and broken seat incidents." },
-        { label: "Sustainability", text: "The operation reached breakeven in about 10 months." }
+        { label: "Operating cost", text: "~R$1M/month on average over the first 6 months, combining maintenance that no longer happened and cancellations from regular users that stopped." },
+        { label: "Maintenance", text: "72% fewer dead batteries, flat tires and broken seats across the fleet." },
+        { label: "Sustainability", text: "Breakeven in ~10 months and a rollout started to Porto Alegre and Rio de Janeiro." }
       ]
     },
     miio: {
-      summary: "A free EV charging app had to start charging a user base that compares kWh prices cent by cent. Leadership wanted a paywall. I brought a study showing why it would not work and designed the opposite path — the plan showing up where the benefit was demonstrable.",
-      role: "Product Designer on subscription, checkout, onboarding, and vehicle connection flows. Product based in Portugal — I worked from Brazil on Lisbon time.",
+      summary: "miio, an EV charging app in Portugal, needed recurring revenue from users who compare kWh prices down to the cent, and leadership wanted a paywall. With my lead, I showed why blocking access would push those users away. Over 6 months, we shipped in milestones: first the car connection, then a plan beta with **2,000 selected users**, and finally the paid subscription for everyone, shown only where the savings could be calculated. Along the way, sign-up got **31% faster**.",
+      role: "Product Designer on the subscription, checkout, onboarding and vehicle connection flows, alongside the design lead. About 6 months of work. The product is based in Portugal; I worked from Brazil, on Lisbon time.",
       readTime: "4 min",
       impact: [
-        { label: "Subscribers", text: "2,000 people subscribed to the plan after going through the beta." },
-        { label: "Sign-up", text: "31% shorter sign-up journey, measured with Google Analytics in an A/B test." },
-        { label: "Model", text: "Monetization presented in context of use, not as a blocker — a decision defended against leadership's paywall proposal." }
+        { label: "Beta", text: "2,000 selected users tested the plan in an A/B beta before billing and rated it 4 to 5 stars." },
+        { label: "Sign-up", text: "Sign-up journey 31% faster, measured in an A/B test in Google Analytics." },
+        { label: "Model", text: "Monetization in the context of use, not as a block: a decision defended against the paywall leadership proposed." }
       ]
     },
     finvity: {
-      summary: "Sole designer of a SaaS platform for wealth, succession, and tax management, reporting directly to the CEO. I redesigned the product, the visual identity, and the institutional website — and support questions dropped 60%.",
-      role: "Sole Product Designer at the company, reporting to the CEO. Product, visual identity, and institutional website.",
-      readTime: "4 min",
+      summary: "Finvity is a wealth, estate and tax planning SaaS used by lawyers, advisors and one of Brazil's largest banks, and the platform generated too many support questions. As the sole designer, reporting to the CEO, I audited the old platform (11 usability problems, 7 severe or catastrophic), restructured client onboarding as the foundation of every analysis and redesigned the product, brand and website in about 4 months. Support questions dropped **60%**.",
+      role: "The company's sole Product Designer, reporting directly to the CEO and working with a team of developers. Responsible for product (audit, discovery, flows and UI), visual identity and corporate website. About 4 months of redesign.",
+      readTime: "5 min",
       impact: [
-        { label: "Support", text: "60% fewer questions reaching support after the redesign — including those coming through the platform's largest client, one of Brazil's biggest banks." },
-        { label: "Scope", text: "Sole designer at the company: product, brand, and institutional website all went through me." },
-        { label: "Process", text: "High-fidelity prototypes generated with AI — Google Stitch with a design.md, later Claude over MCP — to test paths before building them." }
+        { label: "Support", text: "60% fewer questions reaching support after the redesign, including those from the largest client, one of Brazil's biggest banks." },
+        { label: "Diagnosis", text: "11 usability problems found in the old platform, 7 severe or catastrophic, which became the redesign's priority order." },
+        { label: "Process", text: "High-fidelity AI prototypes (Google Stitch + design.md, then Claude via MCP) to test paths before building." }
       ]
     }
   },
-  testimonialsTitle: "What it's like working with me!",
+  testimonialsTitle: "What it's like to work with me",
   testimonials: [
     {
       content: '"I had the opportunity to work with Rodrigo through Levva on an extremely challenging project. And working with him was very light and peaceful. Because he is a highly dedicated and committed professional, delivering his best to the product. All demands directed to him were carried out clearly and with concern not only for the designer\'s visual, but also for the user experience and the expectations of stakeholders. I hope we can work with you again soon. You are a talent!"',

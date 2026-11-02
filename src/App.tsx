@@ -19,7 +19,7 @@ const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About
 const CaseStudy = lazy(() => import('./pages/CaseStudy').then((m) => ({ default: m.CaseStudy })));
 
 const SITE_NAME = 'Rodrigo Silva';
-const ROLE = 'Product Designer';
+const ROLE = 'Senior Product Designer';
 
 /**
  * Unica autoridade sobre a posicao de scroll entre rotas.
@@ -83,7 +83,7 @@ function DocumentTitle() {
 
   useEffect(() => {
     let title = `${SITE_NAME} — ${ROLE}`;
-    let description = t.home.heroLead;
+    let description = t.home.metaDescription;
 
     if (pathname === '/about') {
       title = `${t.nav.about} — ${SITE_NAME}`;

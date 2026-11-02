@@ -31,6 +31,8 @@ export interface Translations {
     heroEyebrow: string;
     heroTitle: string;
     heroLead: string;
+    /** description/og/twitter: mais curta que o heroLead, escrita para o card de compartilhamento. */
+    metaDescription: string;
     /** Tres numeros logo abaixo do hero: e o que o recrutador le em 5 segundos. */
     facts: { value: string; label: string }[];
     casesCta: string;
