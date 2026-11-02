@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
@@ -9,6 +10,9 @@ import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 
 import aboutImage from '../../images/about.webp';
 import rennerCover from '../../images/covers/renner.webp';
+
+// O card da Renner (sem pagina) entra entre os cases, antes deste indice.
+const RENNER_POSITION = 2;
 
 const LINKEDIN = 'https://www.linkedin.com/in/rodrigo-fsilva/';
 const EMAIL = 'mailto:rodrigo_silva05@live.com';
@@ -64,8 +68,45 @@ export function Home() {
       <section id="work" className={`${SHELL} scroll-mt-[calc(var(--nav-h)+1rem)] py-20 md:py-28`}>
         <div>
           {cases.map((project, i) => (
+            <Fragment key={project.id}>
+              {/* O trabalho atual: sem pagina, porque nao ha o que publicar.
+                  A unica acao possivel aqui e comecar uma conversa. */}
+              {i === RENNER_POSITION && (
+                <motion.article
+                  initial={revealFrom}
+                  whileInView={revealTo}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={stagger(i)}
+                  className="rule"
+                >
+                  <div className="grid grid-cols-1 items-start gap-8 py-10 md:grid-cols-12 md:gap-10 md:py-14">
+                    <div className="md:col-span-7">
+                      <p className="eyebrow">{t.confidential.context}</p>
+                      <h3 className="title-l mt-4">{t.confidential.title}</h3>
+                      <p className="mt-5 max-w-[50ch] text-[var(--body)]">{t.confidential.description}</p>
+                      <Link
+                        to="/#contact"
+                        className="group mt-7 inline-flex items-center gap-2 border-b border-[var(--brand)] pb-1 text-sm font-medium text-[var(--brand)]"
+                      >
+                        {t.confidential.cta}
+                        <ArrowRight
+                          size={15}
+                          weight="bold"
+                          aria-hidden="true"
+                          className="transition-transform duration-200 group-hover:translate-x-1"
+                        />
+                      </Link>
+                    </div>
+
+                    {/* Telas reais com todo texto trocado por barras: mostra o produto sem expor dado */}
+                    <div className="overflow-hidden rounded-2xl border border-[var(--rule)] md:col-span-5">
+                      <img src={rennerCover} alt="" loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                    </div>
+                  </div>
+                </motion.article>
+              )}
+
             <motion.article
-              key={project.id}
               initial={revealFrom}
               whileInView={revealTo}
               viewport={{ once: true, margin: '-60px' }}
@@ -104,42 +145,9 @@ export function Home() {
                 </div>
               </Link>
             </motion.article>
+            </Fragment>
           ))}
 
-          {/* O trabalho atual: sem pagina, porque nao ha o que publicar.
-              A unica acao possivel aqui e comecar uma conversa. */}
-          <motion.article
-            initial={revealFrom}
-            whileInView={revealTo}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={stagger(cases.length)}
-            className="rule"
-          >
-            <div className="grid grid-cols-1 items-start gap-8 py-10 md:grid-cols-12 md:gap-10 md:py-14">
-              <div className="md:col-span-7">
-                <p className="eyebrow">{t.confidential.context}</p>
-                <h3 className="title-l mt-4">{t.confidential.title}</h3>
-                <p className="mt-5 max-w-[50ch] text-[var(--body)]">{t.confidential.description}</p>
-                <Link
-                  to="/#contact"
-                  className="group mt-7 inline-flex items-center gap-2 border-b border-[var(--brand)] pb-1 text-sm font-medium text-[var(--brand)]"
-                >
-                  {t.confidential.cta}
-                  <ArrowRight
-                    size={15}
-                    weight="bold"
-                    aria-hidden="true"
-                    className="transition-transform duration-200 group-hover:translate-x-1"
-                  />
-                </Link>
-              </div>
-
-              {/* Telas reais com todo texto trocado por barras: mostra o produto sem expor dado */}
-              <div className="overflow-hidden rounded-2xl border border-[var(--rule)] md:col-span-5">
-                <img src={rennerCover} alt="" loading="lazy" className="aspect-[4/3] w-full object-cover" />
-              </div>
-            </div>
-          </motion.article>
         </div>
       </section>
 

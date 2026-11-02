@@ -12,7 +12,7 @@
 */
 
 /** Ordem de exibicao na home e na lista de "mais cases". */
-export const CASE_ORDER = ['tembici', 'finvity', 'miio'] as const;
+export const CASE_ORDER = ['tembici', 'miio', 'finvity'] as const;
 
 /** Os cases publicados, derivados da ordem acima. */
 export type CaseId = (typeof CASE_ORDER)[number];
