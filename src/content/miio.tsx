@@ -62,7 +62,6 @@ export function getMiioContent(lang: Lang): ReactNode {
 
       {img(miioMone, "Consumption and vehicle connection screen", "With the car connected, the app shows the session in progress, the battery level, and the cost accumulating in real time — the data that makes the plan's savings verifiable by the user.")}
 
-      {h("results", "2,000 beta users and a 31% faster sign-up")}
       {statsGrid([
         { value: "2,000", label: "users in the plan beta, before billing" },
         { value: "-31%", label: "time in the sign-up journey" }
@@ -123,7 +122,6 @@ export function getMiioContent(lang: Lang): ReactNode {
 
       {img(miioMone, "Tela de consumo e conexão com o veículo", "Com o carro conectado, o app mostra a sessão em curso, o nível de bateria e o custo correndo em tempo real — o dado que torna a economia do plano verificável pelo usuário.")}
 
-      {h("results", "2.000 usuários no beta e um cadastro 31% mais rápido")}
       {statsGrid([
         { value: "2.000", label: "usuários no beta do plano, antes da cobrança" },
         { value: "-31%", label: "no tempo da jornada de cadastro" }
