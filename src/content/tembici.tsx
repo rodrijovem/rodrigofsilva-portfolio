@@ -19,7 +19,6 @@ import noArEn from '../../images/tembici/tembici-06-produto-no-ar-en.webp';
 
 // Os iframes sao os mesmos nos dois idiomas; muda so o title e a legenda.
 const MIRO_WORKSHOP = "https://miro.com/app/live-embed/uXjVKMHscvA=/?moveToViewport=-43218,-14518,13584,15036&embedMode=view_only_without_ui";
-const MIRO_FINAL_FLOW = "https://miro.com/app/live-embed/uXjVKMHscvA=/?moveToViewport=-5372,-7960,32000,2367&embedMode=view_only_without_ui";
 const FIGMA_PROTO = "https://embed.figma.com/proto/v65YY7OjnfpFDJkBRXsQWG/iFood---Entregador?node-id=4118-17666&starting-point-node-id=4118%3A17666&scaling=scale-down&content-scaling=fixed&hide-ui=1&embed-host=share";
 
 export function getTembiciContent(lang: Lang): ReactNode {
@@ -73,8 +72,6 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {img(temMockup, "iFood Pedal app screens", "\"Bike pra Você\" lives inside the app the rider already opens every day, and the pickup ends in a QR Code with a timer, name, and ID number — the interface working as a document for the operator at the physical point.")}
 
       {embedIframe(FIGMA_PROTO, "Navigable prototype — Bike pra Você", "Navigable prototype of version 1.1, already including the usability-test changes. Also used for validation with operations, customer service and engineering.")}
-
-      {embedIframe(MIRO_FINAL_FLOW, "Final flow with error scenarios — Bike pra Você", "The final flow with every error scenario, revised after usability testing.")}
 
       {h("cut-scope", "What was cut to make the deadline")}
       {p("Automated registration.")}
@@ -149,8 +146,6 @@ export function getTembiciContent(lang: Lang): ReactNode {
       {img(temMockup, "Telas do app iFood Pedal", "O “Bike pra Você” vive dentro do app que o entregador já abre todo dia, e a retirada termina em um QR Code com contador, nome e CPF — a interface funcionando como documento para o operador no ponto físico.")}
 
       {embedIframe(FIGMA_PROTO, "Protótipo navegável — Bike pra Você", "Protótipo navegável da versão 1.1, já com os ajustes do teste de usabilidade. Usado também na validação com operação, atendimento e engenharia.")}
-
-      {embedIframe(MIRO_FINAL_FLOW, "Fluxo final com cenários de erro — Bike pra Você", "O fluxo final com todos os cenários de erro, já revisado depois do teste de usabilidade.")}
 
       {h("cut-scope", "O que ficou de fora para caber no prazo")}
       {p("O cadastro automatizado.")}
