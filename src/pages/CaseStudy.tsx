@@ -165,31 +165,30 @@ export function CaseStudy() {
         </motion.div>
       </section>
 
-      {/* Mais cases */}
+      {/* Mais cases: painel cinza para destacar o bloco do fim do case e do rodape */}
       <section className={`${SHELL} pb-24`}>
-        <h2 className="eyebrow">{t.cases.moreCases}</h2>
-        <div className="mt-6">
-          {others.map((project, i) => (
-            <motion.div
-              key={project.id}
-              initial={revealFrom}
-              whileInView={revealTo}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={stagger(i)}
-              className="rule"
-            >
-              <Link
-                to={`/cases/${project.id}`}
-                onClick={() => track('case_open', { case_id: project.id, location: 'more_cases' })}
-                className="group grid grid-cols-1 items-center gap-6 py-8 md:grid-cols-12 md:gap-10"
+        <div className="rounded-2xl bg-[var(--surface)] px-6 py-10 md:px-10 md:py-12">
+          <h2 className="eyebrow">{t.cases.moreCases}</h2>
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+            {others.map((project, i) => (
+              <motion.div
+                key={project.id}
+                initial={revealFrom}
+                whileInView={revealTo}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={stagger(i)}
               >
-                <div className="md:col-span-8">
-                  <p className="eyebrow">{t.caseContext[project.id]}</p>
-                  <h3 className="title-m mt-3 transition-colors duration-200 group-hover:text-[var(--brand)]">
-                    {project.title}
-                  </h3>
-                </div>
-                <div className="flex md:col-span-4 md:justify-end">
+                <Link
+                  to={`/cases/${project.id}`}
+                  onClick={() => track('case_open', { case_id: project.id, location: 'more_cases' })}
+                  className="group flex h-full flex-col justify-between gap-10 rounded-xl border border-[var(--rule)] bg-[var(--bg)] p-6 transition-colors duration-200 hover:border-[var(--rule-strong)] md:p-8"
+                >
+                  <div>
+                    <p className="eyebrow">{t.caseContext[project.id]}</p>
+                    <h3 className="title-m mt-3 transition-colors duration-200 group-hover:text-[var(--brand)]">
+                      {project.title}
+                    </h3>
+                  </div>
                   <span className="inline-flex items-center gap-2 text-sm font-medium text-[var(--ink)]">
                     {t.cases.readCase}
                     <ArrowRight
@@ -199,10 +198,10 @@ export function CaseStudy() {
                       className="transition-transform duration-200 group-hover:translate-x-1"
                     />
                   </span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
