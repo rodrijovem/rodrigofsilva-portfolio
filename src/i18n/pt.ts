@@ -9,9 +9,9 @@ export const pt: Translations = {
     resume: 'Currículo',
   },
   home: {
-    heroEyebrow: "Senior Product Designer · Mobilidade · Fintech · SaaS B2B",
-    heroTitle: 'Desenho o sistema inteiro, não só a tela.',
-    heroLead: "Comecei no design gráfico e hoje trabalho onde a tela é a parte menor do problema: frota física, modelo de assinatura, regra tributária. Levo pesquisa e dado para a mesa antes da decisão, não depois. Hoje na Lojas Renner; antes, Finvity, miio e Tembici.",
+    heroEyebrow: "Senior Product Designer · Porto Alegre",
+    heroTitle: "Já fiz produto para mobilidade, fintech, varejo e saúde.",
+    heroLead: "Os projetos que mais me ensinaram foram aqueles em que o difícil estava fora da tela: uma frota de bicicletas quebrando, um app de recarga que precisava começar a cobrar, uma família querendo saber quanto vai pagar de herança. Hoje na Lojas Renner; antes, Finvity, miio e Tembici.",
     metaDescription: 'Senior Product Designer. 13 anos em design, 6 em produto: mobilidade, fintech e SaaS B2B, onde a decisão de design mexe em operação, receita e dado.',
     facts: [
       { value: '13 anos', label: 'em design, 6 deles em produto' },
