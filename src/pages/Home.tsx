@@ -41,7 +41,7 @@ export function Home() {
       <section className={`${SHELL} pt-[calc(var(--nav-h)+4.5rem)] pb-20 md:pt-[calc(var(--nav-h)+8rem)] md:pb-28`}>
         <motion.div initial={revealFrom} animate={revealTo} transition={calm}>
           <p className="eyebrow">{t.home.heroEyebrow}</p>
-          <h1 className="display mt-6 max-w-[16ch]">{t.home.heroTitle}</h1>
+          <h1 className="display mt-6 max-w-[22ch]">{t.home.heroTitle}</h1>
           <p className="lead mt-8 max-w-[52ch]">{t.home.heroLead}</p>
         </motion.div>
 
