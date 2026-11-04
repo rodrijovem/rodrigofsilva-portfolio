@@ -21,7 +21,7 @@ export const en: Translations = {
     casesCta: 'Read case study',
     aboutEyebrow: 'About',
     aboutTitle: 'I started in graphic design. Today I argue about data modeling.',
-    aboutText: "I'm from São Paulo and live in Porto Alegre. I went through graphic design, web and UX/UI before landing in product, where the work got closer to strategy, operations and engineering. I use AI in my process to research, explore, prototype and also help with handoff; but the judgment and the decisions about direction are still mine.",
+    aboutText: "I'm from São Paulo and live in Porto Alegre. I went through graphic design, web and UX/UI before landing in product, where the work got closer to strategy, operations and engineering. I use AI every day to research, explore and prototype faster.",
     aboutCta: 'See my career',
     contactEyebrow: 'Contact',
     contactTitle: "Let's talk about the next problem.",
@@ -32,9 +32,9 @@ export const en: Translations = {
   },
   about: {
     downloadResume: 'Download resume',
-    introPara1: "I started in graphic design in 2012. I moved through web, UX/UI and chatbots before getting to product, when I realized what interested me was not a better interface but understanding why a product works, where people get stuck and how much that costs the operation.",
+    introPara1: "I started in graphic design in 2012. I moved through web, UX/UI and chatbots before getting to product, when I realized what interested me most was understanding why a product works, where people get stuck and how much that costs the operation.",
     introPara2: "I do my best work on problems where design touches the business model: a physical fleet that breaks down, a subscription that has to launch without pushing users away, a tax rule the screen cannot oversimplify. In those contexts my work starts before Figma, with data, research and alignment across teams, and ends after launch, tracking the metrics.",
-    introPara3: "I use AI every day for analysis, exploration and working prototypes. It speeds up the path; deciding what is worth building is still a conversation with users, business and engineering.",
+    introPara3: "I use AI every day for analysis, exploration and working prototypes. It lets me test more paths in the same time, and what goes into the product I decide together with users, business and engineering.",
     educationTitle: 'Education',
     education: [
       { title: 'Product Design', location: 'Instituto Mauá de Tecnologia, Brazil' }
@@ -67,7 +67,7 @@ export const en: Translations = {
   confidential: {
     context: 'Retail · B2C · 2026 – Present',
     title: 'Lojas Renner',
-    description: "Senior Product Designer since May 2026. I lead discovery for the affiliate program, with 12,000+ registered affiliates, and contribute to MFA login and facial-biometrics account recovery on a platform with 5M+ logins a month: email-change requests to customer service dropped 80%. The screens are under NDA; the conversation about the decisions is not.",
+    description: "Senior Product Designer since May 2026. I lead discovery for the affiliate program, with 12,000+ registered affiliates, and contribute to MFA login and facial-biometrics account recovery on a platform with 5M+ logins a month: email-change requests to customer service dropped 80%. The screens are confidential, but I'm happy to talk about the decisions.",
     cta: 'Talk about this work',
   },
   resumeFile: resumeFile,
@@ -133,7 +133,7 @@ export const en: Translations = {
       location: "Brazil - Hybrid",
       description: [
         "I worked on B2C and B2B2C mobility products, covering mobile apps, hardware, physical operations, and the experience of recurring heavy users.",
-        "• I was the sole Product Designer on Bike pra Você, a product for delivery riders built with iFood: I ran the research and the workshop that split the fleets and designed the end-to-end journey. The operation saved ~R$1M/month and broke even in ~10 months.",
+        "• I was the sole Product Designer on Bike pra Você, a product for delivery riders built with iFood: I ran the research and the workshop that split the fleets and designed the end-to-end journey. NPS went up for both audiences, and the operation saved ~R$1M/month and broke even in ~10 months.",
         "• Worked across discovery, journey mapping, ideation, prototyping, usability testing, continuous validation, and metrics tracking.",
         "• Designed flows for registration, phone validation, documentation, address submission, payment, scheduling, check-in, QR Code, and bike pickup.",
         "• Also participated in the creation of the Design System from scratch to improve consistency and delivery speed."
@@ -166,7 +166,7 @@ export const en: Translations = {
   caseDescriptions: {
     finvity: "Sole designer of a wealth and estate planning platform used by one of Brazil's largest banks. I started by auditing the old platform: 11 usability problems, 7 of them severe or catastrophic. After 4 months of redesign, support questions dropped 60%.",
     miio: "The EV charging app was free and the CEO wanted a paywall. With my lead, I showed why blocking access would push away users who pick a charger by price, and I designed the subscription to appear only where the savings could be calculated. Before charging anyone, 2,000 users tested the plan in an A/B beta.",
-    tembici: "Delivery riders and casual cyclists were competing for the same bike, and maintenance paid the bill. I led the research and the workshop that split the two operations and designed the new product's journey: ~R$1M/month saved and breakeven in 10 months.",
+    tembici: "Delivery riders and casual cyclists were competing for the same fleet, and both were complaining: empty stations, dead batteries, late fees. I led the research and the workshop that split the two operations and designed the new product's journey: NPS up for both audiences, ~R$1M/month saved and breakeven in 10 months.",
   },
   caseTitles: {
     finvity: "Finvity",
@@ -180,12 +180,12 @@ export const en: Translations = {
   },
   caseMeta: {
     tembici: {
-      summary: "During the pandemic, iFood delivery riders started using the same e-bike fleet as casual cyclists, at an intensity the operation could not handle: broken bikes, falling NPS and expensive maintenance. As the sole Product Designer, I ran the research and the workshop that led the company to split the two operations, and I designed the new product's journey. Result: **~R$1M/month saved** and **breakeven in ~10 months**.",
+      summary: "During the pandemic, iFood delivery riders started using the same e-bike fleet as casual cyclists, and the service got worse for everyone: empty stations, dead or broken bikes, late fees for riders who went past 4 hours and a maintenance and redistribution operation that couldn't keep up. All of it hit the NPS of the company's core product. As the sole Product Designer, I ran the research and the workshop that led the company to split the two operations, and I designed the new product's journey. Result: **NPS up for both audiences**, **~R$1M/month saved** and **breakeven in ~10 months**.",
       role: "Sole Product Designer, from the second half of 2023 to early 2024. I ran the research (50+ survey responses, 9 interviews), facilitated the workshop that set the strategy and designed the end-to-end journey. Team: PM, 1 front-end, 2 back-ends, 1 QA and 1 shared content designer.",
       readTime: "5 min",
       impact: [
-        { label: "Operating cost", text: "~R$1M/month on average over the first 6 months, combining maintenance that no longer happened and cancellations from regular users that stopped." },
-        { label: "Maintenance", text: "72% fewer dead batteries, flat tires and broken seats across the fleet." },
+        { label: "Experience", text: "NPS up for both audiences: casual cyclists found bikes in good shape at the station again, and riders no longer had the 4-hour limit that led to late fees." },
+        { label: "Operations", text: "72% fewer dead batteries, flat tires and broken seats, and ~R$1M/month saved in maintenance and cancellations (average over the first 6 months)." },
         { label: "Sustainability", text: "Breakeven in ~10 months and a rollout started to Porto Alegre and Rio de Janeiro." }
       ]
     },
@@ -196,7 +196,7 @@ export const en: Translations = {
       impact: [
         { label: "Beta", text: "2,000 selected users tested the plan in an A/B beta before billing and rated it 4 to 5 stars." },
         { label: "Sign-up", text: "Sign-up journey 31% faster, measured in an A/B test in Google Analytics." },
-        { label: "Model", text: "Monetization in the context of use, not as a block: a decision defended against the paywall leadership proposed." }
+        { label: "Model", text: "Monetization inside the app's normal use, defended in place of the paywall leadership proposed." }
       ]
     },
     finvity: {

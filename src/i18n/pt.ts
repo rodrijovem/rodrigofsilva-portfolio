@@ -21,7 +21,7 @@ export const pt: Translations = {
     casesCta: 'Ler estudo de caso',
     aboutEyebrow: 'Sobre',
     aboutTitle: 'Comecei no design gráfico. Hoje discuto modelagem de dados.',
-    aboutText: "Sou paulista e moro em Porto Alegre. Passei por design gráfico, web e UX/UI até chegar em produto, onde o trabalho ficou mais perto de estratégia, operação e engenharia. Uso IA no processo para pesquisar, explorar, prototipar e também ajudar no handoff; mas o julgamento e as decisões de caminho ainda são meus.",
+    aboutText: "Sou paulista e moro em Porto Alegre. Passei por design gráfico, web e UX/UI até chegar em produto, onde o trabalho ficou mais perto de estratégia, operação e engenharia. Uso IA no dia a dia para pesquisar, explorar e prototipar mais rápido.",
     aboutCta: 'Conheça minha trajetória',
     contactEyebrow: 'Contato',
     contactTitle: 'Vamos conversar sobre o próximo problema.',
@@ -32,9 +32,9 @@ export const pt: Translations = {
   },
   about: {
     downloadResume: 'Baixar currículo',
-    introPara1: "Comecei no design gráfico em 2012. Passei por web, UX/UI e chatbots até chegar em produto, quando percebi que o que me interessava não era a interface melhor, e sim entender por que um produto funciona, onde a pessoa trava e quanto essa trava custa para a operação.",
+    introPara1: "Comecei no design gráfico em 2012. Passei por web, UX/UI e chatbots até chegar em produto, quando percebi que o que mais me interessava era entender por que um produto funciona, onde a pessoa trava e quanto isso custa para a operação.",
     introPara2: "Rendo mais em problemas em que o design encosta no modelo de negócio: uma frota física que quebra, uma assinatura que precisa nascer sem afastar a base, uma regra tributária que a tela não pode simplificar demais. Nesses contextos, meu trabalho começa antes do Figma, com dado, pesquisa e alinhamento entre áreas, e termina depois do lançamento, acompanhando métrica.",
-    introPara3: "Uso IA no dia a dia para análise, exploração e protótipo funcional. Ela acelera o caminho; a decisão sobre o que vale construir continua sendo uma conversa com usuário, negócio e engenharia.",
+    introPara3: "Uso IA no dia a dia para análise, exploração e protótipo funcional. Com ela consigo testar mais caminhos no mesmo tempo, e o que entra no produto eu decido junto com usuário, negócio e engenharia.",
     educationTitle: 'Formação',
     education: [
       { title: 'Design de produto', location: 'Instituto Mauá de Tecnologia, Brasil' }
@@ -67,7 +67,7 @@ export const pt: Translations = {
   confidential: {
     context: 'Varejo · B2C · 2026 – Atual',
     title: 'Lojas Renner',
-    description: "Senior Product Designer desde maio de 2026. Lidero o discovery do programa de afiliadas, com mais de 12 mil cadastradas, e contribuo com o login com MFA e a recuperação de conta por biometria facial, em uma plataforma com mais de 5 milhões de logins por mês: os pedidos de troca de e-mail no atendimento caíram 80%. As telas estão sob confidencialidade; a conversa sobre as decisões, não.",
+    description: "Senior Product Designer desde maio de 2026. Lidero o discovery do programa de afiliadas, com mais de 12 mil cadastradas, e contribuo com o login com MFA e a recuperação de conta por biometria facial, em uma plataforma com mais de 5 milhões de logins por mês: os pedidos de troca de e-mail no atendimento caíram 80%. As telas são confidenciais, mas posso falar das decisões numa conversa.",
     cta: 'Conversar sobre esse trabalho',
   },
   resumeFile: curriculoFile,
@@ -133,7 +133,7 @@ export const pt: Translations = {
       location: "Brasil - Híbrido",
       description: [
         "Atuei em produtos B2C e B2B2C de mobilidade, trabalhando em app mobile, hardware, operação física e experiência de usuários recorrentes.",
-        "• Fui o único Product Designer do Bike pra Você, produto para entregadores em parceria com o iFood: conduzi a pesquisa e o workshop que separaram as frotas e desenhei a jornada ponta a ponta. A operação economizou ~R$1M/mês e chegou ao breakeven em ~10 meses.",
+        "• Fui o único Product Designer do Bike pra Você, produto para entregadores em parceria com o iFood: conduzi a pesquisa e o workshop que separaram as frotas e desenhei a jornada ponta a ponta. O NPS subiu nos dois públicos, e a operação economizou ~R$1M/mês e chegou ao breakeven em ~10 meses.",
         "• Atuei em discovery, mapeamento de jornada, ideação, prototipação, testes de usabilidade, validação contínua e acompanhamento de métricas.",
         "• Desenhei fluxos de cadastro, validação de telefone, documentação, endereço, pagamento, agendamento, check-in, QR Code e retirada de bicicleta.",
         "• Também participei da criação do Design System do zero para aumentar consistência e velocidade de entrega."
@@ -166,7 +166,7 @@ export const pt: Translations = {
   caseDescriptions: {
     finvity: "Único designer de uma plataforma de planejamento patrimonial e sucessório usada por um dos maiores bancos do Brasil. Comecei auditando a plataforma antiga: 11 problemas de usabilidade, 7 graves ou catastróficos. Em 4 meses de redesign, as dúvidas no suporte caíram 60%.",
     miio: "O app de recarga era grátis e o CEO queria paywall. Com minha líder, mostramos por que bloquear acesso afastaria uma base que escolhe posto pelo preço, e desenhei a assinatura aparecendo só onde a economia era calculável. Antes de cobrar, 2.000 usuários testaram o plano num beta A/B.",
-    tembici: "Entregadores e ciclistas casuais disputavam a mesma bicicleta, e a manutenção pagava a conta. Liderei a pesquisa e o workshop que separaram as duas operações e desenhei a jornada do novo produto: ~R$1M/mês economizados e breakeven em 10 meses.",
+    tembici: "Entregadores e ciclistas casuais disputavam a mesma frota, e os dois reclamavam: estação vazia, bike sem bateria, multa por atraso. Liderei a pesquisa e o workshop que separaram as duas operações e desenhei a jornada do novo produto: NPS em alta nos dois públicos, ~R$1M/mês economizados e breakeven em 10 meses.",
   },
   caseTitles: {
     finvity: "Finvity",
@@ -180,12 +180,12 @@ export const pt: Translations = {
   },
   caseMeta: {
     tembici: {
-      summary: "Na pandemia, entregadores do iFood passaram a usar a mesma frota de bikes elétricas dos ciclistas casuais, com uma intensidade que a operação não suportava: bike quebrada, NPS em queda e manutenção cara. Como único Product Designer, conduzi a pesquisa e o workshop que levaram a empresa a separar as duas operações e desenhei a jornada do novo produto. Resultado: **~R$1M/mês economizados** e **breakeven em ~10 meses**.",
+      summary: "Na pandemia, entregadores do iFood passaram a usar a mesma frota de bikes elétricas dos ciclistas casuais, e o serviço piorou para todo mundo: estação vazia, bike sem bateria ou quebrada, multa para o entregador que passava das 4 horas e uma operação de manutenção e redistribuição que não dava conta. Tudo isso batia no NPS do produto principal da empresa. Como único Product Designer, conduzi a pesquisa e o workshop que levaram a empresa a separar as duas operações e desenhei a jornada do novo produto. Resultado: **NPS em alta nos dois públicos**, **~R$1M/mês economizados** e **breakeven em ~10 meses**.",
       role: "Único Product Designer, do 2º semestre de 2023 ao início de 2024. Conduzi a pesquisa (50+ respostas quantitativas, 9 entrevistas), facilitei o workshop que definiu a estratégia e desenhei a jornada ponta a ponta. Time: PM, 1 front-end, 2 back-ends, 1 QA e 1 content designer compartilhado.",
       readTime: "5 min",
       impact: [
-        { label: "Custo operacional", text: "~R$1M/mês na média dos 6 primeiros meses, somando a manutenção que deixou de existir e os cancelamentos de usuários comuns que pararam de acontecer." },
-        { label: "Manutenção", text: "72% menos bateria descarregada, pneu furado e banco quebrado na frota." },
+        { label: "Experiência", text: "NPS em alta nos dois públicos: o ciclista casual voltou a achar bike em bom estado na estação e o entregador deixou de ter o limite de 4 horas que gerava multa." },
+        { label: "Operação", text: "72% menos bateria descarregada, pneu furado e banco quebrado, e ~R$1M/mês economizados em manutenção e cancelamentos (média dos 6 primeiros meses)." },
         { label: "Sustentabilidade", text: "Breakeven em ~10 meses e rollout iniciado para Porto Alegre e Rio de Janeiro." }
       ]
     },
@@ -196,7 +196,7 @@ export const pt: Translations = {
       impact: [
         { label: "Beta", text: "2.000 usuários selecionados testaram o plano em A/B antes da cobrança e o avaliaram com notas entre 4 e 5 estrelas." },
         { label: "Cadastro", text: "Jornada de cadastro 31% mais rápida, medida em teste A/B no Google Analytics." },
-        { label: "Modelo", text: "Monetização em contexto de uso, não como bloqueio: decisão defendida contra o paywall proposto pela liderança." }
+        { label: "Modelo", text: "Monetização dentro do uso do app, defendida no lugar do paywall proposto pela liderança." }
       ]
     },
     finvity: {

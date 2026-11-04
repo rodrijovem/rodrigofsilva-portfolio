@@ -67,6 +67,12 @@ export const h = (id: string, t: string) => (
 export const p = (t: string) => <p className="mb-5 text-[var(--body)]">{rich(t)}</p>;
 export const p12 = (t: string) => <p className="mb-10 text-[var(--body)]">{rich(t)}</p>;
 
+export const list = (items: string[]) => (
+  <ul className="mb-5 list-disc space-y-3 pl-5 text-[var(--body)] marker:text-[var(--muted)]">
+    {items.map((t, i) => <li key={i}>{rich(t)}</li>)}
+  </ul>
+);
+
 export const note = (t: string) => (
   <p className="meta mb-10 max-w-[64ch] border-l border-[var(--brand)] pl-4">{t}</p>
 );

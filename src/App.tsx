@@ -82,16 +82,16 @@ function DocumentTitle() {
   const t = translations[lang];
 
   useEffect(() => {
-    let title = `${SITE_NAME} — ${ROLE}`;
+    let title = `${SITE_NAME} | ${ROLE}`;
     let description = t.home.metaDescription;
 
     if (pathname === '/about') {
-      title = `${t.nav.about} — ${SITE_NAME}`;
+      title = `${t.nav.about} | ${SITE_NAME}`;
     } else if (pathname.startsWith('/cases/')) {
       // A URL nao garante nada: o guard e quem autoriza indexar o objeto.
       const id = pathname.split('/')[2];
       if (isCaseId(id)) {
-        title = `${t.caseTitles[id]} — ${SITE_NAME}`;
+        title = `${t.caseTitles[id]} | ${SITE_NAME}`;
         description = t.caseDescriptions[id];
       }
     }
