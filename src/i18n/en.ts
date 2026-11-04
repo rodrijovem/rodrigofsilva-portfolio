@@ -11,7 +11,7 @@ export const en: Translations = {
   home: {
     heroEyebrow: "Senior Product Designer · Porto Alegre, Brazil",
     heroTitle: "I've built products for mobility, fintech, retail and health.",
-    heroLead: "The projects that taught me the most were the ones where the hard part was off the screen: a bike fleet that kept breaking down, an EV charging app that needed to start making money, a family wanting to know how much inheritance tax they'd pay. Currently at Lojas Renner; before that, Finvity, miio and Tembici.",
+    heroLead: "The projects that taught me the most were the ones where the hard part was off the screen: a bike fleet that kept breaking down, an EV charging app that needed to start making money, a family wanting to know how much inheritance tax they'd pay.",
     metaDescription: 'Senior Product Designer. 13 years in design, 6 in product: mobility, fintech and B2B SaaS, where design decisions move operations, revenue and data.',
     facts: [
       { value: '13 years', label: 'in design, 6 of them in product' },
