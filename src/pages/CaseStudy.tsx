@@ -92,7 +92,7 @@ export function CaseStudy() {
         <div className="rule mt-14 grid grid-cols-1 gap-8 pt-8 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-7">
             <h2 className="eyebrow">{t.cases.role}</h2>
-            <p className="mt-3 max-w-[56ch] text-[var(--body)]">{data.role}</p>
+            <p className="mt-3 text-[var(--body)]">{data.role}</p>
           </div>
           <div className="md:col-span-5">
             <h2 className="eyebrow">{t.cases.readTime}</h2>
