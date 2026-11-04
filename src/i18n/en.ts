@@ -21,7 +21,7 @@ export const en: Translations = {
     casesCta: 'Read case study',
     aboutEyebrow: 'About',
     aboutTitle: 'I started in graphic design. Today I argue about data modeling.',
-    aboutText: "I'm from São Paulo and live in Porto Alegre. I went through graphic design, web and UX/UI before landing in product, where the work got closer to strategy, operations and engineering. I use AI in my process to research, explore and prototype faster; the judgment about what is worth building is still mine.",
+    aboutText: "I'm from São Paulo and live in Porto Alegre. I went through graphic design, web and UX/UI before landing in product, where the work got closer to strategy, operations and engineering. I use AI in my process to research, explore, prototype and also help with handoff; but the judgment and the decisions about direction are still mine.",
     aboutCta: 'See my career',
     contactEyebrow: 'Contact',
     contactTitle: "Let's talk about the next problem.",

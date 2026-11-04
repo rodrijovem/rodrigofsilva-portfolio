@@ -21,7 +21,7 @@ export const pt: Translations = {
     casesCta: 'Ler estudo de caso',
     aboutEyebrow: 'Sobre',
     aboutTitle: 'Comecei no design gráfico. Hoje discuto modelagem de dados.',
-    aboutText: "Sou paulista e moro em Porto Alegre. Passei por design gráfico, web e UX/UI até chegar em produto, onde o trabalho ficou mais perto de estratégia, operação e engenharia. Uso IA no processo para pesquisar, explorar e prototipar mais rápido; o julgamento sobre o que vale construir continua sendo meu.",
+    aboutText: "Sou paulista e moro em Porto Alegre. Passei por design gráfico, web e UX/UI até chegar em produto, onde o trabalho ficou mais perto de estratégia, operação e engenharia. Uso IA no processo para pesquisar, explorar, prototipar e também ajudar no handoff; mas o julgamento e as decisões de caminho ainda são meus.",
     aboutCta: 'Conheça minha trajetória',
     contactEyebrow: 'Contato',
     contactTitle: 'Vamos conversar sobre o próximo problema.',
