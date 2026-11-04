@@ -86,7 +86,7 @@ export function CaseStudy() {
         <motion.div initial={revealFrom} animate={revealTo} transition={calm} className="mt-10">
           <p className="eyebrow">{t.caseContext[id]}</p>
           <h1 className="display mt-5 max-w-[14ch]">{data.title}</h1>
-          <p className="lead mt-8 max-w-[56ch]">{rich(data.summary)}</p>
+          <p className="lead mt-8">{rich(data.summary)}</p>
         </motion.div>
 
         <div className="rule mt-14 grid grid-cols-1 gap-8 pt-8 md:grid-cols-12 md:gap-10">
