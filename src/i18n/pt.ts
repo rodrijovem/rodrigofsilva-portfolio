@@ -35,12 +35,15 @@ export const pt: Translations = {
     introPara1: "Comecei no design gráfico em 2012. Passei por web, UX/UI e chatbots até chegar em produto, quando percebi que o que me interessava não era a interface melhor, e sim entender por que um produto funciona, onde a pessoa trava e quanto essa trava custa para a operação.",
     introPara2: "Rendo mais em problemas em que o design encosta no modelo de negócio: uma frota física que quebra, uma assinatura que precisa nascer sem afastar a base, uma regra tributária que a tela não pode simplificar demais. Nesses contextos, meu trabalho começa antes do Figma, com dado, pesquisa e alinhamento entre áreas, e termina depois do lançamento, acompanhando métrica.",
     introPara3: "Uso IA no dia a dia para análise, exploração e protótipo funcional. Ela acelera o caminho; a decisão sobre o que vale construir continua sendo uma conversa com usuário, negócio e engenharia.",
-    educationTitle: 'Educação',
+    educationTitle: 'Formação',
     education: [
-      { title: 'Avançado de Design System', location: 'Escala, Brasil' },
+      { title: 'Design de produto', location: 'Instituto Mauá de Tecnologia, Brasil' }
+    ],
+    coursesTitle: 'Certificados e cursos',
+    courses: [
       { title: 'UX Design', location: 'Google, Brasil' },
       { title: 'UX/UI Design', location: 'Alura, Brasil' },
-      { title: 'Design de produto', location: 'Instituto Mauá de Tecnologia, Brasil' }
+      { title: 'Avançado de Design System', location: 'Escala, Brasil' }
     ]
   },
   experience: {

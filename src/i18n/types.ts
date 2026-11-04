@@ -69,6 +69,8 @@ export interface Translations {
     introPara3: string;
     educationTitle: string;
     education: { title: string; location: string }[];
+    coursesTitle: string;
+    courses: { title: string; location: string }[];
   };
   experience: {
     title: string;

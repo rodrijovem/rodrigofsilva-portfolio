@@ -37,10 +37,13 @@ export const en: Translations = {
     introPara3: "I use AI every day for analysis, exploration and working prototypes. It speeds up the path; deciding what is worth building is still a conversation with users, business and engineering.",
     educationTitle: 'Education',
     education: [
-      { title: 'Advanced Design System', location: 'Escala, Brazil' },
+      { title: 'Product Design', location: 'Instituto Mauá de Tecnologia, Brazil' }
+    ],
+    coursesTitle: 'Certificates and courses',
+    courses: [
       { title: 'UX Design', location: 'Google, Brazil' },
       { title: 'UX/UI Design', location: 'Alura, Brazil' },
-      { title: 'Product Design', location: 'Instituto Mauá de Tecnologia, Brazil' }
+      { title: 'Advanced Design System', location: 'Escala, Brazil' }
     ]
   },
   experience: {
