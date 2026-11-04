@@ -218,7 +218,7 @@ export function Home() {
                 href={c.href}
                 {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 onClick={() => track('contact_click', { method: c.method, location: 'home_contact' })}
-                className="group flex items-center justify-between gap-6 border-t border-[var(--on-brand-rule)] py-5"
+                className="group flex items-center justify-between gap-6 border-t border-[var(--on-brand-rule)] py-5 first:border-t-0 first:pt-0"
               >
                 <span className="flex flex-col">
                   <span className="text-lg font-medium text-[var(--on-brand)]">{c.label}</span>
