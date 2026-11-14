@@ -42,7 +42,7 @@ export function Home() {
         <motion.div initial={revealFrom} animate={revealTo} transition={calm}>
           <p className="eyebrow">{t.home.heroEyebrow}</p>
           <h1 className="display mt-6 max-w-[22ch]">{t.home.heroTitle}</h1>
-          <p className="lead mt-8 max-w-[52ch]">{t.home.heroLead}</p>
+          <p className="lead mt-8">{t.home.heroLead}</p>
         </motion.div>
 
         <motion.dl
