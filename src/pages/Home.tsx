@@ -37,8 +37,12 @@ export function Home() {
       {/* ---------------------------------------------------------------
           Hero — afirmacao de posicionamento e tres numeros. Sem ilustracao
           e sem animacao de fundo: o que precisa ser lido aqui e texto.
+          Ocupa a altura da tela e centraliza o conteudo no espaco abaixo
+          da nav, entao a divisa com o trabalho fica sempre fora da dobra.
           --------------------------------------------------------------- */}
-      <section className={`${SHELL} pt-[calc(var(--nav-h)+4.5rem)] pb-20 md:pt-[calc(var(--nav-h)+8rem)] md:pb-28`}>
+      <section
+        className={`${SHELL} flex min-h-svh flex-col justify-center pt-[calc(var(--nav-h)+3rem)] pb-12 md:pt-[calc(var(--nav-h)+4rem)] md:pb-16`}
+      >
         <motion.div initial={revealFrom} animate={revealTo} transition={calm}>
           <p className="eyebrow">{t.home.heroEyebrow}</p>
           <h1 className="display mt-6 max-w-[22ch]">{t.home.heroTitle}</h1>
