@@ -11,6 +11,22 @@ import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 import aboutImage from '../../images/about.webp';
 import rennerCover from '../../images/covers/renner.webp';
 
+/*
+  Linha de case: a area inteira e o link. No hover ela ganha um fundo
+  discreto (sangrando um pouco para fora da coluna, sem mexer no texto),
+  o titulo e o CTA vao para a cor da marca, o CTA ganha sublinhado e a
+  imagem aproxima. Juntos, deixam claro que o bloco todo e clicavel.
+*/
+const CASE_ROW =
+  'press-subtle group -mx-4 grid grid-cols-1 items-start gap-8 rounded-3xl px-4 py-10 transition-colors duration-300 hover:bg-[var(--surface)] md:-mx-6 md:grid-cols-12 md:gap-10 md:px-6 md:py-14';
+const CASE_TITLE = 'title-l mt-4 transition-colors duration-200 group-hover:text-[var(--brand)]';
+const CASE_CTA =
+  'mt-7 inline-flex items-center gap-2 border-b border-[var(--rule-strong)] pb-1 text-sm font-medium text-[var(--ink)] transition-colors duration-200 group-hover:border-[var(--brand)] group-hover:text-[var(--brand)]';
+const CASE_ARROW = 'transition-transform duration-200 group-hover:translate-x-1';
+const CASE_MEDIA = 'overflow-hidden rounded-2xl border border-[var(--rule)] md:col-span-5';
+const CASE_IMG =
+  'aspect-[4/3] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]';
+
 // O card da Renner (sem pagina) entra entre os cases, antes deste indice.
 const RENNER_POSITION = 2;
 
@@ -83,30 +99,22 @@ export function Home() {
                   transition={stagger(i)}
                   className="rule"
                 >
-                  <div className="grid grid-cols-1 items-start gap-8 py-10 md:grid-cols-12 md:gap-10 md:py-14">
+                  <Link to="/#contact" className={CASE_ROW}>
                     <div className="md:col-span-7">
                       <p className="eyebrow">{t.confidential.context}</p>
-                      <h3 className="title-l mt-4">{t.confidential.title}</h3>
+                      <h3 className={CASE_TITLE}>{t.confidential.title}</h3>
                       <p className="mt-5 max-w-[50ch] text-[var(--body)]">{t.confidential.description}</p>
-                      <Link
-                        to="/#contact"
-                        className="group mt-7 inline-flex items-center gap-2 border-b border-[var(--brand)] pb-1 text-sm font-medium text-[var(--brand)]"
-                      >
+                      <span className={CASE_CTA}>
                         {t.confidential.cta}
-                        <ArrowRight
-                          size={15}
-                          weight="bold"
-                          aria-hidden="true"
-                          className="transition-transform duration-200 group-hover:translate-x-1"
-                        />
-                      </Link>
+                        <ArrowRight size={15} weight="bold" aria-hidden="true" className={CASE_ARROW} />
+                      </span>
                     </div>
 
                     {/* Telas reais com todo texto trocado por barras: mostra o produto sem expor dado */}
-                    <div className="overflow-hidden rounded-2xl border border-[var(--rule)] md:col-span-5">
-                      <img src={rennerCover} alt="" loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                    <div className={CASE_MEDIA}>
+                      <img src={rennerCover} alt="" loading="lazy" className={CASE_IMG} />
                     </div>
-                  </div>
+                  </Link>
                 </motion.article>
               )}
 
@@ -120,32 +128,20 @@ export function Home() {
               <Link
                 to={`/cases/${project.id}`}
                 onClick={() => track('case_open', { case_id: project.id, location: 'home' })}
-                className="press-subtle group grid grid-cols-1 items-start gap-8 py-10 md:grid-cols-12 md:gap-10 md:py-14"
+                className={CASE_ROW}
               >
                 <div className="md:col-span-7">
                   <p className="eyebrow">{t.caseContext[project.id]}</p>
-                  <h3 className="title-l mt-4 transition-colors duration-200 group-hover:text-[var(--brand)]">
-                    {project.title}
-                  </h3>
+                  <h3 className={CASE_TITLE}>{project.title}</h3>
                   <p className="mt-5 max-w-[50ch] text-[var(--body)]">{project.description}</p>
-                  <span className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-[var(--ink)]">
+                  <span className={CASE_CTA}>
                     {t.home.casesCta}
-                    <ArrowRight
-                      size={15}
-                      weight="bold"
-                      aria-hidden="true"
-                      className="transition-transform duration-200 group-hover:translate-x-1"
-                    />
+                    <ArrowRight size={15} weight="bold" aria-hidden="true" className={CASE_ARROW} />
                   </span>
                 </div>
 
-                <div className="overflow-hidden rounded-2xl border border-[var(--rule)] md:col-span-5">
-                  <img
-                    src={project.thumbnail}
-                    alt=""
-                    loading="lazy"
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
+                <div className={CASE_MEDIA}>
+                  <img src={project.thumbnail} alt="" loading="lazy" className={CASE_IMG} />
                 </div>
               </Link>
             </motion.article>
