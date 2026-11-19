@@ -10,12 +10,14 @@ import { useEffect, useRef } from 'react';
   (grade, camadas, caneta, cursor, alinhamento...), e esfriam deixando um
   rastro que some. Sem mouse (toque), o rastro segue o dedo.
 
-  Desenho em canvas 2D, so enquanto houver celula quente; parado, nao gasta
-  nada. Com reduced motion, mostra so o padrao em repouso.
+  Em repouso, alguns numeros e medidas aparecem devagar em pontos
+  aleatorios, ficam um tempo e somem, enquanto outros surgem em outro
+  lugar. O desenho e em canvas 2D, em ~20 quadros/s quando nada se mexe e
+  pausado fora da tela. Com reduced motion, fica so o padrao parado.
 */
 
 const CELL = 18; // px entre celulas
-const RADIUS = 150; // alcance do mouse, em px
+const RADIUS = 90; // alcance do mouse, em px
 const DECAY = 0.93; // quanto do calor sobra a cada quadro
 
 // Numeros, medidas e glifos de ferramenta de design
@@ -33,10 +35,15 @@ type Cell = {
   y: number;
   base: string; // caractere em repouso ('' = vazio)
   baseAlpha: number;
+  density: number;
   heat: number;
   glyph: string;
   next: number; // quando troca de glifo de novo
 };
+
+// Glifo de repouso: nasce devagar, fica um tempo e some
+type Spark = { glyph: string; born: number; hold: number };
+const FADE = 1100; // ms para aparecer e para sumir
 
 const pick = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
 
@@ -61,6 +68,10 @@ export function HeroField({ className = '' }: { className?: string }) {
     let height = 0;
     let raf = 0;
     let running = false;
+    let visible = true;
+    let lastDraw = 0;
+    let lastMove = 0;
+    const sparks = new Map<number, Spark>();
     const pointer = { x: -9999, y: -9999, active: false };
 
     const build = () => {
@@ -87,19 +98,42 @@ export function HeroField({ className = '' }: { className?: string }) {
           let base = '';
           if (roll < density * 0.9) base = '·';
           if (roll < density * 0.45) base = '+';
-          if (roll < density * 0.12) base = String(Math.floor(Math.random() * 10));
           cells.push({
             x,
             y,
             base,
             baseAlpha: 0.16 + Math.min(density, 1) * 0.22,
+            density: Math.max(0, Math.min(density, 1)),
             heat: 0,
             glyph: pick(),
             next: 0,
           });
         }
       }
-      draw(performance.now());
+      sparks.clear();
+      const now = performance.now();
+      const target = Math.round(cells.length * 0.006);
+      // Espalha o inicio para que nao nascam todos juntos
+      for (let i = 0; i < target; i++) spawn(now - Math.random() * (FADE * 2 + 4000));
+      draw(now);
+    };
+
+    // Um glifo novo numa celula vazia de faisca, de preferencia onde o padrao e mais denso
+    const spawn = (now: number) => {
+      for (let tries = 0; tries < 40; tries++) {
+        const i = Math.floor(Math.random() * cells.length);
+        if (sparks.has(i) || Math.random() > cells[i].density + 0.15) continue;
+        sparks.set(i, { glyph: pick(), born: now, hold: 1600 + Math.random() * 3200 });
+        return;
+      }
+    };
+
+    const sparkAlpha = (spark: Spark, now: number) => {
+      if (reduce) return 1;
+      const age = now - spark.born;
+      if (age < FADE) return age / FADE;
+      if (age < FADE + spark.hold) return 1;
+      return Math.max(0, 1 - (age - FADE - spark.hold) / FADE);
     };
 
     const draw = (now: number) => {
@@ -108,7 +142,18 @@ export function HeroField({ className = '' }: { className?: string }) {
       ctx.textBaseline = 'middle';
       let hot = false;
 
-      for (const cell of cells) {
+      // Faiscas que acabaram dao lugar a outras, em outro ponto
+      if (!reduce) {
+        for (const [i, spark] of sparks) {
+          if (now - spark.born > FADE * 2 + spark.hold) {
+            sparks.delete(i);
+            spawn(now);
+          }
+        }
+      }
+
+      for (let i = 0; i < cells.length; i++) {
+        const cell = cells[i];
         if (pointer.active && !reduce) {
           const dx = cell.x - pointer.x;
           const dy = cell.y - pointer.y;
@@ -130,6 +175,16 @@ export function HeroField({ className = '' }: { className?: string }) {
           cell.heat *= DECAY;
         } else {
           cell.heat = 0;
+          const spark = sparks.get(i);
+          if (spark) {
+            const a = sparkAlpha(spark, now);
+            const small = spark.glyph.length > 1;
+            ctx.font = `500 ${small ? 8 : 11}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+            ctx.fillStyle = muted;
+            ctx.globalAlpha = a * 0.55;
+            ctx.fillText(spark.glyph, cell.x, cell.y);
+            continue;
+          }
           if (!cell.base) continue;
           ctx.font = '400 11px ui-monospace, SFMono-Regular, Menlo, monospace';
           ctx.fillStyle = muted;
@@ -141,13 +196,19 @@ export function HeroField({ className = '' }: { className?: string }) {
       return hot;
     };
 
+    // Com o mouse se mexendo (ou rastro quente), quadro a quadro; parado, ~20/s
+    let hot = false;
     const loop = (now: number) => {
-      const hot = draw(now);
-      if (hot || pointer.active) {
-        raf = requestAnimationFrame(loop);
-      } else {
+      if (!visible) {
         running = false;
+        return;
       }
+      const busy = hot || now - lastMove < 120;
+      if (busy || now - lastDraw > 50) {
+        hot = draw(now);
+        lastDraw = now;
+      }
+      raf = requestAnimationFrame(loop);
     };
 
     const wake = () => {
@@ -164,7 +225,7 @@ export function HeroField({ className = '' }: { className?: string }) {
       pointer.x = x;
       pointer.y = y;
       pointer.active = inside;
-      if (inside) wake();
+      if (inside) lastMove = performance.now();
     };
     const onLeave = () => {
       pointer.active = false;
@@ -173,6 +234,13 @@ export function HeroField({ className = '' }: { className?: string }) {
     build();
     const resize = new ResizeObserver(() => build());
     resize.observe(canvas);
+    // Fora da tela, para
+    const seen = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) wake();
+    });
+    seen.observe(canvas);
+    wake();
     window.addEventListener('pointermove', onMove, { passive: true });
     document.addEventListener('pointerleave', onLeave);
     window.addEventListener('blur', onLeave);
@@ -180,6 +248,7 @@ export function HeroField({ className = '' }: { className?: string }) {
     return () => {
       cancelAnimationFrame(raf);
       resize.disconnect();
+      seen.disconnect();
       window.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerleave', onLeave);
       window.removeEventListener('blur', onLeave);
