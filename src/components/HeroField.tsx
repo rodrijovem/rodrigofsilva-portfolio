@@ -10,6 +10,9 @@ import { useEffect, useRef } from 'react';
   (grade, camadas, caneta, cursor, alinhamento...), e esfriam deixando um
   rastro que some. Sem mouse (toque), o rastro segue o dedo.
 
+  Atras do texto (elementos com data-field-shield) o campo some, com um
+  degrade nas bordas, para os caracteres nunca disputarem a leitura.
+
   Em repouso, alguns numeros e medidas aparecem devagar em pontos
   aleatorios, ficam um tempo e somem, enquanto outros surgem em outro
   lugar. O desenho e em canvas 2D, em ~20 quadros/s quando nada se mexe e
@@ -19,6 +22,7 @@ import { useEffect, useRef } from 'react';
 const CELL = 18; // px entre celulas
 const RADIUS = 90; // alcance do mouse, em px
 const DECAY = 0.93; // quanto do calor sobra a cada quadro
+const FEATHER = 32; // px de degrade em volta do texto, onde o campo volta aos poucos
 
 // Numeros, medidas e glifos de ferramenta de design
 const GLYPHS = [
@@ -36,6 +40,7 @@ type Cell = {
   base: string; // caractere em repouso ('' = vazio)
   baseAlpha: number;
   density: number;
+  shield: number; // 0 atras do texto, 1 longe dele
   heat: number;
   glyph: string;
   next: number; // quando troca de glifo de novo
@@ -104,12 +109,14 @@ export function HeroField({ className = '' }: { className?: string }) {
             base,
             baseAlpha: 0.16 + Math.min(density, 1) * 0.22,
             density: Math.max(0, Math.min(density, 1)),
+            shield: 1,
             heat: 0,
             glyph: pick(),
             next: 0,
           });
         }
       }
+      shield();
       sparks.clear();
       const now = performance.now();
       const target = Math.round(cells.length * 0.006);
@@ -118,11 +125,36 @@ export function HeroField({ className = '' }: { className?: string }) {
       draw(now);
     };
 
+    // Quanto cada celula aparece: zero sobre o texto, subindo num degrade ate FEATHER px dele
+    const shield = () => {
+      const origin = canvas.getBoundingClientRect();
+      const root = canvas.parentElement ?? document.body;
+      // Caixas justas de cada linha de texto, nao do bloco inteiro: o campo
+      // continua visivel entre colunas e no fim das linhas curtas
+      const boxes = [...root.querySelectorAll<HTMLElement>('[data-field-shield]')].flatMap((el) => {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        return [...range.getClientRects()]
+          .filter((r) => r.width > 0 && r.height > 0)
+          .map((r) => ({ l: r.left - origin.left, t: r.top - origin.top, r: r.right - origin.left, b: r.bottom - origin.top }));
+      });
+      for (const cell of cells) {
+        let near = Infinity;
+        for (const box of boxes) {
+          const dx = Math.max(box.l - cell.x, 0, cell.x - box.r);
+          const dy = Math.max(box.t - cell.y, 0, cell.y - box.b);
+          near = Math.min(near, Math.sqrt(dx * dx + dy * dy));
+        }
+        const k = Math.min(1, near / FEATHER);
+        cell.shield = k * k * (3 - 2 * k); // suave nas duas pontas
+      }
+    };
+
     // Um glifo novo numa celula vazia de faisca, de preferencia onde o padrao e mais denso
     const spawn = (now: number) => {
       for (let tries = 0; tries < 40; tries++) {
         const i = Math.floor(Math.random() * cells.length);
-        if (sparks.has(i) || Math.random() > cells[i].density + 0.15) continue;
+        if (sparks.has(i) || cells[i].shield < 0.5 || Math.random() > cells[i].density + 0.15) continue;
         sparks.set(i, { glyph: pick(), born: now, hold: 1600 + Math.random() * 3200 });
         return;
       }
@@ -154,6 +186,10 @@ export function HeroField({ className = '' }: { className?: string }) {
 
       for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
+        if (cell.shield === 0) {
+          cell.heat = 0;
+          continue;
+        }
         if (pointer.active && !reduce) {
           const dx = cell.x - pointer.x;
           const dy = cell.y - pointer.y;
@@ -170,7 +206,7 @@ export function HeroField({ className = '' }: { className?: string }) {
           const small = cell.glyph.length > 1;
           ctx.font = `500 ${small ? 8 : 11}px ui-monospace, SFMono-Regular, Menlo, monospace`;
           ctx.fillStyle = brand;
-          ctx.globalAlpha = Math.min(0.85, 0.15 + cell.heat * 0.8);
+          ctx.globalAlpha = Math.min(0.85, 0.15 + cell.heat * 0.8) * cell.shield;
           ctx.fillText(cell.glyph, cell.x, cell.y);
           cell.heat *= DECAY;
         } else {
@@ -181,14 +217,14 @@ export function HeroField({ className = '' }: { className?: string }) {
             const small = spark.glyph.length > 1;
             ctx.font = `500 ${small ? 8 : 11}px ui-monospace, SFMono-Regular, Menlo, monospace`;
             ctx.fillStyle = muted;
-            ctx.globalAlpha = a * 0.55;
+            ctx.globalAlpha = a * 0.55 * cell.shield;
             ctx.fillText(spark.glyph, cell.x, cell.y);
             continue;
           }
           if (!cell.base) continue;
           ctx.font = '400 11px ui-monospace, SFMono-Regular, Menlo, monospace';
           ctx.fillStyle = muted;
-          ctx.globalAlpha = cell.baseAlpha;
+          ctx.globalAlpha = cell.baseAlpha * cell.shield;
           ctx.fillText(cell.base, cell.x, cell.y);
         }
       }
@@ -234,6 +270,10 @@ export function HeroField({ className = '' }: { className?: string }) {
     build();
     const resize = new ResizeObserver(() => build());
     resize.observe(canvas);
+    canvas.parentElement?.querySelectorAll('[data-field-shield]').forEach((el) => resize.observe(el));
+    // O texto entra deslizando e a fonte carrega depois: mede de novo quando assentar
+    const settle = window.setTimeout(shield, 900);
+    void document.fonts?.ready.then(shield);
     // Fora da tela, para
     const seen = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
@@ -249,6 +289,7 @@ export function HeroField({ className = '' }: { className?: string }) {
       cancelAnimationFrame(raf);
       resize.disconnect();
       seen.disconnect();
+      window.clearTimeout(settle);
       window.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerleave', onLeave);
       window.removeEventListener('blur', onLeave);

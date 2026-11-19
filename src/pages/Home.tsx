@@ -64,12 +64,13 @@ export function Home() {
         className={`${SHELL} relative flex min-h-svh flex-col justify-center pt-[calc(var(--nav-h)+3rem)] pb-12 md:pt-[calc(var(--nav-h)+4rem)] md:pb-16`}
       >
         <motion.div initial={revealFrom} animate={revealTo} transition={calm}>
-          <p className="eyebrow">{t.home.heroEyebrow}</p>
-          <h1 className="display mt-6 max-w-[22ch]">{t.home.heroTitle}</h1>
-          <p className="lead mt-8">{t.home.heroLead}</p>
+          <p data-field-shield className="eyebrow w-fit">{t.home.heroEyebrow}</p>
+          <h1 data-field-shield className="display mt-6 w-fit max-w-[22ch]">{t.home.heroTitle}</h1>
+          <p data-field-shield className="lead mt-8">{t.home.heroLead}</p>
         </motion.div>
 
         <motion.dl
+          data-field-shield
           initial={revealFrom}
           animate={revealTo}
           transition={{ ...calm, delay: 0.12 }}
