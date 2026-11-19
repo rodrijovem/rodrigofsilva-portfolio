@@ -24,6 +24,7 @@
   --on-brand: #FFFFFF;
   --on-brand-muted: rgba(255, 255, 255, 0.74);
   --on-brand-rule: rgba(255, 255, 255, 0.16);
+  --mask-solid: #000;
 
   /* Altura da navbar — fonte unica de verdade para o espacamento das paginas */
   --nav-h: 64px;

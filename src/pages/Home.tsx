@@ -6,6 +6,7 @@ import { useAppContext } from '../contexts/useAppContext';
 import { translations } from '../i18n';
 import { track } from '../lib/analytics';
 import { listCases } from '../cases';
+import { HeroField } from '../components/HeroField';
 import { calm, revealFrom, revealTo, stagger } from '../lib/motion';
 
 import aboutImage from '../../images/about.webp';
@@ -56,8 +57,11 @@ export function Home() {
           Ocupa a altura da tela e centraliza o conteudo no espaco abaixo
           da nav, entao a divisa com o trabalho fica sempre fora da dobra.
           --------------------------------------------------------------- */}
-      <section
-        className={`${SHELL} flex min-h-svh flex-col justify-center pt-[calc(var(--nav-h)+3rem)] pb-12 md:pt-[calc(var(--nav-h)+4rem)] md:pb-16`}
+      <section className="relative">
+        {/* Campo de caracteres: numeros e simbolos de design que embaralham sob o mouse */}
+        <HeroField className="absolute inset-0 h-full w-full [mask-image:linear-gradient(to_bottom,transparent,var(--mask-solid)_18%,var(--mask-solid)_72%,transparent)]" />
+      <div
+        className={`${SHELL} relative flex min-h-svh flex-col justify-center pt-[calc(var(--nav-h)+3rem)] pb-12 md:pt-[calc(var(--nav-h)+4rem)] md:pb-16`}
       >
         <motion.div initial={revealFrom} animate={revealTo} transition={calm}>
           <p className="eyebrow">{t.home.heroEyebrow}</p>
@@ -80,6 +84,7 @@ export function Home() {
             </div>
           ))}
         </motion.dl>
+      </div>
       </section>
 
       {/* ---------------------------------------------------------------
