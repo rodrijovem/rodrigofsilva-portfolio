@@ -74,10 +74,10 @@ export function Home() {
           initial={revealFrom}
           animate={revealTo}
           transition={{ ...calm, delay: 0.12 }}
-          className="rule mt-16 grid grid-cols-1 gap-8 pt-8 sm:grid-cols-3 sm:gap-6"
+          className="rule mt-16 flex flex-wrap gap-x-6 gap-y-8 pt-8"
         >
           {t.home.facts.map((fact) => (
-            <div key={fact.value}>
+            <div key={fact.value} className="min-w-[13rem] flex-1">
               <dt className="text-[1.75rem] font-medium leading-none tracking-[-0.03em] text-[var(--brand)] md:text-[2rem]">
                 {fact.value}
               </dt>
